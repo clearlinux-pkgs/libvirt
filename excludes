@@ -1,0 +1,24 @@
+# This file contains the output files that need %exclude. Full path
+# names, one per line.
+/etc/logrotate.d/libvirtd
+/etc/logrotate.d/libvirtd.lxc
+/etc/logrotate.d/libvirtd.qemu
+/etc/logrotate.d/libvirtd.uml
+
+# empty files, with no settings
+/etc/sysconfig/libvirtd
+/etc/sysconfig/libvirt-guests
+/etc/sysconfig/virtlockd
+/etc/libvirt/libvirt.conf
+/etc/libvirt/libvirtd.conf
+/etc/libvirt/lxc.conf
+/etc/libvirt/qemu.conf
+/etc/libvirt/qemu-lockd.conf
+/etc/libvirt/virtlockd.conf
+/etc/libvirt/virt-login-shell.conf
+
+# Drop default libvirt network into extras package I don't believe we
+# actually want default network in libvirt As openstack should be
+# defining it's own network for the launched VMs.
+/etc/libvirt/qemu/networks/autostart/default.xml
+/etc/libvirt/qemu/networks/default.xml

@@ -1,0 +1,30 @@
+# This file contains additional build requirements that did not get
+# picked up automatically. One name per line, no whitespace.
+dbus-dev
+numactl-dev
+libpciaccess-dev
+yajl-lib
+yajl-dev
+dnsmasq
+systemd-dev
+systemd
+iptables
+ebtables
+LVM2
+libnl-dev
+libxslt
+libtasn1-dev
+gettext-dev
+attr-dev
+util-linux-dev
+libcap-ng-dev
+curl-dev
+ncurses-dev
+readline-dev
+kmod-bin
+parted-dev
+libpcap-dev
+open-iscsi
+gnutls-dev
+bridge-utils
+openssh

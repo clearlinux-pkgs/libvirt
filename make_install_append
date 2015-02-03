@@ -1,0 +1,2 @@
+mkdir %{buildroot}/usr/lib/systemd/system/sockets.target.wants
+ln -s ../libvirtd.socket %{buildroot}/usr/lib/systemd/system/sockets.target.wants/libvirtd.socket

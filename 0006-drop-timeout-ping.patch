@@ -1,0 +1,12 @@
+Index: libvirt-1.2.15/src/network/bridge_driver.c
+===================================================================
+--- libvirt-1.2.15.orig/src/network/bridge_driver.c
++++ libvirt-1.2.15/src/network/bridge_driver.c
+@@ -1335,6 +1335,7 @@ networkBuildDhcpDaemonCommandLine(virNet
+     cmd = virCommandNew(dnsmasqCapsGetBinaryPath(dnsmasq_caps));
+     virCommandAddArgFormat(cmd, "--conf-file=%s", configfile);
+     /* Libvirt gains full control of leases database */
++    virCommandAddArgFormat(cmd, "--no-ping");
+     virCommandAddArgFormat(cmd, "--leasefile-ro");
+     virCommandAddArgFormat(cmd, "--dhcp-script=%s", leaseshelper_path);
+     virCommandAddEnvPair(cmd, "VIR_BRIDGE_NAME", network->def->bridge);

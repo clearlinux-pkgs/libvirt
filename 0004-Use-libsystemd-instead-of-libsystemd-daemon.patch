@@ -1,0 +1,25 @@
+From 69932b4a471567ec360ff16a10481e19b048e08f Mon Sep 17 00:00:00 2001
+From: "Simental Magana, Marcos" <marcos.simental.magana@intel.com>
+Date: Wed, 25 Mar 2015 13:42:23 -0600
+Subject: [PATCH] Use libsystemd instead of libsystemd-daemon
+
+---
+ m4/virt-systemd-daemon.m4 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/m4/virt-systemd-daemon.m4 b/m4/virt-systemd-daemon.m4
+index 8516e41..0e094c7 100644
+--- a/m4/virt-systemd-daemon.m4
++++ b/m4/virt-systemd-daemon.m4
+@@ -18,7 +18,7 @@ dnl <http://www.gnu.org/licenses/>.
+ dnl
+ 
+ AC_DEFUN([LIBVIRT_CHECK_SYSTEMD_DAEMON],[
+-  LIBVIRT_CHECK_PKG([SYSTEMD_DAEMON], [libsystemd-daemon], [0.27.1])
++  LIBVIRT_CHECK_PKG([SYSTEMD_DAEMON], [libsystemd], [0.27.1])
+ 
+     old_CFLAGS="$CFLAGS"
+     old_LIBS="$LIBS"
+-- 
+1.9.3
+

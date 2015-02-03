@@ -1,0 +1,7 @@
+0001-Default-to-0770-permissions-with-group-libvirt-for-t.patch
+0002-Move-default-nwfilters-to-datadir.patch
+0003-remove-apparmor-from-unit-file.patch
+0004-Use-libsystemd-instead-of-libsystemd-daemon.patch
+0005-remove-empty-environment-file-from-unit-file.patch
+0006-drop-timeout-ping.patch
+0007-set-default-ciphers.patch
