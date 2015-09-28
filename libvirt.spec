@@ -4,7 +4,7 @@
 #
 Name     : libvirt
 Version  : 1.2.19
-Release  : 69
+Release  : 70
 URL      : http://libvirt.org/sources/libvirt-1.2.19.tar.gz
 Source0  : http://libvirt.org/sources/libvirt-1.2.19.tar.gz
 Summary  : Library providing a simple virtualization API
