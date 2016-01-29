@@ -1,30 +1,31 @@
-From ebf0debbcd32c4724c073fc83393071544eb7d13 Mon Sep 17 00:00:00 2001
-From: Dimitri John Ledkov <dimitri.j.ledkov@intel.com>
-Date: Tue, 8 Sep 2015 11:40:24 -0500
-Subject: [PATCH] Move default nwfilters to datadir
+From 326ad24e4b74da77a2b52f9320c57427bda59255 Mon Sep 17 00:00:00 2001
+From: Alberto Murillo <alberto.murillo.silva@intel.com>
+Date: Fri, 29 Jan 2016 09:45:35 -0600
+Subject: [PATCH 2/7] Move default nwfilters to datadir
 
 Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
+Signed-off-by: Alberto Murillo <alberto.murillo.silva@intel.com>
 ---
- examples/xml/nwfilter/Makefile.am |  2 +-
- src/conf/nwfilter_conf.h          |  1 +
- src/nwfilter/nwfilter_driver.c    | 18 +++++++++++-------
+ examples/Makefile.am           |  2 +-
+ src/conf/nwfilter_conf.h       |  1 +
+ src/nwfilter/nwfilter_driver.c | 18 +++++++++++-------
  3 files changed, 13 insertions(+), 8 deletions(-)
 
-diff --git a/examples/xml/nwfilter/Makefile.am b/examples/xml/nwfilter/Makefile.am
-index ec1e7ee..61f328a 100644
---- a/examples/xml/nwfilter/Makefile.am
-+++ b/examples/xml/nwfilter/Makefile.am
-@@ -37,7 +37,7 @@ EXTRA_DIST=$(FILTERS)
+diff --git a/examples/Makefile.am b/examples/Makefile.am
+index 2adcefb..f9f89ed 100644
+--- a/examples/Makefile.am
++++ b/examples/Makefile.am
+@@ -73,7 +73,7 @@ templates_DATA = \
+ endif WITH_APPARMOR_PROFILES
  
- confdir = $(sysconfdir)/libvirt
- 
+ if WITH_NWFILTER
 -NWFILTER_DIR = "$(DESTDIR)$(sysconfdir)/libvirt/nwfilter"
 +NWFILTER_DIR = "$(DESTDIR)$(datadir)/libvirt/nwfilter"
  
- if WITH_NWFILTER
  install-data-local:
+ 	$(MKDIR_P) "$(NWFILTER_DIR)"
 diff --git a/src/conf/nwfilter_conf.h b/src/conf/nwfilter_conf.h
-index 6e68ecc..ee427b1 100644
+index 0211861..f2f8bba 100644
 --- a/src/conf/nwfilter_conf.h
 +++ b/src/conf/nwfilter_conf.h
 @@ -577,6 +577,7 @@ struct _virNWFilterDriverState {
@@ -99,5 +100,5 @@ index 1a868b6..8ebd35d 100644
      }
  
 -- 
-2.5.1
+2.5.0
 

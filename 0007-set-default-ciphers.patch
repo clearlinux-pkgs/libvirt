@@ -1,7 +1,7 @@
-From b833aabf161d2fef43ca96df16ff9a5fb572bee8 Mon Sep 17 00:00:00 2001
+From 6bf90cfea85fade397c53fd71362446ec098cacb Mon Sep 17 00:00:00 2001
 From: "Munoz, Obed N" <obed.n.munoz@intel.com>
 Date: Tue, 8 Sep 2015 10:44:47 -0500
-Subject: [PATCH] set default ciphers
+Subject: [PATCH 7/7] set default ciphers
 
 Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
 ---
@@ -22,5 +22,5 @@ index 947038d..a0103ab 100644
                         _("Failed to set TLS session priority %s"),
                         gnutls_strerror(err));
 -- 
-2.5.1
+2.5.0
 
