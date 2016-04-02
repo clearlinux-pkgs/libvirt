@@ -1,0 +1,336 @@
+`configure' configures libvirt 1.3.2 to adapt to many kinds of systems.
+
+Usage: ./configure [OPTION]... [VAR=VALUE]...
+
+To assign environment variables (e.g., CC, CFLAGS...), specify them as
+VAR=VALUE.  See below for descriptions of some of the useful variables.
+
+Defaults for the options are specified in brackets.
+
+Configuration:
+  -h, --help              display this help and exit
+      --help=short        display options specific to this package
+      --help=recursive    display the short help of all the included packages
+  -V, --version           display version information and exit
+  -q, --quiet, --silent   do not print `checking ...' messages
+      --cache-file=FILE   cache test results in FILE [disabled]
+  -C, --config-cache      alias for `--cache-file=config.cache'
+  -n, --no-create         do not create output files
+      --srcdir=DIR        find the sources in DIR [configure dir or `..']
+
+Installation directories:
+  --prefix=PREFIX         install architecture-independent files in PREFIX
+                          [/usr/local]
+  --exec-prefix=EPREFIX   install architecture-dependent files in EPREFIX
+                          [PREFIX]
+
+By default, `make install' will install all the files in
+`/usr/local/bin', `/usr/local/lib' etc.  You can specify
+an installation prefix other than `/usr/local' using `--prefix',
+for instance `--prefix=$HOME'.
+
+For better control, use the options below.
+
+Fine tuning of the installation directories:
+  --bindir=DIR            user executables [EPREFIX/bin]
+  --sbindir=DIR           system admin executables [EPREFIX/sbin]
+  --libexecdir=DIR        program executables [EPREFIX/libexec]
+  --sysconfdir=DIR        read-only single-machine data [PREFIX/etc]
+  --sharedstatedir=DIR    modifiable architecture-independent data [PREFIX/com]
+  --localstatedir=DIR     modifiable single-machine data [PREFIX/var]
+  --libdir=DIR            object code libraries [EPREFIX/lib]
+  --includedir=DIR        C header files [PREFIX/include]
+  --oldincludedir=DIR     C header files for non-gcc [/usr/include]
+  --datarootdir=DIR       read-only arch.-independent data root [PREFIX/share]
+  --datadir=DIR           read-only architecture-independent data [DATAROOTDIR]
+  --infodir=DIR           info documentation [DATAROOTDIR/info]
+  --localedir=DIR         locale-dependent data [DATAROOTDIR/locale]
+  --mandir=DIR            man documentation [DATAROOTDIR/man]
+  --docdir=DIR            documentation root [DATAROOTDIR/doc/libvirt]
+  --htmldir=DIR           html documentation [DOCDIR]
+  --dvidir=DIR            dvi documentation [DOCDIR]
+  --pdfdir=DIR            pdf documentation [DOCDIR]
+  --psdir=DIR             ps documentation [DOCDIR]
+
+Program names:
+  --program-prefix=PREFIX            prepend PREFIX to installed program names
+  --program-suffix=SUFFIX            append SUFFIX to installed program names
+  --program-transform-name=PROGRAM   run sed PROGRAM on installed program names
+
+System types:
+  --build=BUILD     configure for building on BUILD [guessed]
+  --host=HOST       cross-compile to build programs to run on HOST [BUILD]
+
+Optional Features:
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-silent-rules   less verbose build output (undo: "make V=1")
+  --disable-silent-rules  verbose build output (undo: "make V=0")
+  --enable-dependency-tracking
+                          do not reject slow dependency extractors
+  --disable-dependency-tracking
+                          speeds up one-time build
+  --disable-largefile     omit support for large files
+  --enable-threads={posix|solaris|pth|windows}
+                          specify multithreading API
+  --disable-threads       build without multithread safety
+  --disable-rpath         do not hardcode runtime library paths
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-static[=PKGS]  build static libraries [default=no]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --enable-werror         Use -Werror (if supported)
+  --enable-debug=[no|yes] enable debugging output [default=yes]
+  --enable-expensive-tests
+                          set the default for enabling expensive tests (gnulib
+                          and long timeouts) [default=check]; use
+                          VIR_TEST_EXPENSIVE to override during make
+  --enable-test-coverage  turn on code coverage instrumentation [default=no]
+  --enable-test-oom       memory allocation failure checking [default=no]
+  --enable-test-locking   thread locking tests using CIL [default=no]
+  --disable-nls           do not use Native Language Support
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-packager         Extra packager name
+  --with-packager-version Extra packager version
+  --with-openssl          use libcrypto hash routines. Valid ARGs are: 'yes',
+                          'no', 'auto' => use if available, 'optional' => use
+                          if available and warn if not available; default is
+                          'no'
+  --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
+  --with-libpth-prefix[=DIR]  search for libpth in DIR/include and DIR/lib
+  --without-libpth-prefix     don't search for libpth in includedir and libdir
+  --without-included-regex
+                          don't compile regex; this is the default on systems
+                          with recent-enough versions of the GNU C Library
+                          (use with caution on other systems).
+  --with-pic[=PKGS]       try to use only PIC/non-PIC objects [default=use
+                          both]
+  --with-aix-soname=aix|svr4|both
+                          shared library versioning (aka "SONAME") variant to
+                          provide on AIX, [default=aix].
+  --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
+  --with-sysroot[=DIR]    Search for dependent libraries within DIR (or the
+                          compiler's sysroot if not specified).
+  --with-apparmor         with libapparmor support [default=check]
+  --with-apparmor-mount   set AppArmor mount point [default=check]
+  --with-attr             with libattr support [default=check]
+  --with-audit            with libaudit support [default=check]
+  --with-avahi            with avahi-client (>= 0.6.0) support [default=check]
+  --with-blkid            with blkid (>= 2.17) support [default=check]
+  --with-capng            with libcap-ng support [default=check]
+  --with-curl             with libcurl (>= 7.18.0) support [default=check]
+  --with-dbus             with dbus-1 (>= 1.0.0) support [default=check]
+  --with-fuse             with fuse (>= 2.8.6) support [default=check]
+  --with-glusterfs        with glusterfs-api (>= 3.4.1) support
+                          [default=check]
+  --with-hal              with hal (>= 0.5.0) support [default=check]
+  --with-netcf            with netcf (>= 0.1.4) support [default=check]
+  --with-numactl          with libnuma support [default=check]
+  --with-openwsman        with openwsman (>= 2.2.3) support [default=check]
+  --with-pciaccess        with pciaccess (>= 0.10.0) support [default=check]
+  --with-readline         with libreadline support [default=check]
+  --with-sanlock          with libsanlock_client support [default=check]
+  --with-sasl             with libsasl2 support [default=check]
+  --with-selinux          with libselinux support [default=check]
+  --with-selinux-mount    set SELinux mount point [default=check]
+  --with-ssh2             with libssh2 (>= 1.3) support [default=check]
+  --with-systemd-daemon   with libsystemd-daemon (>= 0.27.1) support
+                          [default=check]
+  --with-udev             with libudev (>= 145) support [default=check]
+  --with-wireshark-dissector
+                          with wireshark (>= 1.11.3) support [default=check]
+  --with-ws-plugindir     wireshark plugins directory for use when installing
+                          wireshark plugin
+  --with-yajl             with libyajl support [default=check]
+  --with-html-dir=path    path to base html directory, default
+                          $datadir/doc/html
+  --with-html-subdir=path directory used under html-dir, default
+                          $PACKAGE-$VERSION/html
+  --with-xml-catalog-file=path
+                          path to XML catalog file for validating generated
+                          html, default /etc/xml/catalog
+  --with-xen              add XEN support [default=check]
+  --with-xen-inotify      add XEN inotify support [default=check]
+  --with-qemu             add QEMU/KVM support [default=yes]
+  --with-uml              add UML support [default=check]
+  --with-openvz           add OpenVZ support [default=check]
+  --with-vmware           add VMware support [default=yes]
+  --with-phyp             add PHYP support [default=check]
+  --with-xenapi           add XenAPI support [default=check]
+  --with-libxl            add libxenlight support [default=check]
+  --with-vbox=[PFX]       VirtualBox XPCOMC location [default=yes]
+  --with-lxc              add Linux Container support [default=check]
+  --with-esx              add ESX support [default=check]
+  --with-hyperv           add Hyper-V support [default=check]
+  --with-test             add test driver support [default=yes]
+  --with-remote           add remote driver support [default=yes]
+  --with-libvirtd         add libvirtd support [default=yes]
+  --with-chrdev-lock-files
+                          location for UUCP style lock files for character
+                          devices (use auto for default paths on some
+                          platforms) [default=auto]
+  --with-pm-utils         use pm-utils for power management [default=yes]
+  --with-init-script[=STYLE]
+                          Style of init script to install: redhat, systemd,
+                          systemd+redhat, upstart, check, none [default=check]
+  --with-sysctl[=yes/no]  Whether to install sysctl configs [default=check]
+  --with-rhel5-api=[ARG]  build for the RHEL-5 API [default=no]
+  --with-login-shell      build virt-login-shell [default=check]
+  --with-vz               add Virtuozzo support [default=check]
+  --with-bhyve            add BHyVe support [default=check]
+  --with-libxml=[PFX]     libxml2 location
+  --with-gnutls           use GNUTLS for encryption [default=check]
+  --with-polkit           use PolicyKit for UNIX socket access checks
+                          [default=check]
+  --with-firewalld        enable firewalld support [default=check]
+  --with-secdriver-selinux
+                          use SELinux security driver [default=check]
+  --with-secdriver-apparmor
+                          use AppArmor security driver [default=check]
+  --with-apparmor-profiles
+                          install apparmor profiles [default=no]
+  --with-dtrace           use dtrace for static probing [default=check]
+  --with-numad            use numad to manage CPU placement dynamically
+                          [default=check]
+  --with-libpcap=[PFX]    libpcap location
+  --with-network          with virtual network driver [default=yes]
+  --with-secrets          with local secrets management driver [default=yes]
+  --with-storage-dir      with directory backend for the storage driver
+                          [default=yes]
+  --with-storage-fs       with FileSystem backend for the storage driver
+                          [default=check]
+  --with-storage-lvm      with LVM backend for the storage driver
+                          [default=check]
+  --with-storage-iscsi    with iSCSI backend for the storage driver
+                          [default=check]
+  --with-storage-scsi     with SCSI backend for the storage driver
+                          [default=check]
+  --with-storage-mpath    with mpath backend for the storage driver
+                          [default=check]
+  --with-storage-disk     with GPartd Disk backend for the storage driver
+                          [default=check]
+  --with-storage-rbd      with RADOS Block Device backend for the storage
+                          driver [default=check]
+  --with-storage-sheepdog with Sheepdog backend for the storage driver
+                          [default=check]
+  --with-storage-gluster  with Gluster backend for the storage driver
+                          [default=check]
+  --with-storage-zfs      with ZFS backend for the storage driver
+                          [default=check]
+  --with-test-suite       build test suite by default [default=check]
+  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for libiconv in includedir and libdir
+  --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
+  --without-libintl-prefix     don't search for libintl in includedir and libdir
+  --with-driver-modules   build drivers as loadable modules [default=check]
+  --with-interface        with host interface driver [default=check]
+  --with-qemu-user        username to run QEMU system instance as
+                          [default=platform dependent]
+  --with-qemu-group       groupname to run QEMU system instance as
+                          [default=platform dependent]
+  --with-macvtap          enable macvtap device [default=check]
+  --with-virtualport      enable virtual port support [default=check]
+  --with-default-editor   Editor to use for interactive commands [default=vi]
+  --with-loader-nvram     Pass list of pairs of <loader>:<nvram> paths. Both
+                          pairs and list items are separated by a colon.
+                          @<:default=paths to OVMF and its clones]
+
+Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
+  LT_SYS_LIBRARY_PATH
+              User-defined run-time library search path.
+  PKG_CONFIG  path to pkg-config utility
+  PKG_CONFIG_PATH
+              directories to add to pkg-config's search path
+  PKG_CONFIG_LIBDIR
+              path overriding pkg-config's built-in search path
+  AVAHI_CFLAGS
+              C compiler flags for AVAHI, overriding pkg-config
+  AVAHI_LIBS  linker flags for AVAHI, overriding pkg-config
+  BLKID_CFLAGS
+              C compiler flags for BLKID, overriding pkg-config
+  BLKID_LIBS  linker flags for BLKID, overriding pkg-config
+  CURL_CFLAGS C compiler flags for CURL, overriding pkg-config
+  CURL_LIBS   linker flags for CURL, overriding pkg-config
+  DBUS_CFLAGS C compiler flags for DBUS, overriding pkg-config
+  DBUS_LIBS   linker flags for DBUS, overriding pkg-config
+  FUSE_CFLAGS C compiler flags for FUSE, overriding pkg-config
+  FUSE_LIBS   linker flags for FUSE, overriding pkg-config
+  GLUSTERFS_CFLAGS
+              C compiler flags for GLUSTERFS, overriding pkg-config
+  GLUSTERFS_LIBS
+              linker flags for GLUSTERFS, overriding pkg-config
+  HAL_CFLAGS  C compiler flags for HAL, overriding pkg-config
+  HAL_LIBS    linker flags for HAL, overriding pkg-config
+  NETCF_CFLAGS
+              C compiler flags for NETCF, overriding pkg-config
+  NETCF_LIBS  linker flags for NETCF, overriding pkg-config
+  OPENWSMAN_CFLAGS
+              C compiler flags for OPENWSMAN, overriding pkg-config
+  OPENWSMAN_LIBS
+              linker flags for OPENWSMAN, overriding pkg-config
+  PCIACCESS_CFLAGS
+              C compiler flags for PCIACCESS, overriding pkg-config
+  PCIACCESS_LIBS
+              linker flags for PCIACCESS, overriding pkg-config
+  SSH2_CFLAGS C compiler flags for SSH2, overriding pkg-config
+  SSH2_LIBS   linker flags for SSH2, overriding pkg-config
+  SYSTEMD_DAEMON_CFLAGS
+              C compiler flags for SYSTEMD_DAEMON, overriding pkg-config
+  SYSTEMD_DAEMON_LIBS
+              linker flags for SYSTEMD_DAEMON, overriding pkg-config
+  UDEV_CFLAGS C compiler flags for UDEV, overriding pkg-config
+  UDEV_LIBS   linker flags for UDEV, overriding pkg-config
+  WIRESHARK_DISSECTOR_CFLAGS
+              C compiler flags for WIRESHARK_DISSECTOR, overriding pkg-config
+  WIRESHARK_DISSECTOR_LIBS
+              linker flags for WIRESHARK_DISSECTOR, overriding pkg-config
+  LIBXL_CFLAGS
+              C compiler flags for LIBXL, overriding pkg-config
+  LIBXL_LIBS  linker flags for LIBXL, overriding pkg-config
+  PARALLELS_SDK_CFLAGS
+              C compiler flags for PARALLELS_SDK, overriding pkg-config
+  PARALLELS_SDK_LIBS
+              linker flags for PARALLELS_SDK, overriding pkg-config
+  LIBXML_CFLAGS
+              C compiler flags for LIBXML, overriding pkg-config
+  LIBXML_LIBS linker flags for LIBXML, overriding pkg-config
+  GNUTLS_CFLAGS
+              C compiler flags for GNUTLS, overriding pkg-config
+  GNUTLS_LIBS linker flags for GNUTLS, overriding pkg-config
+  POLKIT_CFLAGS
+              C compiler flags for POLKIT, overriding pkg-config
+  POLKIT_LIBS linker flags for POLKIT, overriding pkg-config
+  LIBPARTED_CFLAGS
+              C compiler flags for LIBPARTED, overriding pkg-config
+  LIBPARTED_LIBS
+              linker flags for LIBPARTED, overriding pkg-config
+  DEVMAPPER_CFLAGS
+              C compiler flags for DEVMAPPER, overriding pkg-config
+  DEVMAPPER_LIBS
+              linker flags for DEVMAPPER, overriding pkg-config
+  LIBNL_CFLAGS
+              C compiler flags for LIBNL, overriding pkg-config
+  LIBNL_LIBS  linker flags for LIBNL, overriding pkg-config
+  LIBNL_ROUTE3_CFLAGS
+              C compiler flags for LIBNL_ROUTE3, overriding pkg-config
+  LIBNL_ROUTE3_LIBS
+              linker flags for LIBNL_ROUTE3, overriding pkg-config
+
+Use these variables to override the choices made by `configure' or to help
+it to find libraries and programs with nonstandard names/locations.
+
+Report bugs to <libvir-list@redhat.com>.
+libvirt home page: <http://libvirt.org>.

@@ -4,7 +4,7 @@
 #
 Name     : libvirt
 Version  : 1.3.2
-Release  : 75
+Release  : 76
 URL      : http://libvirt.org/sources/libvirt-1.3.2.tar.gz
 Source0  : http://libvirt.org/sources/libvirt-1.3.2.tar.gz
 Summary  : Library providing a simple virtualization API
@@ -25,6 +25,7 @@ BuildRequires : curl-dev
 BuildRequires : dbus-dev
 BuildRequires : dnsmasq
 BuildRequires : ebtables
+BuildRequires : fuse-dev
 BuildRequires : gettext-bin
 BuildRequires : gettext-dev
 BuildRequires : gnutls-dev
@@ -43,6 +44,7 @@ BuildRequires : ncurses-dev
 BuildRequires : numactl-dev
 BuildRequires : open-iscsi
 BuildRequires : openssh
+BuildRequires : openssl-dev
 BuildRequires : parted-dev
 BuildRequires : pkg-config-dev
 BuildRequires : pkgconfig(devmapper)
