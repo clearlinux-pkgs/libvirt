@@ -30,3 +30,5 @@ bridge-utils
 openssh
 openssl-dev
 fuse-dev
+nfs-utils
+systemd-dev

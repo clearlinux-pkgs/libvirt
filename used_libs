@@ -15,6 +15,7 @@ libpciaccess.so.0
 libpthread.so.0
 libreadline.so.6
 libsystemd.so.0
+libtinfow.so.6
 libudev.so.1
 libutil.so.1
 libxml2.so.2
