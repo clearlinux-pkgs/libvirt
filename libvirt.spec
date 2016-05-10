@@ -4,7 +4,7 @@
 #
 Name     : libvirt
 Version  : 1.3.3
-Release  : 83
+Release  : 84
 URL      : http://libvirt.org/sources/libvirt-1.3.3.tar.gz
 Source0  : http://libvirt.org/sources/libvirt-1.3.3.tar.gz
 Summary  : Library providing a simple virtualization API
@@ -185,7 +185,8 @@ ac_cv_path_IP_PATH= \
 --with-remote \
 --with-test=yes \
 --with-udev \
---with-yajl
+--with-yajl \
+--with-openssl
 make V=1  %{?_smp_mflags}
 
 %check

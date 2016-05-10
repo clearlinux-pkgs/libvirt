@@ -37,3 +37,4 @@ ac_cv_path_IP_PATH=
 --with-test=yes
 --with-udev
 --with-yajl
+--with-openssl

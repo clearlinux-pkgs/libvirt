@@ -1,6 +1,7 @@
 libblkid.so.1
 libc.so.6
 libcap-ng.so.0
+libcrypto.so.1.0.0
 libcurl.so.4
 libdbus-1.so.3
 libdevmapper.so.1.02
