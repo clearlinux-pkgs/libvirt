@@ -6,3 +6,4 @@
 0006-drop-timeout-ping.patch
 0007-set-default-ciphers.patch
 malloc.patch
+locale.patch

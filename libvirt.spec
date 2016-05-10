@@ -4,7 +4,7 @@
 #
 Name     : libvirt
 Version  : 1.3.3
-Release  : 85
+Release  : 86
 URL      : http://libvirt.org/sources/libvirt-1.3.3.tar.gz
 Source0  : http://libvirt.org/sources/libvirt-1.3.3.tar.gz
 Summary  : Library providing a simple virtualization API
@@ -64,6 +64,7 @@ Patch5: 0005-remove-empty-environment-file-from-unit-file.patch
 Patch6: 0006-drop-timeout-ping.patch
 Patch7: 0007-set-default-ciphers.patch
 Patch8: malloc.patch
+Patch9: locale.patch
 
 %description
 Libvirt is a C toolkit to interact with the virtualization capabilities
@@ -144,6 +145,7 @@ locales components for the libvirt package.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 %reconfigure --disable-static ac_cv_path_EBTABLES_PATH=%{_bindir}/ebtables \
