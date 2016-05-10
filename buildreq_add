@@ -25,7 +25,6 @@ kmod-bin
 parted-dev
 libpcap-dev
 open-iscsi
-gnutls-dev
 bridge-utils
 openssh
 openssl-dev

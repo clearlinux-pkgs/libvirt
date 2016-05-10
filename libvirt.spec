@@ -4,7 +4,7 @@
 #
 Name     : libvirt
 Version  : 1.3.3
-Release  : 84
+Release  : 85
 URL      : http://libvirt.org/sources/libvirt-1.3.3.tar.gz
 Source0  : http://libvirt.org/sources/libvirt-1.3.3.tar.gz
 Summary  : Library providing a simple virtualization API
@@ -28,7 +28,6 @@ BuildRequires : ebtables
 BuildRequires : fuse-dev
 BuildRequires : gettext-bin
 BuildRequires : gettext-dev
-BuildRequires : gnutls-dev
 BuildRequires : iptables
 BuildRequires : kmod-bin
 BuildRequires : libcap-ng-dev
