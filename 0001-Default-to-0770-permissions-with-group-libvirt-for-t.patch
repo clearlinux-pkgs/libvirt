@@ -1,7 +1,7 @@
-From eb37dc756547dfd1ecb470fae78a611c67d24040 Mon Sep 17 00:00:00 2001
+From 0cf7477280378540de1dbe6fec3a13e464e9c699 Mon Sep 17 00:00:00 2001
 From: "Munoz, Obed N" <obed.n.munoz@intel.com>
 Date: Thu, 2 Jul 2015 10:35:47 -0500
-Subject: [PATCH 1/7] Default to 0770 permissions, with group libvirt for the
+Subject: [PATCH 1/8] Default to 0770 permissions, with group libvirt for the
  control socket.
 
 Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
@@ -10,10 +10,10 @@ Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/daemon/libvirtd-config.c b/daemon/libvirtd-config.c
-index c31c8b2..77c4be5 100644
+index 6c0f00e..eb25379 100644
 --- a/daemon/libvirtd-config.c
 +++ b/daemon/libvirtd-config.c
-@@ -263,11 +263,14 @@ daemonConfigNew(bool privileged ATTRIBUTE_UNUSED)
+@@ -131,11 +131,14 @@ daemonConfigNew(bool privileged ATTRIBUTE_UNUSED)
  #endif
  
      if (VIR_STRDUP(data->unix_sock_rw_perms,
@@ -30,5 +30,5 @@ index c31c8b2..77c4be5 100644
      data->auth_tcp = REMOTE_AUTH_SASL;
  #else
 -- 
-2.5.0
+2.12.2
 

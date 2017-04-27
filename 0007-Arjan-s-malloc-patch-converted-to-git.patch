@@ -1,0 +1,33 @@
+From 005da56eab139205d64d2b0c8a74169f26188707 Mon Sep 17 00:00:00 2001
+From: Icarus Sparry <icarus.w.sparry@intel.com>
+Date: Wed, 26 Apr 2017 11:18:26 -0700
+Subject: [PATCH 7/8] Arjan's malloc patch, converted to git
+
+Signed-off-by: Icarus Sparry <icarus.w.sparry@intel.com>
+---
+ src/util/vireventpoll.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/util/vireventpoll.c b/src/util/vireventpoll.c
+index 81ecab4..009d97e 100644
+--- a/src/util/vireventpoll.c
++++ b/src/util/vireventpoll.c
+@@ -30,6 +30,7 @@
+ #include <errno.h>
+ #include <unistd.h>
+ #include <fcntl.h>
++#include <malloc.h>
+ 
+ #include "virthread.h"
+ #include "virlog.h"
+@@ -638,6 +639,7 @@ int virEventPollRunOnce(void)
+     PROBE(EVENT_POLL_RUN,
+           "nhandles=%d timeout=%d",
+           nfds, timeout);
++    malloc_trim(0);
+     ret = poll(fds, nfds, timeout);
+     if (ret < 0) {
+         EVENT_DEBUG("Poll got error event %d", errno);
+-- 
+2.12.2
+

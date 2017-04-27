@@ -1,7 +1,7 @@
-From b74344df2fe3c68a1d462d4f81c44163c5c26d3a Mon Sep 17 00:00:00 2001
+From adad930bf8cfb825e9b5f2864c867e9c8dd3a49c Mon Sep 17 00:00:00 2001
 From: "Simental Magana, Marcos" <marcos.simental.magana@intel.com>
 Date: Tue, 8 Sep 2015 11:45:27 -0500
-Subject: [PATCH 3/7] remove apparmor from unit file
+Subject: [PATCH 3/8] remove apparmor from unit file
 
 Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
 ---
@@ -9,10 +9,10 @@ Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
  1 file changed, 1 deletion(-)
 
 diff --git a/daemon/libvirtd.service.in b/daemon/libvirtd.service.in
-index 608221c..8c61c35 100644
+index 899abdf..7acfb52 100644
 --- a/daemon/libvirtd.service.in
 +++ b/daemon/libvirtd.service.in
-@@ -4,7 +4,6 @@ Before=libvirt-guests.service
+@@ -11,7 +11,6 @@ Before=libvirt-guests.service
  After=network.target
  After=dbus.service
  After=iscsid.service
@@ -21,5 +21,5 @@ index 608221c..8c61c35 100644
  After=remote-fs.target
  Documentation=man:libvirtd(8)
 -- 
-2.5.0
+2.12.2
 

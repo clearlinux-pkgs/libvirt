@@ -1,0 +1,28 @@
+From 65e6d608e7105330878255faacafa8fc76651565 Mon Sep 17 00:00:00 2001
+From: Icarus Sparry <icarus.w.sparry@intel.com>
+Date: Wed, 26 Apr 2017 11:43:40 -0700
+Subject: [PATCH 8/8] Arjan's patch for locale
+
+Moved to a more generic location and converted to git format.
+
+Signed-off-by: Icarus Sparry <icarus.w.sparry@intel.com>
+---
+ src/util/virgettext.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/util/virgettext.c b/src/util/virgettext.c
+index c0135b4..b7be563 100644
+--- a/src/util/virgettext.c
++++ b/src/util/virgettext.c
+@@ -37,7 +37,7 @@
+ int
+ virGettextInitialize(void)
+ {
+-    if (!setlocale(LC_ALL, "")) {
++    if (!setlocale(LC_ALL, "C")) {
+         perror("setlocale");
+         /* failure to setup locale is not fatal */
+     }
+-- 
+2.12.2
+

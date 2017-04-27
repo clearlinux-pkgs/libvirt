@@ -1,21 +1,21 @@
-From 326ad24e4b74da77a2b52f9320c57427bda59255 Mon Sep 17 00:00:00 2001
+From 5989f17db7639621e3ae7d561c7e91df9d3a0e71 Mon Sep 17 00:00:00 2001
 From: Alberto Murillo <alberto.murillo.silva@intel.com>
 Date: Fri, 29 Jan 2016 09:45:35 -0600
-Subject: [PATCH 2/7] Move default nwfilters to datadir
+Subject: [PATCH 2/8] Move default nwfilters to datadir
 
 Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
 Signed-off-by: Alberto Murillo <alberto.murillo.silva@intel.com>
 ---
  examples/Makefile.am           |  2 +-
- src/conf/nwfilter_conf.h       |  1 +
+ src/conf/virnwfilterobj.h      |  1 +
  src/nwfilter/nwfilter_driver.c | 18 +++++++++++-------
  3 files changed, 13 insertions(+), 8 deletions(-)
 
 diff --git a/examples/Makefile.am b/examples/Makefile.am
-index 2adcefb..f9f89ed 100644
+index 2956e14..08fed96 100644
 --- a/examples/Makefile.am
 +++ b/examples/Makefile.am
-@@ -73,7 +73,7 @@ templates_DATA = \
+@@ -88,7 +88,7 @@ templates_DATA = \
  endif WITH_APPARMOR_PROFILES
  
  if WITH_NWFILTER
@@ -24,11 +24,11 @@ index 2adcefb..f9f89ed 100644
  
  install-data-local:
  	$(MKDIR_P) "$(NWFILTER_DIR)"
-diff --git a/src/conf/nwfilter_conf.h b/src/conf/nwfilter_conf.h
-index 0211861..f2f8bba 100644
---- a/src/conf/nwfilter_conf.h
-+++ b/src/conf/nwfilter_conf.h
-@@ -577,6 +577,7 @@ struct _virNWFilterDriverState {
+diff --git a/src/conf/virnwfilterobj.h b/src/conf/virnwfilterobj.h
+index 1d80455..670a287 100644
+--- a/src/conf/virnwfilterobj.h
++++ b/src/conf/virnwfilterobj.h
+@@ -54,6 +54,7 @@ struct _virNWFilterDriverState {
      virNWFilterObjList nwfilters;
  
      char *configDir;
@@ -37,10 +37,10 @@ index 0211861..f2f8bba 100644
  };
  
 diff --git a/src/nwfilter/nwfilter_driver.c b/src/nwfilter/nwfilter_driver.c
-index 1a868b6..8ebd35d 100644
+index 4ea216a..6f52245 100644
 --- a/src/nwfilter/nwfilter_driver.c
 +++ b/src/nwfilter/nwfilter_driver.c
-@@ -173,7 +173,6 @@ nwfilterStateInitialize(bool privileged,
+@@ -172,7 +172,6 @@ nwfilterStateInitialize(bool privileged,
                          virStateInhibitCallback callback ATTRIBUTE_UNUSED,
                          void *opaque ATTRIBUTE_UNUSED)
  {
@@ -48,7 +48,7 @@ index 1a868b6..8ebd35d 100644
      DBusConnection *sysbus = NULL;
  
      if (virDBusHasSystemBus() &&
-@@ -228,17 +227,20 @@ nwfilterStateInitialize(bool privileged,
+@@ -228,16 +227,20 @@ nwfilterStateInitialize(bool privileged,
          goto error;
      }
  
@@ -68,13 +68,13 @@ index 1a868b6..8ebd35d 100644
 +                    PKGDATADIR "/nwfilter") == -1)
 +        goto error;
  
-     if (virNWFilterLoadAllConfigs(&driver->nwfilters,
--                                  driver->configDir) < 0)
-+                                  driver->defaultsDir) < 0)
+-    if (virNWFilterObjLoadAllConfigs(&driver->nwfilters, driver->configDir) < 0)
++    if (virNWFilterLoadAllConfigs(&driver->nwfilters,
++                                 driver->defaultsDir) < 0)
          goto error;
  
      nwfilterDriverUnlock();
-@@ -246,7 +248,6 @@ nwfilterStateInitialize(bool privileged,
+@@ -245,7 +248,6 @@ nwfilterStateInitialize(bool privileged,
      return 0;
  
   error:
@@ -82,16 +82,15 @@ index 1a868b6..8ebd35d 100644
      nwfilterDriverUnlock();
      nwfilterStateCleanup();
  
-@@ -292,6 +293,8 @@ nwfilterStateReload(void)
+@@ -290,6 +292,7 @@ nwfilterStateReload(void)
+     virNWFilterCallbackDriversLock();
  
-     virNWFilterLoadAllConfigs(&driver->nwfilters,
-                               driver->configDir);
-+    virNWFilterLoadAllConfigs(&driver->nwfilters,
-+                              driver->defaultsDir);
+     virNWFilterObjLoadAllConfigs(&driver->nwfilters, driver->configDir);
++    virNWFilterObjLoadAllConfigs(&driver->nwfilters, driver->defaultsDir);
  
      virNWFilterCallbackDriversUnlock();
      virNWFilterUnlockFilterUpdates();
-@@ -345,6 +348,7 @@ nwfilterStateCleanup(void)
+@@ -343,6 +346,7 @@ nwfilterStateCleanup(void)
          virNWFilterObjListFree(&driver->nwfilters);
  
          VIR_FREE(driver->configDir);
@@ -100,5 +99,5 @@ index 1a868b6..8ebd35d 100644
      }
  
 -- 
-2.5.0
+2.12.2
 

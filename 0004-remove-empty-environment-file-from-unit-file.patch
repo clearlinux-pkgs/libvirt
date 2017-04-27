@@ -1,0 +1,24 @@
+From 2d524bdda446bcfb582988166454a153bedc01e2 Mon Sep 17 00:00:00 2001
+From: "Simental Magana, Marcos" <marcos.simental.magana@intel.com>
+Date: Fri, 20 Mar 2015 15:24:38 -0600
+Subject: [PATCH 4/8] remove empty environment file from unit file
+
+---
+ daemon/libvirtd.service.in | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/daemon/libvirtd.service.in b/daemon/libvirtd.service.in
+index 7acfb52..761744e 100644
+--- a/daemon/libvirtd.service.in
++++ b/daemon/libvirtd.service.in
+@@ -18,7 +18,6 @@ Documentation=http://libvirt.org
+ 
+ [Service]
+ Type=notify
+-EnvironmentFile=-/etc/sysconfig/libvirtd
+ ExecStart=@sbindir@/libvirtd $LIBVIRTD_ARGS
+ ExecReload=/bin/kill -HUP $MAINPID
+ KillMode=process
+-- 
+2.12.2
+

@@ -1,3 +1,4 @@
+libacl.so.1
 libblkid.so.1
 libc.so.6
 libcap-ng.so.0
@@ -13,8 +14,8 @@ libparted.so.2
 libpcap.so.1
 libpciaccess.so.0
 libpthread.so.0
-libreadline.so.6
-libsystemd.so.0
+libreadline.so.7
+libssh2.so.1
 libtinfow.so.6
 libudev.so.1
 libutil.so.1

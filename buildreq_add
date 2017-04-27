@@ -31,3 +31,9 @@ openssl-dev
 fuse-dev
 nfs-utils
 systemd-dev
+libxml2-dev
+numactl
+libssh2-dev
+acl-dev
+LVM2-dev
+LVM2-extras
