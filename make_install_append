@@ -1,2 +1,2 @@
-mkdir %{buildroot}/usr/lib/systemd/system/sockets.target.wants
-ln -s ../libvirtd.socket %{buildroot}/usr/lib/systemd/system/sockets.target.wants/libvirtd.socket
+mkdir %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/libvirtd.service

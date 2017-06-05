@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 3.2.0
-Release  : 95
+Release  : 96
 URL      : http://libvirt.org/sources/libvirt-3.2.0.tar.xz
 Source0  : http://libvirt.org/sources/libvirt-3.2.0.tar.xz
 Source99 : http://libvirt.org/sources/libvirt-3.2.0.tar.xz.asc
@@ -165,7 +165,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1493259759
+export SOURCE_DATE_EPOCH=1496688119
 %reconfigure --disable-static ac_cv_path_EBTABLES_PATH=%{_bindir}/ebtables \
 ac_cv_path_IP_PATH= \
 --disable-dependency-tracking \
@@ -216,13 +216,13 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1493259759
+export SOURCE_DATE_EPOCH=1496688119
 rm -rf %{buildroot}
 %make_install
 %find_lang libvirt
 ## make_install_append content
-mkdir %{buildroot}/usr/lib/systemd/system/sockets.target.wants
-ln -s ../libvirtd.socket %{buildroot}/usr/lib/systemd/system/sockets.target.wants/libvirtd.socket
+mkdir %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/libvirtd.service
 ## make_install_append end
 
 %files
@@ -230,7 +230,7 @@ ln -s ../libvirtd.socket %{buildroot}/usr/lib/systemd/system/sockets.target.want
 
 %files autostart
 %defattr(-,root,root,-)
-/usr/lib/systemd/system/sockets.target.wants/libvirtd.socket
+/usr/lib/systemd/system/multi-user.target.wants/libvirtd.service
 
 %files bin
 %defattr(-,root,root,-)
@@ -251,7 +251,7 @@ ln -s ../libvirtd.socket %{buildroot}/usr/lib/systemd/system/sockets.target.want
 
 %files config
 %defattr(-,root,root,-)
-%exclude /usr/lib/systemd/system/sockets.target.wants/libvirtd.socket
+%exclude /usr/lib/systemd/system/multi-user.target.wants/libvirtd.service
 /usr/lib/sysctl.d/60-libvirtd.conf
 /usr/lib/systemd/system/libvirt-guests.service
 /usr/lib/systemd/system/libvirtd.service
