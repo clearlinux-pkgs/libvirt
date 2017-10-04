@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 3.2.0
-Release  : 97
+Release  : 98
 URL      : http://libvirt.org/sources/libvirt-3.2.0.tar.xz
 Source0  : http://libvirt.org/sources/libvirt-3.2.0.tar.xz
 Source99 : http://libvirt.org/sources/libvirt-3.2.0.tar.xz.asc
@@ -134,7 +134,6 @@ doc components for the libvirt package.
 Summary: lib components for the libvirt package.
 Group: Libraries
 Requires: libvirt-data
-Requires: libvirt-config
 
 %description lib
 lib components for the libvirt package.
@@ -164,7 +163,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1496778961
+export SOURCE_DATE_EPOCH=1507156297
 %reconfigure --disable-static ac_cv_path_EBTABLES_PATH=%{_bindir}/ebtables \
 ac_cv_path_IP_PATH= \
 --disable-dependency-tracking \
@@ -215,7 +214,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1496778961
+export SOURCE_DATE_EPOCH=1507156297
 rm -rf %{buildroot}
 %make_install
 %find_lang libvirt
