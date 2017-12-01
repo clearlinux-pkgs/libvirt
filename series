@@ -6,3 +6,4 @@
 0006-set-default-ciphers.patch
 0007-Arjan-s-malloc-patch-converted-to-git.patch
 0008-Arjan-s-patch-for-locale.patch
+cve-2017-1000256.patch
