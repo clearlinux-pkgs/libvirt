@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 3.2.0
-Release  : 99
+Release  : 100
 URL      : http://libvirt.org/sources/libvirt-3.2.0.tar.xz
 Source0  : http://libvirt.org/sources/libvirt-3.2.0.tar.xz
 Source99 : http://libvirt.org/sources/libvirt-3.2.0.tar.xz.asc
