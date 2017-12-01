@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 3.2.0
-Release  : 98
+Release  : 99
 URL      : http://libvirt.org/sources/libvirt-3.2.0.tar.xz
 Source0  : http://libvirt.org/sources/libvirt-3.2.0.tar.xz
 Source99 : http://libvirt.org/sources/libvirt-3.2.0.tar.xz.asc
@@ -70,6 +70,7 @@ Patch5: 0005-drop-timeout-ping.patch
 Patch6: 0006-set-default-ciphers.patch
 Patch7: 0007-Arjan-s-malloc-patch-converted-to-git.patch
 Patch8: 0008-Arjan-s-patch-for-locale.patch
+Patch9: cve-2017-1000256.patch
 
 %description
 Libvirt is a C toolkit to interact with the virtualization capabilities
@@ -157,13 +158,18 @@ locales components for the libvirt package.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1507156297
+export SOURCE_DATE_EPOCH=1512154449
+export CFLAGS="$CFLAGS -fstack-protector-strong "
+export FCFLAGS="$CFLAGS -fstack-protector-strong "
+export FFLAGS="$CFLAGS -fstack-protector-strong "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong "
 %reconfigure --disable-static ac_cv_path_EBTABLES_PATH=%{_bindir}/ebtables \
 ac_cv_path_IP_PATH= \
 --disable-dependency-tracking \
@@ -214,7 +220,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1507156297
+export SOURCE_DATE_EPOCH=1512154449
 rm -rf %{buildroot}
 %make_install
 %find_lang libvirt
