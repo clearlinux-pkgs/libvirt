@@ -1,25 +1,26 @@
-From 9a82758153f31a49ab82627de134c3f4be923fc9 Mon Sep 17 00:00:00 2001
+From 79b7ace2634ff41d01ad0eb1078e703ee6d41c65 Mon Sep 17 00:00:00 2001
 From: Alberto Murillo <alberto.murillo.silva@intel.com>
 Date: Fri, 29 Jan 2016 09:48:04 -0600
 Subject: [PATCH 5/8] drop timeout ping
 
 Signed-off-by: Alberto Murillo <alberto.murillo.silva@intel.com>
+Signed-off-by: Simental Magana, Marcos <marcos.simental.magana@intel.com>
 ---
  src/network/bridge_driver.c | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/src/network/bridge_driver.c b/src/network/bridge_driver.c
-index ef98236..3b8e159 100644
+index fcaa66d..0d85bc1 100644
 --- a/src/network/bridge_driver.c
 +++ b/src/network/bridge_driver.c
-@@ -1537,6 +1537,7 @@ networkBuildDhcpDaemonCommandLine(virNetworkDriverStatePtr driver,
+@@ -1519,6 +1519,7 @@ networkBuildDhcpDaemonCommandLine(virNetworkDriverStatePtr driver,
      cmd = virCommandNew(dnsmasqCapsGetBinaryPath(dnsmasq_caps));
      virCommandAddArgFormat(cmd, "--conf-file=%s", configfile);
      /* Libvirt gains full control of leases database */
 +    virCommandAddArgFormat(cmd, "--no-ping");
      virCommandAddArgFormat(cmd, "--leasefile-ro");
      virCommandAddArgFormat(cmd, "--dhcp-script=%s", leaseshelper_path);
-     virCommandAddEnvPair(cmd, "VIR_BRIDGE_NAME", network->def->bridge);
+     virCommandAddEnvPair(cmd, "VIR_BRIDGE_NAME", def->bridge);
 -- 
-2.12.2
+2.15.1
 

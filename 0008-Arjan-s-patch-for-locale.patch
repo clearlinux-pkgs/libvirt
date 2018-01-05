@@ -1,4 +1,4 @@
-From 65e6d608e7105330878255faacafa8fc76651565 Mon Sep 17 00:00:00 2001
+From b5b4f44a708ab5076fb4f0b8ab6be223ea0a8c48 Mon Sep 17 00:00:00 2001
 From: Icarus Sparry <icarus.w.sparry@intel.com>
 Date: Wed, 26 Apr 2017 11:43:40 -0700
 Subject: [PATCH 8/8] Arjan's patch for locale
@@ -24,5 +24,5 @@ index c0135b4..b7be563 100644
          /* failure to setup locale is not fatal */
      }
 -- 
-2.12.2
+2.15.1
 

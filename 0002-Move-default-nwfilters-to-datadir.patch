@@ -1,10 +1,11 @@
-From 5989f17db7639621e3ae7d561c7e91df9d3a0e71 Mon Sep 17 00:00:00 2001
+From e480e4ecd19deed385fe01773887be25e3a40786 Mon Sep 17 00:00:00 2001
 From: Alberto Murillo <alberto.murillo.silva@intel.com>
 Date: Fri, 29 Jan 2016 09:45:35 -0600
 Subject: [PATCH 2/8] Move default nwfilters to datadir
 
 Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
 Signed-off-by: Alberto Murillo <alberto.murillo.silva@intel.com>
+Signed-off-by: Simental Magana, Marcos <marcos.simental.magana@intel.com>
 ---
  examples/Makefile.am           |  2 +-
  src/conf/virnwfilterobj.h      |  1 +
@@ -12,7 +13,7 @@ Signed-off-by: Alberto Murillo <alberto.murillo.silva@intel.com>
  3 files changed, 13 insertions(+), 8 deletions(-)
 
 diff --git a/examples/Makefile.am b/examples/Makefile.am
-index 2956e14..08fed96 100644
+index ef2f79d..0292a83 100644
 --- a/examples/Makefile.am
 +++ b/examples/Makefile.am
 @@ -88,7 +88,7 @@ templates_DATA = \
@@ -25,11 +26,11 @@ index 2956e14..08fed96 100644
  install-data-local:
  	$(MKDIR_P) "$(NWFILTER_DIR)"
 diff --git a/src/conf/virnwfilterobj.h b/src/conf/virnwfilterobj.h
-index 1d80455..670a287 100644
+index 8e79518..c007b35 100644
 --- a/src/conf/virnwfilterobj.h
 +++ b/src/conf/virnwfilterobj.h
-@@ -54,6 +54,7 @@ struct _virNWFilterDriverState {
-     virNWFilterObjList nwfilters;
+@@ -38,6 +38,7 @@ struct _virNWFilterDriverState {
+     virNWFilterObjListPtr nwfilters;
  
      char *configDir;
 +    char *defaultsDir;
@@ -37,10 +38,10 @@ index 1d80455..670a287 100644
  };
  
 diff --git a/src/nwfilter/nwfilter_driver.c b/src/nwfilter/nwfilter_driver.c
-index 4ea216a..6f52245 100644
+index 2f9a51c..e310fea 100644
 --- a/src/nwfilter/nwfilter_driver.c
 +++ b/src/nwfilter/nwfilter_driver.c
-@@ -172,7 +172,6 @@ nwfilterStateInitialize(bool privileged,
+@@ -173,7 +173,6 @@ nwfilterStateInitialize(bool privileged,
                          virStateInhibitCallback callback ATTRIBUTE_UNUSED,
                          void *opaque ATTRIBUTE_UNUSED)
  {
@@ -48,33 +49,39 @@ index 4ea216a..6f52245 100644
      DBusConnection *sysbus = NULL;
  
      if (virDBusHasSystemBus() &&
-@@ -228,16 +227,20 @@ nwfilterStateInitialize(bool privileged,
+@@ -229,14 +228,17 @@ nwfilterStateInitialize(bool privileged,
          goto error;
      }
  
 -    if (VIR_STRDUP(base, SYSCONFDIR "/libvirt") < 0)
 +    if (virAsprintf(&driver->configDir,
-+                    SYSCONFDIR "/libvirt/nwfilter") == -1)
++                SYSCONFDIR "/libvirt/nwfilter") == -1)
          goto error;
  
 -    if (virAsprintf(&driver->configDir,
 -                    "%s/nwfilter", base) == -1)
 +    if (virNWFilterLoadAllConfigs(&driver->nwfilters,
-+                                  driver->configDir) < 0)
++                                         driver->configDir) < 0)
          goto error;
  
 -    VIR_FREE(base);
 +    if (virAsprintf(&driver->defaultsDir,
-+                    PKGDATADIR "/nwfilter") == -1)
++                PKGDATADIR "/nwfilter") == -1)
 +        goto error;
  
--    if (virNWFilterObjLoadAllConfigs(&driver->nwfilters, driver->configDir) < 0)
+     if (virFileMakePathWithMode(driver->configDir, S_IRWXU) < 0) {
+         virReportSystemError(errno, _("cannot create config directory '%s'"),
+@@ -247,7 +249,8 @@ nwfilterStateInitialize(bool privileged,
+     if (!(driver->nwfilters = virNWFilterObjListNew()))
+         goto error;
+ 
+-    if (virNWFilterObjListLoadAllConfigs(driver->nwfilters, driver->configDir) < 0)
 +    if (virNWFilterLoadAllConfigs(&driver->nwfilters,
 +                                 driver->defaultsDir) < 0)
          goto error;
  
      nwfilterDriverUnlock();
-@@ -245,7 +248,6 @@ nwfilterStateInitialize(bool privileged,
+@@ -255,7 +258,6 @@ nwfilterStateInitialize(bool privileged,
      return 0;
  
   error:
@@ -82,16 +89,16 @@ index 4ea216a..6f52245 100644
      nwfilterDriverUnlock();
      nwfilterStateCleanup();
  
-@@ -290,6 +292,7 @@ nwfilterStateReload(void)
+@@ -300,6 +302,7 @@ nwfilterStateReload(void)
      virNWFilterCallbackDriversLock();
  
-     virNWFilterObjLoadAllConfigs(&driver->nwfilters, driver->configDir);
-+    virNWFilterObjLoadAllConfigs(&driver->nwfilters, driver->defaultsDir);
+     virNWFilterObjListLoadAllConfigs(driver->nwfilters, driver->configDir);
++    virNWFilterObjListLoadAllConfigs(driver->nwfilters, driver->defaultsDir);
  
      virNWFilterCallbackDriversUnlock();
      virNWFilterUnlockFilterUpdates();
-@@ -343,6 +346,7 @@ nwfilterStateCleanup(void)
-         virNWFilterObjListFree(&driver->nwfilters);
+@@ -353,6 +356,7 @@ nwfilterStateCleanup(void)
+         virNWFilterObjListFree(driver->nwfilters);
  
          VIR_FREE(driver->configDir);
 +        VIR_FREE(driver->defaultsDir);
@@ -99,5 +106,5 @@ index 4ea216a..6f52245 100644
      }
  
 -- 
-2.12.2
+2.15.1
 

@@ -1,4 +1,4 @@
-From 005da56eab139205d64d2b0c8a74169f26188707 Mon Sep 17 00:00:00 2001
+From 5d3656582a02d06c09dbf2d098cbbe6bff7bcd1a Mon Sep 17 00:00:00 2001
 From: Icarus Sparry <icarus.w.sparry@intel.com>
 Date: Wed, 26 Apr 2017 11:18:26 -0700
 Subject: [PATCH 7/8] Arjan's malloc patch, converted to git
@@ -29,5 +29,5 @@ index 81ecab4..009d97e 100644
      if (ret < 0) {
          EVENT_DEBUG("Poll got error event %d", errno);
 -- 
-2.12.2
+2.15.1
 

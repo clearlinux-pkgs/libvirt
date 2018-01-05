@@ -1,4 +1,4 @@
-From 0cf7477280378540de1dbe6fec3a13e464e9c699 Mon Sep 17 00:00:00 2001
+From e6728433acf1d197813e48e27c9ab457a1c34f10 Mon Sep 17 00:00:00 2001
 From: "Munoz, Obed N" <obed.n.munoz@intel.com>
 Date: Thu, 2 Jul 2015 10:35:47 -0500
 Subject: [PATCH 1/8] Default to 0770 permissions, with group libvirt for the
@@ -10,7 +10,7 @@ Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/daemon/libvirtd-config.c b/daemon/libvirtd-config.c
-index 6c0f00e..eb25379 100644
+index 19b3d16..26befc9 100644
 --- a/daemon/libvirtd-config.c
 +++ b/daemon/libvirtd-config.c
 @@ -131,11 +131,14 @@ daemonConfigNew(bool privileged ATTRIBUTE_UNUSED)
@@ -30,5 +30,5 @@ index 6c0f00e..eb25379 100644
      data->auth_tcp = REMOTE_AUTH_SASL;
  #else
 -- 
-2.12.2
+2.15.1
 
