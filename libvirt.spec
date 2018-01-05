@@ -5,14 +5,14 @@
 # Source0 file verified with key 0x15588B26596BEA5D (Daniel.Veillard@w3.org)
 #
 Name     : libvirt
-Version  : 3.2.0
-Release  : 100
-URL      : http://libvirt.org/sources/libvirt-3.2.0.tar.xz
-Source0  : http://libvirt.org/sources/libvirt-3.2.0.tar.xz
-Source99 : http://libvirt.org/sources/libvirt-3.2.0.tar.xz.asc
+Version  : 3.10.0
+Release  : 101
+URL      : https://libvirt.org/sources/libvirt-3.10.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-3.10.0.tar.xz
+Source99 : https://libvirt.org/sources/libvirt-3.10.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
-License  : GPL-2.0 LGPL-2.1 LGPL-2.1+
+License  : GPL-2.0 LGPL-2.1 LGPL-2.1+ OFL-1.1
 Requires: libvirt-bin
 Requires: libvirt-config
 Requires: libvirt-lib
@@ -56,6 +56,7 @@ BuildRequires : openssh
 BuildRequires : openssl-dev
 BuildRequires : parted-dev
 BuildRequires : pkg-config-dev
+BuildRequires : polkit-dev
 BuildRequires : readline-dev
 BuildRequires : systemd
 BuildRequires : systemd-dev
@@ -70,7 +71,6 @@ Patch5: 0005-drop-timeout-ping.patch
 Patch6: 0006-set-default-ciphers.patch
 Patch7: 0007-Arjan-s-malloc-patch-converted-to-git.patch
 Patch8: 0008-Arjan-s-patch-for-locale.patch
-Patch9: cve-2017-1000256.patch
 
 %description
 Libvirt is a C toolkit to interact with the virtualization capabilities
@@ -149,7 +149,7 @@ locales components for the libvirt package.
 
 
 %prep
-%setup -q -n libvirt-3.2.0
+%setup -q -n libvirt-3.10.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -158,14 +158,13 @@ locales components for the libvirt package.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1512154449
+export SOURCE_DATE_EPOCH=1515195765
 export CFLAGS="$CFLAGS -fstack-protector-strong "
 export FCFLAGS="$CFLAGS -fstack-protector-strong "
 export FFLAGS="$CFLAGS -fstack-protector-strong "
@@ -192,7 +191,6 @@ ac_cv_path_IP_PATH= \
 --without-openvz \
 --without-phyp \
 --without-pm-utils \
---without-polkit \
 --without-sasl \
 --without-selinux \
 --without-uml \
@@ -209,8 +207,10 @@ ac_cv_path_IP_PATH= \
 --with-test=yes \
 --with-udev \
 --with-yajl \
---with-openssl
-make V=1  %{?_smp_mflags}
+--with-openssl \
+--with-polkit \
+--with-loader-nvram=/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF_CODE.fd:/usr/share/qemu/OVMF_VARS.fd
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
@@ -220,7 +220,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1512154449
+export SOURCE_DATE_EPOCH=1515195765
 rm -rf %{buildroot}
 %make_install
 %find_lang libvirt
@@ -318,6 +318,9 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/share/libvirt/schemas/storagepool.rng
 /usr/share/libvirt/schemas/storagevol.rng
 /usr/share/libvirt/test-screenshot.png
+/usr/share/polkit-1/actions/org.libvirt.api.policy
+/usr/share/polkit-1/actions/org.libvirt.unix.policy
+/usr/share/polkit-1/rules.d/50-libvirt.rules
 
 %files dev
 %defattr(-,root,root,-)
@@ -351,6 +354,7 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 %defattr(-,root,root,-)
 %doc /usr/share/doc/libvirt/*
 %doc /usr/share/man/man1/*
+%doc /usr/share/man/man7/*
 %doc /usr/share/man/man8/*
 /usr/share/gtk-doc/html/libvirt/general.html
 /usr/share/gtk-doc/html/libvirt/home.png
@@ -367,13 +371,13 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.3002.0
+/usr/lib64/libvirt-admin.so.0.3010.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.3002.0
+/usr/lib64/libvirt-lxc.so.0.3010.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.3002.0
+/usr/lib64/libvirt-qemu.so.0.3010.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.3002.0
+/usr/lib64/libvirt.so.0.3010.0
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_network.so

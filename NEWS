@@ -1,6 +1,685 @@
 libvirt releases
 ================
 
+# v3.10.0 (2017-12-04)
+
+  * New features
+
+    - conf: Support defining distances between virtual NUMA cells
+        A NUMA hardware architecture supports the notion of distances between
+        NUMA cells. This can now be specified using the <distances> element
+        within the NUMA cell configuration. Drivers which support this include
+        Xen and QEMU.
+
+    - Xen: Support defining vNUMA topology
+        Xen now supports defining a virtual NUMA topology for VMs, including
+        specifying distances between NUMA cells.
+
+    - qemu: Add the ability to configure HPT resizing for pSeries guests
+        The user can now decide whether HPT (Hash Page Table) resizing should
+        be enabled, disabled or required instead of leaving it up to hypervisor
+        defaults and negotiation between the guest and the host.
+
+    - qemu: Add vmcoreinfo feature
+        Starting with QEMU 2.11, the guest can save kernel debug details when
+        this feature is enabled and the kernel supports it. It is useful to
+        process kernel dump with KASLR enabled, and also provides various
+        kernel details to crash tools.
+
+    - conf: Move the auth and encryption definitions to disk source
+        Allow parsing and formatting of the auth and encryption sub-elements to
+        be a child of the source element. This will allow adding an auth
+        sub-element to a backingStore or mirror elements as a means to track
+        specific authentication and/or encryption needs.
+
+  * Improvements
+
+    - vbox: Add VirtualBox 5.2 support
+
+    - vbox: Add support for configuring storage controllers
+        The VirtualBox driver now supports the <controller> element in the
+        domain XML for configuring storage controllers in VBOX VMs.
+        Additionally, libvirt's domain XML schema was updated to allow optional
+        model attribute for <controller type='ide'> which is used by the VBOX
+        driver to set the IDE controller model to be one of 'piix4', 'piix4'
+        (default), or 'ich6'. Finally, with this change dumpxml generates
+        <controller> elements that correspond to current VBOX VM storage
+        controller configuration.
+
+    - vbox: Add support for attaching empty removable disks
+        The VirutalBox driver now supports adding CD-ROM and floppy disk
+        devices that do not have the disk source specified. Previously such
+        devices were silently ignored.
+
+    - vbox: Add support for attaching SAS storage controllers
+        In VirtualBox, SCSI and SAS are distinct controller types whereas
+        libvirt does not make such distinction. Therefore, the VBOX driver was
+        updated to allow attaching SAS controllers via <controller type='scsi'
+        model='lsisas1068'> element. If there are both SCSI and SAS controllers
+        present in the VBOX VM, the domain XML can associate the disk device
+        using the <address> element with the controller attribute, and
+        optionally, set the port via unit attribute.
+
+    - qemu: Generate predictable paths for qemu memory backends
+        In some cases management applications need to know paths passed to
+        memory-backend-file objects upfront. Libvirt now generates predictable
+        paths so applications can prepare the files if they need to do so.
+
+    - Shareable disks work properly with recent qemu
+        Recent qemu versions added image locking to avoid potential corruption
+        of disk images. This broke shareable disks with libvirt since the
+        feature was turned on by default in qemu. Libvirt now enables sharing
+        of those disks in qemu so that the image locking is not applied in that
+        case. Additionally libvirt now checks that shareable disks have
+        supported format (raw) to avoid metadata corruption.
+
+    - Improve serial console behavior on non-x86 architectures
+        ppc64, aarch64 and s390x guests were treating the <serial> and
+        <console> elements differently from x86, in some cases presenting
+        misleading information to the user. The behavior is now consistent
+        across all architectures and the information reported is always
+        accurate.
+
+  * Bug fixes
+
+    - vbox: Do not ignore failures to attach disk devices when defining
+        The define now fails and reports an error if any of the controller or
+        disk devices specified in the domain XML fail to attach to the
+        VirtualBox VM.
+
+    - vbox: Fix dumpxml to always output disk devices
+        The VirtualBox driver was ignoring any disk devices in dumpxml output
+        if there was a SAS storage controller attached to the VM.
+
+    - vbox: Fix dumpxml to always generate valid domain XML
+        When a VirtualBox VM has multiple disks attached, each to a different
+        storage controller that uses 'sd' prefix for block device names e.g.
+        one disk attached to SATA and one to SCSI controller, it no longer
+        generates XML where both would have 'sda' device name assigned. Instead
+        it properly assigns 'sda' and 'sdb' to those disks in the order of
+        appearance.
+
+    - Securely pass iSCSI authentication data
+        Rather than supplying the authentication data as part of the iSCSI URL
+        for a disk or host device, utilize the encrypted secret object to
+        securely pass the authentication data.
+
+# v3.9.0 (2017-11-02)
+
+  * New features
+
+    - Add capability to allow hot (un)plug of a domain watchdog device
+
+    - Allow users to set device aliases
+        Users can set aliases to domain devices and thus identify them easily.
+
+    - qemu: Support multiqueue for virtio-blk
+        Multiqueue support for virtio-blk has been available in QEMU ever since
+        2.7.0, and now libvirt guests can enable it.
+
+    - Add virDomainSetLifecycleAction API
+        Provided a new API to allow dynamic guest lifecycle control for guest
+        reactions to poweroff, restart, or crash type events related to the
+        domain XML on_poweroff, on_reboot, and on_crash elements. The virsh
+        set-lifecycle-action command was created to control the actions.
+
+    - qemu: Allow cold(un)plugging and hot(un)plugging input devices
+
+    - net: Implement QoS for vhostuser
+
+  * Improvements
+
+    - Allow a logical volume to be create using LUKS
+        A logical volume may be created using an encryption element using
+        "luks" format. This does require a previously created secret to store
+        the passphrase used to encrypt the volume Adding the volume to a domain
+        can then either provide the secret or allow the consumer in the guest
+        to provide the passphrase in order to decrypt the volume.
+
+    - net: Ignore auto-generated MAC address when detaching an interface
+        If the MAC address has not been specified by the user, libvirt will try
+        and fill in the gaps by generating one; however, for some error paths
+        that led to some confusing error messages, so when an auto-generated
+        MAC address is specified the error message will not include the
+        auto-generated MAC.
+
+    - net: Enable MAC address lookup for virDomainInterfaceStats
+
+    - apparmor: Several improvements
+        Changes include permitting access to data about USB devices and dnsmasq
+        instances, allowing spaces in guest names and many more.
+
+    - cpu: Use CPU information obtained from QEMU when possible
+        Recent QEMU versions can expose information about which CPU models are
+        available and usable on the host; libvirt will now make use of such
+        information whenever possible.
+
+    - hyperv: Various improvements
+        The error reported when clients can't connect to Hyper-V has been made
+        more descriptive, and memory limits for guests are now mapped to more
+        appropriate libvirt equivalents.
+
+    - qemu: Report QEMU error on failed migration
+        Instead of reporting a generic error, ask QEMU for a more detailed and
+        thus hopefully more helpful one.
+
+    - vbox: Implement autoport for RDP
+        libvirt will now obtain the (dynamically allocated) RDP port number
+        from VirtualBox itself, avoiding conflicts between multiple guests
+        wanting to use RDP at the same time.
+
+    - qemu: Allow rotation of small logs
+        On a host where numerous unique instances are executed per day, it's
+        quite possible that, even though each of the single log files are
+        fairly small, collectively the quantity and volume may add tens of
+        thousands of log files to the /var/log/libvirt/qemu/ directory.
+        Removing the constraints that log have to be bigger than 100 KiB before
+        they can be rotated solves the issue.
+
+  * Bug fixes
+
+    - Fix swapped interface statistics and QoS
+        Due to internal implementation, reported statistics for some types of
+        interfaces were swapped (RX appeared in TX and vice versa). Similarly,
+        QoS was set in reversed way.
+
+    - Properly resize local LUKS encrypted volume
+        Resizing of a local LUKS encrypted volume will now use qemu-img to
+        resize the volume. This will require configuring a secret for the LUKS
+        encrypted volume.
+
+    - qemu: Reserve PCI addresses for implicit i440fx devices
+        Failing to do so causes the addresses to be considered usable by
+        libvirt, which means they could be assigned to more than one device
+        resulting in the guest failing to start.
+
+    - spec: Restart libvirtd only at the end of the upgrade process
+        Use %posttrans to make sure libvirtd is not restarted before all other
+        components, such as the library itself and storage / hypervisor
+        drivers, have already been upgraded.
+
+  * Security
+
+    - qemu: Ensure TLS clients always verify the server certificate
+        While it's reasonable to turn off client certificate validation, as
+        setting it up can be non-trivial, clients should always verify the
+        server certificate to avoid MITM attacks. However, libvirt was using
+        the same knob to control both checks, leading to CVE-2017-1000256 /
+        LSN-2017-0002.
+
+# v3.8.0 (2017-10-04)
+
+  * New features
+
+    - qemu: Added support for cold-(un)plug of watchdog devices
+
+    - qemu: Added support for setting IP address os usernet interfaces
+
+    - qemu: Added support for Veritas Hyperscale (VxHS) block devices
+
+    - storage: Added new events for pool-build and pool-delete
+
+  * Improvements
+
+    - qemu: Set DAC permissions properly for spice rendernode
+        When a rendernode path is set for SPICE GL on qemu:///system, we now
+        correctly set DAC permissions on the device at VM startup. This is the
+        last remaining hurdle to let SPICE GL work for qemu:///system without
+        any external host changes.
+
+    - nodedev: Add switchdev offload query to NIC capabilities
+        Allow querying the NIC interface capabilities for the availability of
+        switchdev offloading (also known as kernel-forward-plane-offload).
+
+    - New CPU models for AMD and Intel
+        AMD EPYC and Intel Skylake-Server CPU models were added together with
+        their features
+
+    - Improve long waiting when saving a domain
+        While waiting for a write to disk to be finished, e.g. during save,
+        even simple operations like virsh list would be blocking due to domain
+        lock. This is now resolved by unlocking the domain in places where it
+        is not needed.
+
+  * Bug fixes
+
+    - Proper units are now used in virsh manpage for dom(mem)stats
+        Previously the documentation used multiples of 1000, but now it is
+        fixed to use multiples of 1024.
+
+    - qemu: Fix error reporting when disk attachment fails
+        There was a possibility for the actual error to be overridden or
+        cleared during the rollback.
+
+    - qemu: Fix assignment of graphics ports after daemon restart
+        This could be seen with newer kernels that have bug regarding
+        SO_REUSEADDR. After libvirtd was restarted it could assign already used
+        address to new guests which would make them fail to start. This is
+        fixed by marking used ports unavailable when reconnecting to running
+        QEMU domains.
+
+    - Fix message decoding which was causing a very strange bug
+        When parsing an RPC message with file descriptors was interrupted and
+        had to restart, the offset of the payload was calculated badly causing
+        strange issues like not being able to find a domain that was not
+        requested.
+
+# v3.7.0 (2017-09-04)
+
+  * New features
+
+    - qemu: Add managedsave-edit commands
+        Using managedsave-dumpxml, managedsave-define and managedsave-edit
+        commands, now we can dump and edit the XML configuration of domain
+        which has managedsave image.
+
+    - qemu: Add migrate-getmaxdowntime command
+        Currently, the maximum tolerable downtime for a domain being migrated
+        is write-only from libvirt, via migrate-setmaxdowntime. This implements
+        a complementary migrate-getmaxdowntime command
+
+    - bhyve: Support autoport for VNC ports
+        It's no longer necessary to explicitly specify VNC port for the bhyve
+        guests. With the autoport feature it will be allocated automatically.
+        Please refer to the bhyve driver documentation for examples.
+
+    - qemu: Added support for setting heads of virtio GPU
+
+    - qemu: Added support to configure reconnect timeout for chardev devices
+        When you have a TCP or UNIX chardev device and it's connected somewhere
+        you can configure reconnect timeout if the connection is closed.
+
+  * Improvements
+
+    - qemu: Report a clear error when dropping a VM during startup
+        "Failed to load config for domain 'DOMNAME'" is now reported if a VM
+        config can't be parsed for some reason, and thus provides a clear
+        indication for users (and devs).
+
+    - apparmor: Update for QEMU 2.10 compatibility
+        Starting with QEMU 2.10, disk images and NVRAM files get automatically
+        locked to prevent them from being corrupted; however, file locking
+        needs to be explicitly allowed through virt-aa-helper or AppArmor will
+        reject the requests and the guest will not be able to run.
+
+    - virsh: List Unix sockets in 'domdisplay' output
+        VNC and SPICE graphics can use Unix sockets instead of TCP/IP sockets
+        as connection endpoints, but such a configuration was not handled
+        correctly by virsh domdisplay, causing the respective endpoints to be
+        missing from the output.
+
+    - qemu: Don't check whether offline migration is safe
+        Since offline migration only copies the guest definition to the
+        destination host, data corruption is not a concern and the operation
+        can always be performed safely.
+
+    - virt-host-validate: Fix IOMMU detection on ppc64
+
+  * Bug fixes
+
+    - qemu: Better support for international domain names (with wide
+      characters)
+        There were some issues with multi-byte domains getting lost on daemon
+        restart due to truncation, so the code now handles multi-byte names a
+        bit better.
+
+    - qemu: Support long domain names with namespaces
+        Domains with extremely long names would fail to start due to temporary
+        namespace paths being created with the whole name. The path is now
+        generated with shortened name instead.
+
+    - qemu: Tolerate missing emulator binary during libvirtd restart
+        For some time libvirt required qemu capabilities being present when
+        parsing VM configs during startup. As a side effect VM configs would
+        fail to parse and thus vanish, if the emulator binary would be
+        uninstalled or broken. Libvirt now tolerates when capabilities are
+        missing during startup.
+
+    - qemu: Prevent pSeries guests from disappearing in some situations
+        pSeries guest would disappear if any of the host devices they were
+        configured to use was not available during libvirtd startup, which
+        could easily happen for SR-IOV Virtual Functions. This scenario is now
+        handled correctly.
+
+    - qemu: Honor <on_reboot/> setting
+        The setting was accepted by the parser, but not actually implemented.
+
+    - Fix --verbose option for all daemons
+        Since v3.0.0, the option had been ignored by all libvirt daemons
+        (libvirtd, virtlogd and virtlockd); it's now working as intended once
+        again.
+
+# v3.6.0 (2017-08-02)
+
+  * New features
+
+    - hyperv: Implement virDomainSetMemory and virDomainSendKey APIs
+
+    - qemu: Support multiple PHBs for pSeries guests
+        pSeries guests can now have multiple PHBs (PCI Host Bridges), which
+        show up as separate PCI domains in the guest. To create additional
+        PHBs, simply add PCI controllers with model pci-root to the guest
+        configuration.
+
+    - qemu: Isolate hostdevs on pSeries guests
+        To enable better error reporting and recovery, unrelated hostdevs will
+        now be automatically isolated on pSeries guests by placing them on
+        separate PHBs (PCI Host Bridges).
+
+  * Improvements
+
+    - qemu: platform serial devices can now use chardev features
+        QEMU VMs that depend on platform serial devices can now use QEMU's
+        -chardev option, which enables access to advanced features like log
+        file configuration. This applies to the default serial devices for arm,
+        aarch64, and some ppc configurations.
+
+    - Require use of GCC 4.4 or Clang compilers
+        We only ever test libvirt with GCC or Clang (which provides a GCC
+        compatible compilation environment). Between them, these compilers
+        cover every supported operating system platform, including Windows.
+
+    - qemu: shared disks with directsync cache should be safe for migration
+        At present shared disks can be migrated with either readonly or
+        cache=none. But cache=directsync should be safe for migration, because
+        both cache=directsync and cache=none don't use the host page cache, and
+        cache=direct write through qemu block layer cache.
+
+    - Handle hotplug change on VLAN configuration using OVS
+        Libvirt was taught to handle VLAN change for running OVS interface.
+
+  * Bug fixes
+
+    - qemu: Use vCPU 'node-id' property and pass it back to qemu
+        vCPU properties gathered from query-hotpluggable-cpus need to be passed
+        back to QEMU. As QEMU did not use the node-id property until now and
+        libvirt forgot to pass it back properly (it was parsed but not passed
+        around) we did not honor this.
+
+    - Miscellaneous stream fixes
+        After introducing sparse stream features there were still some known
+        bugs left. Those are fixed in this release.
+
+    - qemu: Miscellaneous domain NS fixes
+        Libvirt starts qemu domains in separate Linux namespaces for a while
+        now. However, there were still some bugs lingering. For instance
+        libvirt did not know how to handle file based bind mounts.
+
+    - Various CPU driver improvements
+        There were some minor bugs when using 'host-model' CPU.
+
+# v3.5.0 (2017-07-04)
+
+  * New features
+
+    - qemu: Add support for loadparm for a boot device
+        Add an optional boot parameter 'loadparm' for a boot device. Loadparm
+        is an 8 byte parameter that, when present, is queried by S390 guests
+        via sclp or diag 308. Linux guests on S390 use it to select a boot
+        entry.
+
+    - Support controlling how video devices are exposed to the bhyve guests
+        The vgaconf attribute was added to video's driver element. Possible
+        values are: on, off, and io. It controlls the way how bhyve exposes
+        video devices to its guests; various guest OSes might require different
+        settings to boot properly.
+
+    - qemu: Add support for live updates of coalesce settings
+        Users can now use virsh update-device to change the coalesce settings
+        of an interfaces while the domain is running.
+
+    - qemu: Allow VirtIO devices to use vIOMMU
+        It is now possible to turn on IOTBL for the vIOMMU and have VirtIO
+        devices use it, provided they have been configured appropriately.
+
+  * Improvements
+
+    - qemu: block copy job can be used with persistent domains
+        Until now it was not possible to use block copy with persistent VMs. In
+        use cases where it's not required to recover the job after VM shutdown,
+        it's possible to specify VIR_DOMAIN_BLOCK_COPY_TRANSIENT_JOB flag to
+        start the copy job.
+
+    - JSON pseudo-protocol backing store parser supports new format of qemu 2.9
+        QEMU 2.9 modified a few structures corresponding to the JSON format of
+        specifying a backing store for a disk image. Libvirt now implements the
+        new format.
+
+    - Capabilities now include info about host's CAT settings
+        Various information about resource control from the host is gathered
+        and presented in capabilities if available.
+
+    - apparmor: Several improvements
+        Allow access to Ceph config, EFI firmware on both x86_64 and aarch64,
+        device tree on ppc64 and more.
+
+    - qemu: Support host-model on POWER9 machines
+
+  * Bug fixes
+
+    - qemu: snapshot: retrieve image metadata from user provided files
+        Disk images of an external snapshot created with
+        VIR_DOMAIN_SNAPSHOT_CREATE_REUSE_EXT flag specified would not be
+        scanned for metadata after recent changes. The metadata is necessary to
+        allow keeping relative paths between images when doing a block-commit.
+
+    - Parse decimal numbers in a locale-independent way
+        Some locales, such as de_DE and pt_BR, use comma rather than dot to
+        separate the integer part from the fractional part of a decimal number;
+        however, several data sources such as the kernel use a
+        locale-independent representation and need to be treated accordingly.
+
+    - Support compilation with newer compiler and libc versions
+        Several fixes have been included to make compilation with Clang 4.0.0,
+        GCC 7.1 and glibc >= 2.25.90 possible.
+
+    - qemu: Query name for vhost-user interfaces at runtime
+        This makes it possible to use virsh subcommands such as domiflist and
+        domifstat on vhost-user interfaces.
+
+    - qemu: Set MTU for hotplugged interfaces correctly
+        When hotplugging a network interface, the MTU was only set on the guest
+        side. Set it on the host side as well.
+
+    - qemu: Forbid updating MTU for interfaces of running guests
+        The MTU setting can't be modified while the guest is running, so any
+        attempt to alter it at runtime will now result in an error rather than
+        being silently ignored.
+
+    - qemu: Fix specifying QXL heads with older QEMU releases
+        Specifying the number of QXL heads was not working correctly for QEMU
+        releases older than 1.6.
+
+    - qemu: Fix migration to older libvirt/QEMU versions
+        When the guest is started, libvirt updates the CPU definition to
+        reflect the actual CPU features to enforce ABI. We need to send
+        original and updated CPU definition in order to support migration to
+        older libvirt/QEMU versions. Only the updated CPU definition was sent
+        to destination.
+
+# v3.4.0 (2017-06-02)
+
+  * New features
+
+    - Improved streams to efficiently transfer sparseness
+        New extension to virStream was implemented so that
+        virStorageVolDownload and virStorageVolUpload can preserve file
+        sparseness.
+
+    - I/O APIC type can be specified for QEMU/KVM domains
+        The ioapic tag was added to domain features, so the type of the I/O
+        APIC can now be specified (e.g. putting it in userspace for KVM
+        domains).
+
+    - The reason for VM shutdown is reported, if known
+        QEMU 2.10 will be able to report the reason for shutting down (whether
+        that was caused by the guest or not), and libvirt is prepared for that
+        and reports that information in its shutdown event as well, if it is
+        known.
+
+  * Improvements
+
+    - Repository now has new README.md file
+        The new file uses markdown syntax, so it looks better on github and
+        possibly other web pages, but it has also more useful information. The
+        old README is now symlink to the new file.
+
+    - qemu: Use GICv2 by default for aarch64/virt TCG guests
+        The emulated GICv3 has some limitations that make it unusable as a
+        default; use GICv2 until they're sorted out. This change makes it once
+        again possible to run aarch64/virt guests on a x86_64 host without
+        having to tweak their configuration.
+
+    - Additional capabilities for the node_device module
+        Introduce two new capabilities to the node_device module. The first is
+        for CCW devices, most common on the S390 architecture. The second is
+        for fibre channel-backed SCSI devices and exposes the fc_remote_port
+        sub-capability to SCSI target devices.
+
+    - Node devices now report Mediated device capabilities
+        Endpoint devices support new mdev capability and their parents now
+        report the supported types in new mdev_types capability.
+
+    - Capabilities now report information about host caches
+        If supported in the kernel, host capabilities will now list L3 caches.
+        The code for other levels was added as well, but only L3 caches are
+        reported currently.
+
+    - POWER9 CPU model was added
+        It is now properly reported in host capabilities.
+
+    - libxl: NUMA sibling distances are now reported in host capabilities
+
+    - VMDK version 3 files are now properly detected
+
+    - Interrupt remapping and Extended interrupt mode for IOMMU devices
+        These two new features can now be controlled with new <driver
+        intremap='on/off' eim='on/off'/> tag for iommu devices.
+
+    - Graphics in libxl domains now have default addresses
+        Even though there were default addresses before this change, they were
+        not saved in the XML. It is now possible to see and control the listen
+        addresses properly.
+
+    - Default USB controllers are now added for devices in libxl domains
+        Even though they were added automatically when USB device was attached,
+        they could've been missing in some other cases. The logic is now fixed
+        so there are always USB controllers, even if there was none of them in
+        the specified XML.
+
+    - Limits for RPC messages were increased
+        Hitting the RPC limits we have is easier every day, so they were
+        increased once again and some guessing logic was improved as well. It
+        is now possible to get more stats than ever using the
+        virConnectGetAllDomainStats() call and push through even bigger
+        requests and replies for all APIs.
+
+  * Bug fixes
+
+    - qemu: Create memory_backing_dir on startup
+        Libvirt's policy is that directories are created on startup if they
+        don't exist. We've missed this one.
+
+    - PCIe 4.0 cards now report proper link speeds
+        It could happen that the link speed for PCIe devices was not properly
+        reported or the nodedev-dumpxml just failed. That was due to mistake in
+        the field width, but should now work properly.
+
+    - qemu: Do not report errors on shutdown
+        For some users, in some rare cases, it could happen that there was an
+        error message "internal error: End of file from qemu monitor" in the
+        logs even though no problem happened. The detection of these false
+        positives was improved and such errors should not show any more.
+
+    - User-specified UNIX socket paths for virtio channels should not be reset
+        It could happen, in some cases, that libvirt would mistake a
+        user-specified path for its own generated one and thus remove it from
+        the XML. The detection of such addresses was improved now.
+
+    - Fix address reservation during RNG hot-plug
+        When error occurred in a specific point in time during the hot-plug of
+        an RNG device, it could happen that an address was released even though
+        another device was already using it, making it possible to hot-plug
+        another device with that address, effectively having duplicated
+        addresses in the XML.
+
+# v3.3.0 (2017-05-05)
+
+  * New features
+
+    - net: Add support for coalesce settings
+        Enabling data batching through these settings can improve network
+        performance for guests.
+
+    - qemu: Add support for guest CPU cache specification
+        This features allows fine-grained control of the cache behavior of the
+        guest CPU.
+
+    - qemu: Add support for the qemu-xhci USB controller
+
+  * Improvements
+
+    - hyperv: Support Hyper-V 2012 and newer
+        Starting with Hyper-V 2012 the API has changed causing the existing
+        driver to be unable to send and process requests properly. This has
+        been resolved by adding abstractions to handle the differences and ease
+        handling such breaks if they happen in the future.
+
+    - libxl: Add support for nested HVM domains
+        Xen has supported nested HVM domains since version 4.4. The libvirt
+        libxl driver now supports nested HVM domains by specifying the
+        host-passthrough CPU mode when defining a domain.
+
+    - qemu: Implement ACPI support for aarch64 guests
+        Up until this point, ACPI support was only advertised for x86_64 guests
+        and disabling it for aarch64 guests was not possible at all.
+
+    - vz: Add support for changing the number of vCPUs
+
+    - qemu: Automatically choose the best USB controller for guests
+        The recently introduced qemu-xhci USB controller is the best choice for
+        both ppc64 and aarch64 guests, so use it by default on those
+        architectures if available.
+
+    - daemon: Increase default task limit for libvirtd
+        The default number of tasks for the pids cgroup controller is 512,
+        which libvirtd can quickly bump into when starting lots of guests.
+        Raise the limit to a more reasonable 32768.
+
+    - docs: Include man pages describing key code names and values
+
+    - virsh: Report initialization errors
+        Sometimes virsh might be unable to start: when that happens, report
+        useful diagnostics instead of failing silently.
+
+  * Bug fixes
+
+    - nss: Don't require a network restart for libvirt_guest
+        Previously, the libvirt_guest NSS module would only work properly after
+        the corresponding network had been restarted; now newly started guests
+        will be reported correctly right away.
+
+    - storage: Remove unavailable transient pools after restart
+        Solve an issue where transient storage pools would be stuck in an
+        unmanageable state if the source disappeared and libvirtd was
+        subsequently restarted.
+
+    - storage: Fix capacity value for LUKS encrypted volumes
+        The 'capacity' value (e.g. guest logical size) for a LUKS volume is
+        smaller than the 'physical' value of the file in the file system, so we
+        need to account for that.
+
+    - qemu: Fix regression when hyperv/vendor_id feature is used
+        Guests using the feature would not be started at all; it is now
+        possible to start them as expected.
+
+    - qemu: Do not crash on USB address with no port and invalid bus
+
+    - crypto: Always pad data before encrypting it
+        If this step is not performed, when the data length matches the chunk
+        size the decryption routines will misinterpret the last byte of data as
+        the padding length and fail to decode it correctly.
+
 # v3.2.0 (2017-04-02)
 
   * New features
@@ -345,12 +1024,14 @@ libvirt releases
         Add the capability to pass through a scsi_host HBA and the associated
         LUNs to the guest.
 
-    - qemu: Users can now enable debug logging for native gluster volumes in
-      qemu using the "gluster_debug_level" option in qemu.conf
+    - Allow debugging of gluster volumes in qemu
+        Users can now enable debug logging for native gluster volumes in qemu
+        using the "gluster_debug_level" option in qemu.conf
 
-    - memory hotplug: Slot numbers for memory devices are now automatically
-      allocated and thus persistent. In addition slot numbers can be specified
-      without providing a base address, which simplifies user configuration
+    - Pre-allocate memory slots for memory hotplug
+        Slot numbers for memory devices are now automatically allocated and
+        thus persistent. In addition slot numbers can be specified without
+        providing a base address, which simplifies user configuration
 
     - qemu: Express devices will be placed on PCIe bus by default
         For machine types that use a PCI Express root bus (e.g. x86_64/Q35 and
