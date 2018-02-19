@@ -1,25 +1,17 @@
-Configure miss: xlocale.h usability
-Configure miss: xlocale.h presence
-Configure miss: xlocale.h
 Configure miss: crtdefs.h usability
 Configure miss: crtdefs.h presence
 Configure miss: crtdefs.h
 Configure miss: fpurge
 Configure miss: pthread_sigmask
-Configure miss: getprogname
-Configure miss: getexecname
 Configure miss: sysctlbyname
 Configure miss: whether fflush works on input streams
 Configure miss: whether C symbols are prefixed with underscore at the linker level
 Configure miss: strerror_r with POSIX signature
-Configure miss: whether wint_t is too small
-Configure miss: whether stdint.h predates C++11
 Configure miss: whether fpurge is declared
 Configure miss: _fseeki64
 Configure miss: whether gai_strerrorA is declared
 Configure miss: ioctl with POSIX signature
 Configure miss: whether pthread_rwlock_rdlock prefers a writer to a reader
-Configure miss: whether the C locale is free of encoding errors
 Configure miss: __mktime_internal
 Configure miss: struct msghdr.msg_accrights
 Configure miss: sys/sysmp.h
@@ -31,9 +23,7 @@ Configure miss: whether <pthread.h> pollutes the namespace
 Configure miss: whether pthread_sigmask is only a macro
 Configure miss: random.h
 Configure miss: a turkish Unicode locale
-Configure miss: whether __argv is declared
 Configure miss: working nanosleep
-Configure miss: whether C compiler handles -Werror -Wunknown-warning-option
 Configure miss: whether the C compiler's -Wlogical-op gives bogus warnings
 Configure miss: whether clang gives bogus warnings for -Wdouble-promotion
 Configure miss: whether -Wno-missing-field-initializers is needed
@@ -52,7 +42,6 @@ Configure miss: where to find <rpc/rpc.h>
 Configure miss: yajl_parse_complete in -lyajl
 Configure miss: sys/ucred.h usability
 Configure miss: sys/ucred.h presence
-Configure miss: sys/ucred.h
 Configure miss: struct sockpeercred
 Configure miss: gettext in -lintl
 Configure miss: udevsettle
@@ -72,7 +61,6 @@ Configure miss: zfs
 Configure miss: zpool
 Configure miss: vstorage
 Configure miss: vstorage-mount
-Configure miss: whether DEVLINK_CMD_ESWITCH_GET is declared
 Configure miss: Whether to build test suite by default
 Configure miss: struct ifreq.ifr_index
 Configure miss: whether BRDGSFD is declared

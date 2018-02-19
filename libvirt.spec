@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 3.10.0
-Release  : 102
+Release  : 103
 URL      : https://libvirt.org/sources/libvirt-3.10.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-3.10.0.tar.xz
 Source99 : https://libvirt.org/sources/libvirt-3.10.0.tar.xz.asc
@@ -57,6 +57,7 @@ BuildRequires : openssl-dev
 BuildRequires : parted-dev
 BuildRequires : pkg-config-dev
 BuildRequires : polkit-dev
+BuildRequires : python-dev
 BuildRequires : readline-dev
 BuildRequires : systemd
 BuildRequires : systemd-dev
@@ -164,7 +165,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1515195765
+export SOURCE_DATE_EPOCH=1519082644
 export CFLAGS="$CFLAGS -fstack-protector-strong "
 export FCFLAGS="$CFLAGS -fstack-protector-strong "
 export FFLAGS="$CFLAGS -fstack-protector-strong "
@@ -220,7 +221,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1515195765
+export SOURCE_DATE_EPOCH=1519082644
 rm -rf %{buildroot}
 %make_install
 %find_lang libvirt
