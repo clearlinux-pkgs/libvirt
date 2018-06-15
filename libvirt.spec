@@ -57,7 +57,7 @@ BuildRequires : openssl-dev
 BuildRequires : parted-dev
 BuildRequires : pkg-config-dev
 BuildRequires : polkit-dev
-BuildRequires : python-dev
+
 BuildRequires : readline-dev
 BuildRequires : systemd
 BuildRequires : systemd-dev
