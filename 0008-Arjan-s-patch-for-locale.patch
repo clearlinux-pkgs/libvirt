@@ -1,4 +1,4 @@
-From b5b4f44a708ab5076fb4f0b8ab6be223ea0a8c48 Mon Sep 17 00:00:00 2001
+From 1c3bc7f0132d6958059a9501a5470eb03c3ca843 Mon Sep 17 00:00:00 2001
 From: Icarus Sparry <icarus.w.sparry@intel.com>
 Date: Wed, 26 Apr 2017 11:43:40 -0700
 Subject: [PATCH 8/8] Arjan's patch for locale
@@ -6,23 +6,27 @@ Subject: [PATCH 8/8] Arjan's patch for locale
 Moved to a more generic location and converted to git format.
 
 Signed-off-by: Icarus Sparry <icarus.w.sparry@intel.com>
+--
+update patch to libvirt-4.7.0 release
+
+Signed-off-by: Simental Magana, Marcos <marcos.simental.magana@intel.com>
 ---
  src/util/virgettext.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/util/virgettext.c b/src/util/virgettext.c
-index c0135b4..b7be563 100644
+index f583eaf..952d082 100644
 --- a/src/util/virgettext.c
 +++ b/src/util/virgettext.c
-@@ -37,7 +37,7 @@
- int
+@@ -38,7 +38,7 @@ int
  virGettextInitialize(void)
  {
+ #if HAVE_LIBINTL_H
 -    if (!setlocale(LC_ALL, "")) {
 +    if (!setlocale(LC_ALL, "C")) {
          perror("setlocale");
          /* failure to setup locale is not fatal */
      }
 -- 
-2.15.1
+2.18.0
 

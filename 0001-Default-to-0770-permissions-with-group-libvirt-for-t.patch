@@ -1,4 +1,4 @@
-From e6728433acf1d197813e48e27c9ab457a1c34f10 Mon Sep 17 00:00:00 2001
+From 1acf69203f84c5260151ccd99bd7f193eea36146 Mon Sep 17 00:00:00 2001
 From: "Munoz, Obed N" <obed.n.munoz@intel.com>
 Date: Thu, 2 Jul 2015 10:35:47 -0500
 Subject: [PATCH 1/8] Default to 0770 permissions, with group libvirt for the
@@ -6,14 +6,14 @@ Subject: [PATCH 1/8] Default to 0770 permissions, with group libvirt for the
 
 Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
 ---
- daemon/libvirtd-config.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ src/remote/remote_daemon_config.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/daemon/libvirtd-config.c b/daemon/libvirtd-config.c
-index 19b3d16..26befc9 100644
---- a/daemon/libvirtd-config.c
-+++ b/daemon/libvirtd-config.c
-@@ -131,11 +131,14 @@ daemonConfigNew(bool privileged ATTRIBUTE_UNUSED)
+diff --git a/src/remote/remote_daemon_config.c b/src/remote/remote_daemon_config.c
+index 27e0c63..5210668 100644
+--- a/src/remote/remote_daemon_config.c
++++ b/src/remote/remote_daemon_config.c
+@@ -131,7 +131,7 @@ daemonConfigNew(bool privileged ATTRIBUTE_UNUSED)
  #endif
  
      if (VIR_STRDUP(data->unix_sock_rw_perms,
@@ -22,13 +22,6 @@ index 19b3d16..26befc9 100644
          VIR_STRDUP(data->unix_sock_ro_perms, "0777") < 0 ||
          VIR_STRDUP(data->unix_sock_admin_perms, "0700") < 0)
          goto error;
- 
-+    if (VIR_STRDUP(data->unix_sock_group, "libvirt") < 0)
-+        goto error;
-+
- #if WITH_SASL
-     data->auth_tcp = REMOTE_AUTH_SASL;
- #else
 -- 
-2.15.1
+2.18.0
 

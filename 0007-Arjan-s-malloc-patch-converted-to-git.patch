@@ -1,4 +1,4 @@
-From 5d3656582a02d06c09dbf2d098cbbe6bff7bcd1a Mon Sep 17 00:00:00 2001
+From c82a730b01a05321965e9a6a4142efc2c586de5c Mon Sep 17 00:00:00 2001
 From: Icarus Sparry <icarus.w.sparry@intel.com>
 Date: Wed, 26 Apr 2017 11:18:26 -0700
 Subject: [PATCH 7/8] Arjan's malloc patch, converted to git
@@ -9,7 +9,7 @@ Signed-off-by: Icarus Sparry <icarus.w.sparry@intel.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/src/util/vireventpoll.c b/src/util/vireventpoll.c
-index 81ecab4..009d97e 100644
+index 2fe58c7..c834372 100644
 --- a/src/util/vireventpoll.c
 +++ b/src/util/vireventpoll.c
 @@ -30,6 +30,7 @@
@@ -29,5 +29,5 @@ index 81ecab4..009d97e 100644
      if (ret < 0) {
          EVENT_DEBUG("Poll got error event %d", errno);
 -- 
-2.15.1
+2.18.0
 

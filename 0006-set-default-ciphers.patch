@@ -1,4 +1,4 @@
-From 59456d8bc408289bcaa88fb04187e14c40026923 Mon Sep 17 00:00:00 2001
+From fe2f36cca929acb5d75a9b070dd7f5a71216687b Mon Sep 17 00:00:00 2001
 From: "Munoz, Obed N" <obed.n.munoz@intel.com>
 Date: Tue, 8 Sep 2015 10:44:47 -0500
 Subject: [PATCH 6/8] set default ciphers
@@ -22,5 +22,5 @@ index 44d9f68..db364f3 100644
  
  AC_DEFUN([LIBVIRT_CHECK_TLS_PRIORITY], [
 -- 
-2.15.1
+2.18.0
 
