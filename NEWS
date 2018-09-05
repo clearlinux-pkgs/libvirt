@@ -1,6 +1,440 @@
 libvirt releases
 ================
 
+# v4.7.0 (2018-09-03)
+
+  * New features
+
+    - storage: add storage pool iscsi-direct
+        Introduce a new storage pool backend that uses libiscsi instead of
+        iscsiadm. It support basic pool operations: checkPool and refreshPool.
+
+    - Add support for MBA (Memory Bandwidth Allocation technology)
+        Domain vCPU threads can now have allocated some parts of host memory
+        bandwidth by using the memorytune element in cputune.
+
+    - qemu: Add support for RISC-V guests
+        riscv32 and riscv64 guest architectures are now supported.
+
+  * Improvements
+
+    - qemu: Add ccw support for vhost-vsock
+        Support the vhost-vsock-ccw device on S390.
+
+    - qemu: Make default machine type independent of QEMU
+        We can't control whether or not QEMU will change its default machine
+        type in the future, or whether downstream distributions will decide to
+        compile out some machine types, so our only option to provide a
+        predictable behavior is taking care of the default ourselves;
+        management applications and users are encouraged to explicitly pick a
+        machine type when creating new guests.
+
+    - apparmor: Various improvements
+        Rules have been added to deal with a number of scenarios that didn't
+        work correctly.
+
+  * Bug fixes
+
+    - esx: Truncate CPU model name
+        Some CPU model names are too long to be stored into the corresponding
+        property, and should be explicitly truncated to avoid unexpected
+        behavior in users of the virNodeGetInfo() API such as virsh nodeinfo.
+
+    - utils: Remove arbitrary limit on socket_id/core_id
+        Both values were assumed to be smaller than 4096, but in fact they are
+        entirely hardware-dependent and there have been reports of machines
+        presenting much bigger values, preventing libvirt from working
+        correctly; all such limits have now been removed.
+
+# v4.6.0 (2018-08-06)
+
+  * New features
+
+    - qemu: Implement the HTM pSeries feature
+        Users can now decide whether HTM (Hardware Transactional Memory)
+        support should be available to the guest.
+
+    - qemu: Enable VNC console for mediated devices
+        Host devices now support a new atribute 'display' which can be used to
+        turn on frame buffer rendering on a vgpu mediated device instead of on
+        an emulated GPU, like QXL.
+
+  * Improvements
+
+    - qemu: Introduce a new video model of type 'none'
+        Introduce a new video model type that disables the automatic addition
+        of a video device to domains with 'graphics' specified in their XML.
+        This can be useful with GPU mediated devices which can serve as the
+        only rendering devices within the guest.
+
+    - virsh: Add --alias to attach-disk and attach-interface commands
+        Add option --alias to set customized device alias name when using
+        attach-disk or attach-interface commands.
+
+    - virsh: Support usb and sata address to attach-disk
+        Usb or sata address could be used when attach-disk with --address. For
+        example, use usb address as usb:<bus>.<port>, use sata address as
+        <controller>.<bus>.<unit>.
+
+  * Bug fixes
+
+# v4.5.0 (2018-07-02)
+
+  * New features
+
+    - qemu: Provide TPM emulator support
+        Support QEMU's TPM emulator based on swtpm. Each QEMU guest gets its
+        own virtual TPM.
+
+    - bhyve: Support specifying guest CPU topology
+        Bhyve's guest CPU topology could be specified using the <cpu><topology
+        ../></cpu> element.
+
+    - qemu: Add support for extended TSEG size
+        Support specifying extended TSEG size for SMM in QEMU.
+
+    - qemu: Add support for SEV guests
+        SEV (Secure Encrypted Virtualization) is a feature available on AMD
+        CPUs that encrypts the guest memory and makes it inaccessible even to
+        the host OS.
+
+  * Removed features
+
+    - Remove support for qcow/default encrypted volumes
+        Disallow using a qcow encrypted volume for the guest and disallow
+        creation of the qcow or default encrypted volume from the storage
+        driver. Support for qcow encrypted volumes has been phasing out since
+        QEMU 2.3 and by QEMU 2.9 creation of a qcow encrypted volume via
+        qemu-img required usage of secret objects, but that support was never
+        added to libvirt.
+
+    - Make GnuTLS mandatory
+        Building without GnuTLS is no longer possible.
+
+    - qemu: Remove allow_disk_format_probing configuration option
+        The option represented a security risk when used with malicious disk
+        images, so users were recommended against enabling it; with this
+        release, it's been removed altogether.
+
+  * Improvements
+
+    - capabilities: Provide info about host IOMMU support
+        Capabilities XML now provide information about host IOMMU support.
+
+    - virsh: Add --all to domblkinfo command
+        Alter the domblkinfo command to add the option --all in order to
+        display the size details of each domain block device from one command
+        in a output table.
+
+    - qemu: Allow concurrent access to monitor and guest agent
+        Historically libvirt prevented concurrent accesses to the qemu monitor
+        and the guest agent. Therefore two independent calls (one querying the
+        monitor and the other querying guest agent) would serialize which hurts
+        performance. The code was reworked to allow two independent calls run
+        at the same time.
+
+    - qemu: Allow configuring the page size for HPT pSeries guests
+        For HPT pSeries guests, the size of the host pages used to back guest
+        memory and the usable guest page sizes are connected; the new setting
+        can be used to request that a certain page size is available in the
+        guest.
+
+    - Add support to use an raw input volume for encryption
+        It is now possible to provide a raw input volume as input for to
+        generate a luks encrypted volume via either virsh vol-create-from or
+        virStorageVolCreateXMLFrom.
+
+    - qemu: Add support for vsock hot (un)plug and cold (un)plug
+
+    - qemu: Add support for NBD over TLS
+        NBD volumes can now be accessed securely.
+
+    - qemu: Implement FD passing for Unix sockets
+        Instead of having QEMU open the socket and then connecting to it, which
+        is inherently racy, starting with QEMU 2.12 we can open the socket
+        ourselves and pass it to QEMU, avoiding race conditions.
+
+    - virsh: Introduce --nowait option for domstat command
+        When this option is specified, virsh will try to fetch the guest stats
+        but abort instead of stalling if they can't be retrieved right away.
+
+  * Bug fixes
+
+    - qemu: Fix a potential libvirtd crash on VM reconnect
+        Initialization of the driver worker pool needs to come before libvirtd
+        trying to reconnect to all machines, since one of the QEMU processes
+        migh have already emitted events which need to be handled prior to us
+        getting to the worker pool initialization.
+
+    - qemu: Fix domain resume after failed migration
+        Recent versions of QEMU activate block devices before the guest CPU has
+        been started, which makes it impossible to roll back a failed
+        migration. Use the late-block-activate migration capability if
+        supported to avoid the issue.
+
+    - vmx: Permit guests to have an odd number of vCPUs
+        An odd number of vCPUs greater than 1 was forbidden in the past, but
+        current versions of ESXi have lifted that restriction.
+
+# v4.4.0 (2018-06-04)
+
+  * New features
+
+    - bhyve: Support locking guest memory
+        Bhyve's guest memory may be wired using the
+        <memoryBacking><locked/></memoryBacking> element.
+
+    - qemu: Provide VFIO channel I/O passthrough support
+        Support passthrough devices that use channel I/O based mechanism in a
+        QEMU virtual machine.
+
+    - qemu: Add support for migration of VMs with non-shared storage over TLS
+        It's now possible to use the VIR_MIGRATE_TLS flag together with
+        VIR_MIGRATE_NON_SHARED_DISK. The connection is then secured using the
+        TLS environment which is setup for the migration connection.
+
+    - Add support for VM Generation ID
+        The VM Generatation ID exposes a 128-bit, cryptographically random,
+        integer value identifier, referred to as a Globally Unique Identifier
+        (GUID) to the guest in order to notify the guest operating system when
+        the virtual machine is executed with a different configuration. Add a
+        new domain XML processing and a domain capabilities feature.
+
+    - Introduce virDomainDetachDeviceAlias
+        This new API enables users to detach device using only its alias.
+
+    - Introduce new virConnectCompareHypervisorCPU and
+      virConnectBaselineHypervisorCPU APIs
+        Unlike the old virConnectCompareCPU and virConnectBaselineCPU APIs,
+        both new APIs consider capabilities of a specific hypervisor.
+
+    - Introduce SCSI persistent reservations support
+        The QEMU driver gained support for qemu-pr-helper which enables guests
+        to issue SCSI commands for persistent reservation.
+
+    - qemu: Implement multiple screen support for virDomainScreenshot
+        While the virDomainScreenshot API supported multihead video cards, the
+        implementation was missing. But now that QEMU implemented it libvirt
+        has done as well.
+
+    - qemu: add support for vhost-vsock-device
+        A new vsock device was introduced, allowing communication between the
+        guest and the host via the AF_VSOCK family.
+
+  * Improvements
+
+    - qemu: Add suport for OpenGL rendering with SDL
+        Domains using SDL as a graphics backend will now be able to use OpenGL
+        accelerated rendering.
+
+    - qemu: Add support for 'output' audio codec
+        Support QEMU's 'hda-output' codec advertising only a line-out for ich6
+        and ich9 sound devices.
+
+    - virsh: Enhance event name completion
+        Implement event name completion for some commands (e.g. event,
+        secret-event, pool-event and nodedev-event)
+
+  * Bug fixes
+
+# v4.3.0 (2018-05-02)
+
+  * New features
+
+    - qemu: Add support for the pcie-to-pci-bridge controller
+        Pure PCIe guests such as x86_64/q35 and aarch64/virt will now add this
+        controller when traditional PCI devices are in use.
+
+    - Xen: Support setting CPU features for host-passthrough model
+        The CPU model presented to Xen HVM domains is equivalent to libvirt's
+        host-passthrough model, although individual features can be enabled and
+        disabled via the cpuid setting. The libvirt libxl driver now supports
+        enabling and disabling individual features of the host-passthrough CPU
+        model.
+
+  * Removed features
+
+    - Xen: Drop the legacy xend-based driver
+        The xm/xend toolstack was deprecated in Xen 4.2 and removed from the
+        Xen sources in the 4.5 development cycle. The libvirt driver based on
+        xend is now removed from the libvirt sources.
+
+  * Improvements
+
+    - qemu: Support hot plug and hot unplug of mediated devices
+        Libvirt now allows mediated devices to be hot plugged and hot unplugged
+        from a guest rather than reporting an error that this isn't supported.
+        In fact, kernel has been supporting this since 4.10.
+
+  * Bug fixes
+
+    - Improve handling of device mapper targets
+        When starting a domain with a disk backed by a device mapper volume
+        libvirt also needs to allow the storage backing the device mapper in
+        CGroups. In the past kernel did not care, but starting from 4.16
+        CGroups are consulted on each access to the device mapper target.
+
+# v4.2.0 (2018-04-01)
+
+  * New features
+
+    - Support building with Python 3
+        Python is required to build libvirt, and up until now only Python 2
+        could be used as an interpreter. All scripts used during build have now
+        been made compatible with Python 3, which means both major releases of
+        the language are fully supported.
+
+    - qemu: Provide ccw address support for graphics and input devices
+        Support the virtio-gpu-ccw device as a video device and
+        virtio-{keyboard, mouse, tablet}-ccw devices as input devices on S390.
+
+  * Improvements
+
+    - qemu: Add logging of guest crash information on S390
+        On S390, when the guest crashes and QEMU exposes the guest crash
+        information, log the relevant data to the domain log file.
+
+    - qemu: use arp table of host to get the IP address of guests
+        Find IP address of a VM by arp table on hosts. If someone customizing
+        IP address inside VM, it will be helpful.
+
+    - Xen: Remove hard-coded scheduler weight
+        The libxl driver was accidentally hard-coding the per-domain scheduler
+        weight to 1000, silently ignoring any user-provided <shares> in
+        <cputune>. The driver now honors <shares>, and defers setting a default
+        value to Xen. Note that the Xen default is 256, so any domains started
+        after this improvement will have one fourth the shares of previously
+        started domains. If all domains must have equal CPU shares,
+        administrators must manually set the weight of previously started
+        domains to 256, or restart them.
+
+  * Bug fixes
+
+    - qemu: TLS migration now enforces use of TLS for the NBD connection
+        When the VIR_MIGRATE_TLS flag was used with the migration API libvirt
+        did not ensure that the NBD connection was using TLS as well. The code
+        now rejects such migration as the TLS transport for NBD is not ready
+        yet, but prevents a false sense of security that TLS would be used. The
+        support TLS for NBD will be added soon.
+
+# v4.1.0 (2018-03-05)
+
+  * New features
+
+    - Added support for CAT (Cache allocation Technology)
+        Domain vCPU threads can now have allocated some parts of host cache
+        using the cachetune element in cputune.
+
+    - Allow opening secondary drivers
+        Up until now it was possible to connect to only hypervisor drivers
+        (e.g. qemu:///system, lxc:///, vbox:///system, and so on). The internal
+        drivers (like network driver, node device driver, etc.) were hidden
+        from users and users could use them only indirectly. Starting with this
+        release new connection URIs are accepted. For instance
+        network:///system, storage:///system and so on.
+
+    - virtlogd, virtlockd: Add support for admin protocol
+        These two daemons now support admin protocol through which some admin
+        info can be gathered or some configuration tweaked on the fly.
+
+  * Improvements
+
+    - virsh: Enhance bash completion
+        Implement more bash completions so that basic libvirt objects can be
+        auto-completed (e.g. networks, interfaces, NWFilters, and so on).
+
+    - qemu: Use VIR_ERR_DEVICE_MISSING for various hotplug/detach messages
+
+    - qemu: Allow showing the dump progress for memory only dump
+        Alter the QEMU dump-guest-memory command processing to check for and
+        allow asynchronous completion which then allows for the virsh dump
+        --memory-only --verbose command to display percent completion data.
+
+    - conf: add support for setting Chassis SMBIOS data fields
+
+    - libxl: add support for setting clock offset and adjustment
+
+    - Make port allocator global
+        Up until now each driver had their own port allocator module. This
+        meant that info on port usage was not shared. Starting with this
+        release, the port allocator module is made global and therefore drivers
+        allocate ports from global pool.
+
+    - Fixed some compiler warnings that appear with GCC 8
+
+  * Bug fixes
+
+    - qemu: Check for unsafe migration more thoroughly
+        If a domain disk is stored on local filesystem (e.g. ext4) but is not
+        being migrated it is very likely that domain is not able to run on
+        destination. Regardless of share/cache mode.
+
+    - qemu: Fix updating device with boot order
+        Starting with 3.7.0 release updating any device with boot order would
+        fail with 'boot order X is already used by another device' while in
+        fact it was the very same device.
+
+    - virlog: determine the hostname on startup CVE-2018-6764
+        At later point it might not be possible or even safe to use
+        getaddrinfo(). It can in turn result in a load of NSS module which can
+        even be loaded from unsage guest filesystem and thus escape the
+        confinment of its container.
+
+    - qemu: Rework vCPU statistics fetching
+        Fetching vCPU statistics was very expensive because it lead to waking
+        up vCPU threads in QEMU and thus it degraded performance. The code was
+        reworked so that fetching statistics does not wake up halted vCPUs.
+
+    - qemu: unlink memory backing file on domain shutdown
+        Depending on the filesystem where domain memory is stored, some files
+        might have been left behind. This is not a problem on hugetlbfs, but it
+        is a problem on regular filesystems like ext4.
+
+    - qemu: Fix shutting down domains in parallel
+        If multiple domains were being shut down in parallel, libvirtd might
+        have deadlocked.
+
+    - nodedev: Update PCI mdev capabilities dynamically
+        PCI devices may have other nested capabilities, like SRIOV and mdev
+        which depend on the device being plugged into the native vendor driver.
+        However, in case such a device is directly assigned to a guest using
+        VFIO driver, the device will naturally lose these capabilities and
+        libvirt needs to reflect that.
+
+# v4.0.0 (2018-01-19)
+
+  * New features
+
+    - tools: Provide bash completion support
+        Both virsh and virt-admin now implement basic bash completion support.
+
+    - qemu: Refresh capabilities on host microcode update
+        A microcode update can cause the CPUID bits to change; therefore, the
+        capabilities cache should be rebuilt when such an update is detected on
+        the host.
+
+    - lxc: Set hostname based on container name
+
+  * Improvements
+
+    - CPU frequency reporting improvements
+        The CPU frequency will now be reported by virsh nodeinfo and other
+        tools for s390 hosts; at the same time; CPU frequency has been disabled
+        on aarch64 hosts because there's no way to detect it reliably.
+
+    - libxl: Mark domain0 as persistent
+
+    - Xen: Add support for multiple IP addresses on interface devices
+
+    - qemu: Add support for hot unplugging redirdev device
+
+  * Bug fixes
+
+    - qemu: Enforce vCPU hotplug granularity constraints
+        QEMU 2.7 and newer don't allow guests to start unless the initial vCPUs
+        count is a multiple of the vCPU hotplug granularity, so validate it and
+        report an error if needed.
+
 # v3.10.0 (2017-12-04)
 
   * New features
@@ -420,7 +854,7 @@ libvirt releases
 
     - Support controlling how video devices are exposed to the bhyve guests
         The vgaconf attribute was added to video's driver element. Possible
-        values are: on, off, and io. It controlls the way how bhyve exposes
+        values are: on, off, and io. It controls the way how bhyve exposes
         video devices to its guests; various guest OSes might require different
         settings to boot properly.
 

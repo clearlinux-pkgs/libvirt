@@ -21,7 +21,6 @@ Configure miss: pstat_getstatic
 Configure miss: sysmp
 Configure miss: whether <pthread.h> pollutes the namespace
 Configure miss: whether pthread_sigmask is only a macro
-Configure miss: random.h
 Configure miss: a turkish Unicode locale
 Configure miss: working nanosleep
 Configure miss: whether the C compiler's -Wlogical-op gives bogus warnings
@@ -29,9 +28,10 @@ Configure miss: whether clang gives bogus warnings for -Wdouble-promotion
 Configure miss: whether -Wno-missing-field-initializers is needed
 Configure miss: audit_encode_nv_string in -laudit
 Configure miss: avahi-client >= 0.6.0
+Configure miss: bash-completion >= 2.0
 Configure miss: glusterfs-api >= 3.4.1
-Configure miss: gnutls >= 2.2.0
 Configure miss: hal >= 0.5.0
+Configure miss: libiscsi >= 1.18.0
 Configure miss: libssh >= 0.7
 Configure miss: openwsman >= 2.2.3
 Configure miss: sanlock_init in -lsanlock_client
@@ -61,6 +61,9 @@ Configure miss: zfs
 Configure miss: zpool
 Configure miss: vstorage
 Configure miss: vstorage-mount
+Configure miss: xfs/xfs.h usability
+Configure miss: xfs/xfs.h presence
+Configure miss: xfs/xfs.h
 Configure miss: Whether to build test suite by default
 Configure miss: struct ifreq.ifr_index
 Configure miss: whether BRDGSFD is declared

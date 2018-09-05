@@ -1,2 +1,0 @@
-mkdir %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
-ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/libvirtd.service

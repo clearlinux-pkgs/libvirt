@@ -2,7 +2,6 @@
 # but are undesirable. One entry per line, no whitespace.
 libnl-1
 polkit-dbus
-gnutls
 xenlight
 LVM2
 libparted
