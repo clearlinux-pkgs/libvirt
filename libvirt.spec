@@ -6,20 +6,22 @@
 #
 Name     : libvirt
 Version  : 4.7.0
-Release  : 107
+Release  : 108
 URL      : https://libvirt.org/sources/libvirt-4.7.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-4.7.0.tar.xz
 Source99 : https://libvirt.org/sources/libvirt-4.7.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1 LGPL-2.1+ OFL-1.1
-Requires: libvirt-bin
-Requires: libvirt-config
-Requires: libvirt-lib
-Requires: libvirt-data
-Requires: libvirt-license
-Requires: libvirt-locales
-Requires: libvirt-man
+Requires: libvirt-bin = %{version}-%{release}
+Requires: libvirt-config = %{version}-%{release}
+Requires: libvirt-data = %{version}-%{release}
+Requires: libvirt-lib = %{version}-%{release}
+Requires: libvirt-libexec = %{version}-%{release}
+Requires: libvirt-license = %{version}-%{release}
+Requires: libvirt-locales = %{version}-%{release}
+Requires: libvirt-man = %{version}-%{release}
+Requires: libvirt-services = %{version}-%{release}
 Requires: polkit
 BuildRequires : LVM2
 BuildRequires : LVM2-dev
@@ -37,6 +39,7 @@ BuildRequires : fuse-dev
 BuildRequires : gettext-bin
 BuildRequires : gettext-dev
 BuildRequires : glibc-locale
+BuildRequires : intltool-dev
 BuildRequires : iptables
 BuildRequires : kmod-bin
 BuildRequires : libcap-ng-dev
@@ -92,10 +95,12 @@ autostart components for the libvirt package.
 %package bin
 Summary: bin components for the libvirt package.
 Group: Binaries
-Requires: libvirt-data
-Requires: libvirt-config
-Requires: libvirt-license
-Requires: libvirt-man
+Requires: libvirt-data = %{version}-%{release}
+Requires: libvirt-libexec = %{version}-%{release}
+Requires: libvirt-config = %{version}-%{release}
+Requires: libvirt-license = %{version}-%{release}
+Requires: libvirt-man = %{version}-%{release}
+Requires: libvirt-services = %{version}-%{release}
 
 %description bin
 bin components for the libvirt package.
@@ -120,10 +125,10 @@ data components for the libvirt package.
 %package dev
 Summary: dev components for the libvirt package.
 Group: Development
-Requires: libvirt-lib
-Requires: libvirt-bin
-Requires: libvirt-data
-Provides: libvirt-devel
+Requires: libvirt-lib = %{version}-%{release}
+Requires: libvirt-bin = %{version}-%{release}
+Requires: libvirt-data = %{version}-%{release}
+Provides: libvirt-devel = %{version}-%{release}
 
 %description dev
 dev components for the libvirt package.
@@ -132,7 +137,7 @@ dev components for the libvirt package.
 %package doc
 Summary: doc components for the libvirt package.
 Group: Documentation
-Requires: libvirt-man
+Requires: libvirt-man = %{version}-%{release}
 
 %description doc
 doc components for the libvirt package.
@@ -141,11 +146,22 @@ doc components for the libvirt package.
 %package lib
 Summary: lib components for the libvirt package.
 Group: Libraries
-Requires: libvirt-data
-Requires: libvirt-license
+Requires: libvirt-data = %{version}-%{release}
+Requires: libvirt-libexec = %{version}-%{release}
+Requires: libvirt-license = %{version}-%{release}
 
 %description lib
 lib components for the libvirt package.
+
+
+%package libexec
+Summary: libexec components for the libvirt package.
+Group: Default
+Requires: libvirt-config = %{version}-%{release}
+Requires: libvirt-license = %{version}-%{release}
+
+%description libexec
+libexec components for the libvirt package.
 
 
 %package license
@@ -172,6 +188,14 @@ Group: Default
 man components for the libvirt package.
 
 
+%package services
+Summary: services components for the libvirt package.
+Group: Systemd services
+
+%description services
+services components for the libvirt package.
+
+
 %prep
 %setup -q -n libvirt-4.7.0
 %patch1 -p1
@@ -188,7 +212,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1536161378
+export SOURCE_DATE_EPOCH=1542404565
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -244,12 +268,12 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1536161378
+export SOURCE_DATE_EPOCH=1542404565
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/libvirt
-cp COPYING %{buildroot}/usr/share/doc/libvirt/COPYING
-cp COPYING.LESSER %{buildroot}/usr/share/doc/libvirt/COPYING.LESSER
-cp docs/fonts/LICENSE.md %{buildroot}/usr/share/doc/libvirt/docs_fonts_LICENSE.md
+mkdir -p %{buildroot}/usr/share/package-licenses/libvirt
+cp COPYING %{buildroot}/usr/share/package-licenses/libvirt/COPYING
+cp COPYING.LESSER %{buildroot}/usr/share/package-licenses/libvirt/COPYING.LESSER
+cp docs/fonts/LICENSE.md %{buildroot}/usr/share/package-licenses/libvirt/docs_fonts_LICENSE.md
 %make_install
 %find_lang libvirt
 ## install_append content
@@ -275,25 +299,10 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/bin/virt-xml-validate
 /usr/bin/virtlockd
 /usr/bin/virtlogd
-/usr/libexec/libvirt-guests.sh
-/usr/libexec/libvirt_iohelper
-/usr/libexec/libvirt_leaseshelper
-/usr/libexec/libvirt_lxc
-/usr/libexec/libvirt_parthelper
 
 %files config
 %defattr(-,root,root,-)
-%exclude /usr/lib/systemd/system/multi-user.target.wants/libvirtd.service
 /usr/lib/sysctl.d/60-libvirtd.conf
-/usr/lib/systemd/system/libvirt-guests.service
-/usr/lib/systemd/system/libvirtd.service
-/usr/lib/systemd/system/virt-guest-shutdown.target
-/usr/lib/systemd/system/virtlockd-admin.socket
-/usr/lib/systemd/system/virtlockd.service
-/usr/lib/systemd/system/virtlockd.socket
-/usr/lib/systemd/system/virtlogd-admin.socket
-/usr/lib/systemd/system/virtlogd.service
-/usr/lib/systemd/system/virtlogd.socket
 
 %files data
 %defattr(-,root,root,-)
@@ -479,15 +488,22 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_scsi.so
 /usr/lib64/libvirt/storage-file/libvirt_storage_file_fs.so
 
-%files license
+%files libexec
 %defattr(-,root,root,-)
-/usr/share/doc/libvirt/COPYING
-/usr/share/doc/libvirt/COPYING.LESSER
-/usr/share/doc/libvirt/docs_fonts_LICENSE.md
-/usr/share/doc/libvirt/libvirt-4.7.0/html/fonts/LICENSE.md
+/usr/libexec/libvirt-guests.sh
+/usr/libexec/libvirt_iohelper
+/usr/libexec/libvirt_leaseshelper
+/usr/libexec/libvirt_lxc
+/usr/libexec/libvirt_parthelper
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/libvirt/COPYING
+/usr/share/package-licenses/libvirt/COPYING.LESSER
+/usr/share/package-licenses/libvirt/docs_fonts_LICENSE.md
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/virsh.1
 /usr/share/man/man1/virt-admin.1
 /usr/share/man/man1/virt-host-validate.1
@@ -509,6 +525,19 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/share/man/man8/libvirtd.8
 /usr/share/man/man8/virtlockd.8
 /usr/share/man/man8/virtlogd.8
+
+%files services
+%defattr(-,root,root,-)
+%exclude /usr/lib/systemd/system/multi-user.target.wants/libvirtd.service
+/usr/lib/systemd/system/libvirt-guests.service
+/usr/lib/systemd/system/libvirtd.service
+/usr/lib/systemd/system/virt-guest-shutdown.target
+/usr/lib/systemd/system/virtlockd-admin.socket
+/usr/lib/systemd/system/virtlockd.service
+/usr/lib/systemd/system/virtlockd.socket
+/usr/lib/systemd/system/virtlogd-admin.socket
+/usr/lib/systemd/system/virtlogd.service
+/usr/lib/systemd/system/virtlogd.socket
 
 %files locales -f libvirt.lang
 %defattr(-,root,root,-)
