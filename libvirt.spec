@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x15588B26596BEA5D (Daniel.Veillard@w3.org)
 #
 Name     : libvirt
-Version  : 4.7.0
-Release  : 108
-URL      : https://libvirt.org/sources/libvirt-4.7.0.tar.xz
-Source0  : https://libvirt.org/sources/libvirt-4.7.0.tar.xz
-Source99 : https://libvirt.org/sources/libvirt-4.7.0.tar.xz.asc
+Version  : 4.10.0
+Release  : 109
+URL      : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
+Source99 : https://libvirt.org/sources/libvirt-4.10.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1 LGPL-2.1+ OFL-1.1
@@ -197,7 +197,7 @@ services components for the libvirt package.
 
 
 %prep
-%setup -q -n libvirt-4.7.0
+%setup -q -n libvirt-4.10.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -212,7 +212,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1542404565
+export SOURCE_DATE_EPOCH=1545532736
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -268,7 +268,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1542404565
+export SOURCE_DATE_EPOCH=1545532736
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libvirt
 cp COPYING %{buildroot}/usr/share/package-licenses/libvirt/COPYING
@@ -342,6 +342,8 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/share/libvirt/cpu_map/x86_Haswell-noTSX-IBRS.xml
 /usr/share/libvirt/cpu_map/x86_Haswell-noTSX.xml
 /usr/share/libvirt/cpu_map/x86_Haswell.xml
+/usr/share/libvirt/cpu_map/x86_Icelake-Client.xml
+/usr/share/libvirt/cpu_map/x86_Icelake-Server.xml
 /usr/share/libvirt/cpu_map/x86_IvyBridge-IBRS.xml
 /usr/share/libvirt/cpu_map/x86_IvyBridge.xml
 /usr/share/libvirt/cpu_map/x86_Nehalem-IBRS.xml
@@ -464,13 +466,13 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.4007.0
+/usr/lib64/libvirt-admin.so.0.4010.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.4007.0
+/usr/lib64/libvirt-lxc.so.0.4010.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.4007.0
+/usr/lib64/libvirt-qemu.so.0.4010.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.4007.0
+/usr/lib64/libvirt.so.0.4010.0
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_network.so

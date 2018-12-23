@@ -44,6 +44,7 @@ Configure miss: sys/ucred.h presence
 Configure miss: struct sockpeercred
 Configure miss: gettext in -lintl
 Configure miss: udevsettle
+Configure miss: whether LIBXL_DOMAIN_TYPE_PVH is declared
 Configure miss: parallels-sdk >= 7.0.22
 Configure miss: bhyve
 Configure miss: bhyvectl
