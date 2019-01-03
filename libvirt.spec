@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 4.10.0
-Release  : 109
+Release  : 110
 URL      : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
 Source99 : https://libvirt.org/sources/libvirt-4.10.0.tar.xz.asc
