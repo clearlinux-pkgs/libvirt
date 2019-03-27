@@ -6,3 +6,4 @@
 0006-set-default-ciphers.patch
 0007-Arjan-s-malloc-patch-converted-to-git.patch
 0008-Arjan-s-patch-for-locale.patch
+CVE-2019-3840.patch

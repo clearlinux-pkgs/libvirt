@@ -25,7 +25,6 @@ Configure miss: working nanosleep
 Configure miss: whether the C compiler's -Wlogical-op gives bogus warnings
 Configure miss: whether clang gives bogus warnings for -Wdouble-promotion
 Configure miss: whether -Wno-missing-field-initializers is needed
-Configure miss: audit_encode_nv_string in -laudit
 Configure miss: avahi-client >= 0.6.0
 Configure miss: bash-completion >= 2.0
 Configure miss: glusterfs-api >= 3.4.1
