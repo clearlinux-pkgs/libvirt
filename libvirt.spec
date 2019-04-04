@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 4.10.0
-Release  : 111
+Release  : 112
 URL      : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
 Source99 : https://libvirt.org/sources/libvirt-4.10.0.tar.xz.asc
@@ -80,6 +80,7 @@ Patch6: 0006-set-default-ciphers.patch
 Patch7: 0007-Arjan-s-malloc-patch-converted-to-git.patch
 Patch8: 0008-Arjan-s-patch-for-locale.patch
 Patch9: CVE-2019-3840.patch
+Patch10: CVE-2019-3886.patch
 
 %description
 Libvirt is a C toolkit to interact with the virtualization capabilities
@@ -101,7 +102,6 @@ Requires: libvirt-data = %{version}-%{release}
 Requires: libvirt-libexec = %{version}-%{release}
 Requires: libvirt-config = %{version}-%{release}
 Requires: libvirt-license = %{version}-%{release}
-Requires: libvirt-man = %{version}-%{release}
 Requires: libvirt-services = %{version}-%{release}
 
 %description bin
@@ -209,13 +209,14 @@ services components for the libvirt package.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1553719942
+export SOURCE_DATE_EPOCH=1554403232
 export LDFLAGS="${LDFLAGS} -fno-lto"
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -272,7 +273,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1553719942
+export SOURCE_DATE_EPOCH=1554403232
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libvirt
 cp COPYING %{buildroot}/usr/share/package-licenses/libvirt/COPYING

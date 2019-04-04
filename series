@@ -7,3 +7,4 @@
 0007-Arjan-s-malloc-patch-converted-to-git.patch
 0008-Arjan-s-patch-for-locale.patch
 CVE-2019-3840.patch
+CVE-2019-3886.patch
