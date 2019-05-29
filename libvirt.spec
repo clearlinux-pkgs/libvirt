@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 4.10.0
-Release  : 112
+Release  : 113
 URL      : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
 Source99 : https://libvirt.org/sources/libvirt-4.10.0.tar.xz.asc
@@ -64,6 +64,7 @@ BuildRequires : openssl-dev
 BuildRequires : parted-dev
 BuildRequires : pkg-config-dev
 BuildRequires : pkgconfig(gnutls)
+BuildRequires : polkit
 BuildRequires : polkit-dev
 BuildRequires : readline-dev
 BuildRequires : systemd
@@ -81,6 +82,7 @@ Patch7: 0007-Arjan-s-malloc-patch-converted-to-git.patch
 Patch8: 0008-Arjan-s-patch-for-locale.patch
 Patch9: CVE-2019-3840.patch
 Patch10: CVE-2019-3886.patch
+Patch11: CVE-2019-10132.patch
 
 %description
 Libvirt is a C toolkit to interact with the virtualization capabilities
@@ -131,6 +133,7 @@ Requires: libvirt-lib = %{version}-%{release}
 Requires: libvirt-bin = %{version}-%{release}
 Requires: libvirt-data = %{version}-%{release}
 Provides: libvirt-devel = %{version}-%{release}
+Requires: libvirt = %{version}-%{release}
 
 %description dev
 dev components for the libvirt package.
@@ -210,18 +213,19 @@ services components for the libvirt package.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1554403232
-export LDFLAGS="${LDFLAGS} -fno-lto"
-export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export SOURCE_DATE_EPOCH=1559151791
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 %reconfigure --disable-static ac_cv_path_EBTABLES_PATH=%{_bindir}/ebtables \
 ac_cv_path_IP_PATH= \
 --disable-dependency-tracking \
@@ -273,7 +277,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1554403232
+export SOURCE_DATE_EPOCH=1559151791
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libvirt
 cp COPYING %{buildroot}/usr/share/package-licenses/libvirt/COPYING
