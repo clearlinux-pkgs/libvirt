@@ -6,10 +6,10 @@
 #
 Name     : libvirt
 Version  : 4.10.0
-Release  : 113
+Release  : 114
 URL      : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
-Source99 : https://libvirt.org/sources/libvirt-4.10.0.tar.xz.asc
+Source1 : https://libvirt.org/sources/libvirt-4.10.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1 LGPL-2.1+ OFL-1.1
@@ -83,6 +83,10 @@ Patch8: 0008-Arjan-s-patch-for-locale.patch
 Patch9: CVE-2019-3840.patch
 Patch10: CVE-2019-3886.patch
 Patch11: CVE-2019-10132.patch
+Patch12: CVE-2019-10161.patch
+Patch13: CVE-2019-10166.patch
+Patch14: CVE-2019-10167.patch
+Patch15: CVE-2019-10168.patch
 
 %description
 Libvirt is a C toolkit to interact with the virtualization capabilities
@@ -214,13 +218,17 @@ services components for the libvirt package.
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1559151791
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1564705793
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -270,14 +278,14 @@ ac_cv_path_IP_PATH= \
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1559151791
+export SOURCE_DATE_EPOCH=1564705793
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libvirt
 cp COPYING %{buildroot}/usr/share/package-licenses/libvirt/COPYING
@@ -285,6 +293,23 @@ cp COPYING.LESSER %{buildroot}/usr/share/package-licenses/libvirt/COPYING.LESSER
 cp docs/fonts/LICENSE.md %{buildroot}/usr/share/package-licenses/libvirt/docs_fonts_LICENSE.md
 %make_install
 %find_lang libvirt
+## Remove excluded files
+rm -f %{buildroot}/etc/logrotate.d/libvirtd
+rm -f %{buildroot}/etc/logrotate.d/libvirtd.lxc
+rm -f %{buildroot}/etc/logrotate.d/libvirtd.qemu
+rm -f %{buildroot}/etc/logrotate.d/libvirtd.uml
+rm -f %{buildroot}/etc/sysconfig/libvirtd
+rm -f %{buildroot}/etc/sysconfig/libvirt-guests
+rm -f %{buildroot}/etc/sysconfig/virtlockd
+rm -f %{buildroot}/etc/libvirt/libvirt.conf
+rm -f %{buildroot}/etc/libvirt/libvirtd.conf
+rm -f %{buildroot}/etc/libvirt/lxc.conf
+rm -f %{buildroot}/etc/libvirt/qemu.conf
+rm -f %{buildroot}/etc/libvirt/qemu-lockd.conf
+rm -f %{buildroot}/etc/libvirt/virtlockd.conf
+rm -f %{buildroot}/etc/libvirt/virt-login-shell.conf
+rm -f %{buildroot}/etc/libvirt/qemu/networks/autostart/default.xml
+rm -f %{buildroot}/etc/libvirt/qemu/networks/default.xml
 ## install_append content
 mkdir %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
 ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/libvirtd.service
