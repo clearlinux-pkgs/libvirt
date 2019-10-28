@@ -1,7 +1,7 @@
-From 1acf69203f84c5260151ccd99bd7f193eea36146 Mon Sep 17 00:00:00 2001
+From c5c842b2f4d464ce45b85d4bfebefaf058ef0f02 Mon Sep 17 00:00:00 2001
 From: "Munoz, Obed N" <obed.n.munoz@intel.com>
 Date: Thu, 2 Jul 2015 10:35:47 -0500
-Subject: [PATCH 1/8] Default to 0770 permissions, with group libvirt for the
+Subject: [PATCH 1/6] Default to 0770 permissions, with group libvirt for the
  control socket.
 
 Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
@@ -10,10 +10,10 @@ Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/remote/remote_daemon_config.c b/src/remote/remote_daemon_config.c
-index 27e0c63..5210668 100644
+index 0eecb20..7cde36a 100644
 --- a/src/remote/remote_daemon_config.c
 +++ b/src/remote/remote_daemon_config.c
-@@ -131,7 +131,7 @@ daemonConfigNew(bool privileged ATTRIBUTE_UNUSED)
+@@ -134,7 +134,7 @@ daemonConfigNew(bool privileged ATTRIBUTE_UNUSED)
  #endif
  
      if (VIR_STRDUP(data->unix_sock_rw_perms,
@@ -23,5 +23,5 @@ index 27e0c63..5210668 100644
          VIR_STRDUP(data->unix_sock_admin_perms, "0700") < 0)
          goto error;
 -- 
-2.18.0
+2.23.0
 

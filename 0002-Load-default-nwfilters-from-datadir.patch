@@ -1,0 +1,75 @@
+From 2bc0a8fc0a0a441c94dd5eb03dd1f753a1131785 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Mon, 28 Oct 2019 10:00:25 -0700
+Subject: [PATCH 2/6] Load default nwfilters from datadir
+
+Not fully stateless as the datadir defaults files aren't maskable by
+the sysconfdir files but that's for another day.
+---
+ src/conf/virnwfilterobj.h      | 1 +
+ src/nwfilter/Makefile.inc.am   | 2 +-
+ src/nwfilter/nwfilter_driver.c | 9 +++++++++
+ 3 files changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/src/conf/virnwfilterobj.h b/src/conf/virnwfilterobj.h
+index a6bdfb3..31a03b1 100644
+--- a/src/conf/virnwfilterobj.h
++++ b/src/conf/virnwfilterobj.h
+@@ -45,6 +45,7 @@ struct _virNWFilterDriverState {
+ 
+     char *stateDir;
+     char *configDir;
++    char *defaultsDir;
+     char *bindingDir;
+ };
+ 
+diff --git a/src/nwfilter/Makefile.inc.am b/src/nwfilter/Makefile.inc.am
+index 6acb457..194bc88 100644
+--- a/src/nwfilter/Makefile.inc.am
++++ b/src/nwfilter/Makefile.inc.am
+@@ -24,7 +24,7 @@ EXTRA_DIST += $(NWFILTER_DRIVER_SOURCES)
+ 
+ if WITH_NWFILTER
+ 
+-nwfilterxmldir = $(sysconfdir)/libvirt/nwfilter
++nwfilterxmldir = $(datadir)/libvirt/nwfilter
+ nwfilterxml_DATA = $(NWFILTER_XML_FILES)
+ 
+ noinst_LTLIBRARIES += libvirt_driver_nwfilter_impl.la
+diff --git a/src/nwfilter/nwfilter_driver.c b/src/nwfilter/nwfilter_driver.c
+index aef5bd4..4c0198c 100644
+--- a/src/nwfilter/nwfilter_driver.c
++++ b/src/nwfilter/nwfilter_driver.c
+@@ -276,6 +276,12 @@ nwfilterStateInitialize(bool privileged,
+     if (virNWFilterBindingObjListLoadAllConfigs(driver->bindings, driver->bindingDir) < 0)
+         goto error;
+ 
++    if (VIR_STRDUP(driver->defaultsDir, PKGDATADIR "/libvirt/nwfilter") == -1)
++        goto error;
++
++    if (virNWFilterObjListLoadAllConfigs(driver->nwfilters, driver->defaultsDir) < 0)
++        goto error;
++
+     if (virNWFilterBuildAll(driver, false) < 0)
+         goto error;
+ 
+@@ -329,6 +335,8 @@ nwfilterStateReload(void)
+ 
+     virNWFilterObjListLoadAllConfigs(driver->nwfilters, driver->configDir);
+ 
++    virNWFilterObjListLoadAllConfigs(driver->nwfilters, driver->defaultsDir);
++
+     virNWFilterUnlockFilterUpdates();
+ 
+     virNWFilterBuildAll(driver, false);
+@@ -366,6 +374,7 @@ nwfilterStateCleanup(void)
+ 
+         VIR_FREE(driver->stateDir);
+         VIR_FREE(driver->configDir);
++        VIR_FREE(driver->defaultsDir);
+         VIR_FREE(driver->bindingDir);
+         nwfilterDriverUnlock();
+     }
+-- 
+2.23.0
+

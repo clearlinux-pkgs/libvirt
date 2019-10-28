@@ -1,5 +1,3 @@
-Configure miss: crtdefs.h usability
-Configure miss: crtdefs.h presence
 Configure miss: crtdefs.h
 Configure miss: fpurge
 Configure miss: pthread_sigmask
@@ -7,43 +5,119 @@ Configure miss: sysctlbyname
 Configure miss: whether fflush works on input streams
 Configure miss: whether C symbols are prefixed with underscore at the linker level
 Configure miss: strerror_r with POSIX signature
+Configure miss: fake locale system (OpenBSD)
+Configure miss: Solaris 11.4 locale system
+Configure miss: CFLocaleCopyPreferredLanguages
 Configure miss: whether fpurge is declared
 Configure miss: _fseeki64
 Configure miss: whether gai_strerrorA is declared
 Configure miss: ioctl with POSIX signature
 Configure miss: whether pthread_rwlock_rdlock prefers a writer to a reader
 Configure miss: __mktime_internal
+Configure miss: working nanosleep
 Configure miss: struct msghdr.msg_accrights
 Configure miss: sys/sysmp.h
 Configure miss: sys/table.h
 Configure miss: sys/systemcfg.h
 Configure miss: pstat_getstatic
 Configure miss: sysmp
-Configure miss: whether <pthread.h> pollutes the namespace
-Configure miss: whether pthread_sigmask is only a macro
-Configure miss: working nanosleep
-Configure miss: whether the C compiler's -Wlogical-op gives bogus warnings
+Configure miss: whether pthread_sigmask is a macro
+Configure miss: working re_compile_pattern
 Configure miss: whether gcc gives bogus warnings for -Wlogical-op
 Configure miss: whether clang gives bogus warnings for -Wdouble-promotion
 Configure miss: whether -Wno-missing-field-initializers is needed
-Configure miss: avahi-client >= 0.6.0
+Configure miss: BASH_COMPLETION
+Configure miss: whether to install firewalld libvirt zone
+Configure miss: GLUSTERFS
+Configure miss: HAL
+Configure miss: LIBISCSI
+Configure miss: LIBSSH
+Configure miss: OPENWSMAN
+Configure miss: sanlock_init in -lsanlock_client
+Configure miss: WIRESHARK_DISSECTOR
+Configure miss: xdrmem_create in -lportablexdr
+Configure miss: xdr_u_int64_t
+Configure miss: where to find <rpc/rpc.h>
+Configure miss: sys/ucred.h usability
+Configure miss: sys/ucred.h presence
+Configure miss: struct sockpeercred
+Configure miss: gettext in -lintl
+Configure miss: whether LIBXL_DOMAIN_TYPE_PVH is declared
+Configure miss: PARALLELS_SDK
+Configure miss: bhyve
+Configure miss: bhyvectl
+Configure miss: bhyveload
+Configure miss: numad
+Configure miss: ns_mtab
+Configure miss: nss_module_unregister_fn
+Configure miss: rbd/librbd.h usability
+Configure miss: rbd/librbd.h presence
+Configure miss: rbd/librbd.h
+Configure miss: collie
+Configure miss: dog
+Configure miss: zfs
+Configure miss: zpool
+Configure miss: vstorage
+Configure miss: vstorage-mount
+Configure miss: xfs/xfs.h usability
+Configure miss: xfs/xfs.h presence
+Configure miss: xfs/xfs.h
+Configure miss: flake8
+Configure miss: Whether to build test suite by default
+Configure miss: struct ifreq.ifr_index
+Configure miss: whether BRDGSFD is declared
+Configure miss: whether BRDGADD is declared
+Configure miss: whether BRDGDEL is declared
+Configure miss: whether cpuset_getaffinity is declared
+Configure miss: struct if_data.ifi_oqdrops
+Configure miss: whether clock_serv_t is declared
+Configure miss: whether host_get_clock_service is declared
+Configure miss: whether clock_get_time is declared
+Configure miss: whether this build is done by a static analysis tool
+Configure miss: crtdefs.h
+Configure miss: fpurge
+Configure miss: pthread_sigmask
+Configure miss: sysctlbyname
+Configure miss: whether fflush works on input streams
+Configure miss: whether C symbols are prefixed with underscore at the linker level
+Configure miss: strerror_r with POSIX signature
+Configure miss: fake locale system (OpenBSD)
+Configure miss: Solaris 11.4 locale system
+Configure miss: CFLocaleCopyPreferredLanguages
+Configure miss: whether fpurge is declared
+Configure miss: _fseeki64
+Configure miss: whether gai_strerrorA is declared
+Configure miss: ioctl with POSIX signature
+Configure miss: whether pthread_rwlock_rdlock prefers a writer to a reader
+Configure miss: __mktime_internal
+Configure miss: working nanosleep
+Configure miss: struct msghdr.msg_accrights
+Configure miss: sys/sysmp.h
+Configure miss: sys/table.h
+Configure miss: sys/systemcfg.h
+Configure miss: pstat_getstatic
+Configure miss: sysmp
+Configure miss: whether pthread_sigmask is a macro
+Configure miss: working re_compile_pattern
+Configure miss: whether gcc gives bogus warnings for -Wlogical-op
+Configure miss: whether clang gives bogus warnings for -Wdouble-promotion
+Configure miss: whether -Wno-missing-field-initializers is needed
 Configure miss: bash-completion >= 2.0
+Configure miss: whether to install firewalld libvirt zone
 Configure miss: glusterfs-api >= 3.4.1
 Configure miss: hal >= 0.5.0
 Configure miss: libiscsi >= 1.18.0
 Configure miss: libssh >= 0.7
 Configure miss: openwsman >= 2.2.3
 Configure miss: sanlock_init in -lsanlock_client
-Configure miss: wireshark >= 1.11.3
+Configure miss: wireshark >= 2.4.0
 Configure miss: xdrmem_create in -lportablexdr
 Configure miss: xdr_u_int64_t
 Configure miss: where to find <rpc/rpc.h>
-Configure miss: yajl_parse_complete in -lyajl
 Configure miss: sys/ucred.h usability
 Configure miss: sys/ucred.h presence
 Configure miss: struct sockpeercred
 Configure miss: gettext in -lintl
-Configure miss: udevsettle
 Configure miss: whether LIBXL_DOMAIN_TYPE_PVH is declared
 Configure miss: parallels-sdk >= 7.0.22
 Configure miss: bhyve
@@ -64,6 +138,7 @@ Configure miss: vstorage-mount
 Configure miss: xfs/xfs.h usability
 Configure miss: xfs/xfs.h presence
 Configure miss: xfs/xfs.h
+Configure miss: flake8
 Configure miss: Whether to build test suite by default
 Configure miss: struct ifreq.ifr_index
 Configure miss: whether BRDGSFD is declared

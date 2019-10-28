@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x15588B26596BEA5D (Daniel.Veillard@w3.org)
 #
 Name     : libvirt
-Version  : 4.10.0
-Release  : 115
-URL      : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
-Source0  : https://libvirt.org/sources/libvirt-4.10.0.tar.xz
-Source1 : https://libvirt.org/sources/libvirt-4.10.0.tar.xz.asc
+Version  : 5.8.0
+Release  : 116
+URL      : https://libvirt.org/sources/libvirt-5.8.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-5.8.0.tar.xz
+Source1 : https://libvirt.org/sources/libvirt-5.8.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1 LGPL-2.1+ OFL-1.1
@@ -29,15 +29,12 @@ BuildRequires : LVM2-extras
 BuildRequires : acl-dev
 BuildRequires : attr-dev
 BuildRequires : audit-dev
-BuildRequires : automake
-BuildRequires : automake-dev
 BuildRequires : bridge-utils
 BuildRequires : curl-dev
 BuildRequires : dbus-dev
 BuildRequires : dnsmasq
 BuildRequires : ebtables
 BuildRequires : fuse-dev
-BuildRequires : gettext-bin
 BuildRequires : gettext-dev
 BuildRequires : glibc-locale
 BuildRequires : intltool-dev
@@ -49,11 +46,8 @@ BuildRequires : libpcap-dev
 BuildRequires : libpciaccess-dev
 BuildRequires : libssh2-dev
 BuildRequires : libtasn1-dev
-BuildRequires : libtool
-BuildRequires : libtool-dev
 BuildRequires : libxml2-dev
 BuildRequires : libxslt
-BuildRequires : m4
 BuildRequires : ncurses-dev
 BuildRequires : nfs-utils
 BuildRequires : numactl
@@ -62,31 +56,22 @@ BuildRequires : open-iscsi
 BuildRequires : openssh
 BuildRequires : openssl-dev
 BuildRequires : parted-dev
-BuildRequires : pkg-config-dev
 BuildRequires : pkgconfig(gnutls)
 BuildRequires : polkit
 BuildRequires : polkit-dev
 BuildRequires : readline-dev
 BuildRequires : systemd
 BuildRequires : systemd-dev
+BuildRequires : util-linux
 BuildRequires : util-linux-dev
 BuildRequires : yajl-dev
 BuildRequires : yajl-lib
 Patch1: 0001-Default-to-0770-permissions-with-group-libvirt-for-t.patch
-Patch2: 0002-Move-default-nwfilters-to-datadir.patch
-Patch3: 0003-remove-apparmor-from-unit-file.patch
-Patch4: 0004-remove-empty-environment-file-from-unit-file.patch
-Patch5: 0005-drop-timeout-ping.patch
-Patch6: 0006-set-default-ciphers.patch
-Patch7: 0007-Arjan-s-malloc-patch-converted-to-git.patch
-Patch8: 0008-Arjan-s-patch-for-locale.patch
-Patch9: CVE-2019-3840.patch
-Patch10: CVE-2019-3886.patch
-Patch11: CVE-2019-10132.patch
-Patch12: CVE-2019-10161.patch
-Patch13: CVE-2019-10166.patch
-Patch14: CVE-2019-10167.patch
-Patch15: CVE-2019-10168.patch
+Patch2: 0002-Load-default-nwfilters-from-datadir.patch
+Patch3: 0003-drop-timeout-ping.patch
+Patch4: 0004-set-default-ciphers.patch
+Patch5: 0005-release-unused-memory-back-to-the-system.patch
+Patch6: 0006-Arjan-s-patch-for-locale.patch
 
 %description
 Libvirt is a C toolkit to interact with the virtualization capabilities
@@ -206,35 +191,26 @@ services components for the libvirt package.
 
 
 %prep
-%setup -q -n libvirt-4.10.0
+%setup -q -n libvirt-5.8.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch14 -p1
-%patch15 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1564705793
+export SOURCE_DATE_EPOCH=1572284108
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-%reconfigure --disable-static ac_cv_path_EBTABLES_PATH=%{_bindir}/ebtables \
+%configure --disable-static ac_cv_path_EBTABLES_PATH=%{_bindir}/ebtables \
 ac_cv_path_IP_PATH= \
 --disable-dependency-tracking \
 --enable-nls \
@@ -285,12 +261,12 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1564705793
+export SOURCE_DATE_EPOCH=1572284108
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libvirt
-cp COPYING %{buildroot}/usr/share/package-licenses/libvirt/COPYING
-cp COPYING.LESSER %{buildroot}/usr/share/package-licenses/libvirt/COPYING.LESSER
-cp docs/fonts/LICENSE.md %{buildroot}/usr/share/package-licenses/libvirt/docs_fonts_LICENSE.md
+cp %{_builddir}/libvirt-5.8.0/COPYING %{buildroot}/usr/share/package-licenses/libvirt/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/libvirt-5.8.0/COPYING.LESSER %{buildroot}/usr/share/package-licenses/libvirt/3704f4680301a60004b20f94e0b5b8c7ff1484a9
+cp %{_builddir}/libvirt-5.8.0/docs/fonts/LICENSE.md %{buildroot}/usr/share/package-licenses/libvirt/395cbfe3e7e4a5da6e5f41c406fcb0eab7e38426
 %make_install
 %find_lang libvirt
 ## Remove excluded files
@@ -331,8 +307,17 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/bin/virt-login-shell
 /usr/bin/virt-pki-validate
 /usr/bin/virt-xml-validate
+/usr/bin/virtinterfaced
 /usr/bin/virtlockd
 /usr/bin/virtlogd
+/usr/bin/virtlxcd
+/usr/bin/virtnetworkd
+/usr/bin/virtnodedevd
+/usr/bin/virtnwfilterd
+/usr/bin/virtproxyd
+/usr/bin/virtqemud
+/usr/bin/virtsecretd
+/usr/bin/virtstoraged
 
 %files config
 %defattr(-,root,root,-)
@@ -348,10 +333,28 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/share/augeas/lenses/tests/test_libvirtd.aug
 /usr/share/augeas/lenses/tests/test_libvirtd_lxc.aug
 /usr/share/augeas/lenses/tests/test_libvirtd_qemu.aug
+/usr/share/augeas/lenses/tests/test_virtinterfaced.aug
 /usr/share/augeas/lenses/tests/test_virtlockd.aug
 /usr/share/augeas/lenses/tests/test_virtlogd.aug
+/usr/share/augeas/lenses/tests/test_virtlxcd.aug
+/usr/share/augeas/lenses/tests/test_virtnetworkd.aug
+/usr/share/augeas/lenses/tests/test_virtnodedevd.aug
+/usr/share/augeas/lenses/tests/test_virtnwfilterd.aug
+/usr/share/augeas/lenses/tests/test_virtproxyd.aug
+/usr/share/augeas/lenses/tests/test_virtqemud.aug
+/usr/share/augeas/lenses/tests/test_virtsecretd.aug
+/usr/share/augeas/lenses/tests/test_virtstoraged.aug
+/usr/share/augeas/lenses/virtinterfaced.aug
 /usr/share/augeas/lenses/virtlockd.aug
 /usr/share/augeas/lenses/virtlogd.aug
+/usr/share/augeas/lenses/virtlxcd.aug
+/usr/share/augeas/lenses/virtnetworkd.aug
+/usr/share/augeas/lenses/virtnodedevd.aug
+/usr/share/augeas/lenses/virtnwfilterd.aug
+/usr/share/augeas/lenses/virtproxyd.aug
+/usr/share/augeas/lenses/virtqemud.aug
+/usr/share/augeas/lenses/virtsecretd.aug
+/usr/share/augeas/lenses/virtstoraged.aug
 /usr/share/libvirt/api/libvirt-admin-api.xml
 /usr/share/libvirt/api/libvirt-api.xml
 /usr/share/libvirt/api/libvirt-lxc-api.xml
@@ -369,8 +372,9 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/share/libvirt/cpu_map/x86_Broadwell-noTSX-IBRS.xml
 /usr/share/libvirt/cpu_map/x86_Broadwell-noTSX.xml
 /usr/share/libvirt/cpu_map/x86_Broadwell.xml
+/usr/share/libvirt/cpu_map/x86_Cascadelake-Server.xml
 /usr/share/libvirt/cpu_map/x86_Conroe.xml
-/usr/share/libvirt/cpu_map/x86_EPYC-IBRS.xml
+/usr/share/libvirt/cpu_map/x86_EPYC-IBPB.xml
 /usr/share/libvirt/cpu_map/x86_EPYC.xml
 /usr/share/libvirt/cpu_map/x86_Haswell-IBRS.xml
 /usr/share/libvirt/cpu_map/x86_Haswell-noTSX-IBRS.xml
@@ -436,11 +440,13 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/share/libvirt/schemas/cputypes.rng
 /usr/share/libvirt/schemas/domain.rng
 /usr/share/libvirt/schemas/domaincaps.rng
+/usr/share/libvirt/schemas/domaincheckpoint.rng
 /usr/share/libvirt/schemas/domaincommon.rng
 /usr/share/libvirt/schemas/domainsnapshot.rng
 /usr/share/libvirt/schemas/interface.rng
 /usr/share/libvirt/schemas/network.rng
 /usr/share/libvirt/schemas/networkcommon.rng
+/usr/share/libvirt/schemas/networkport.rng
 /usr/share/libvirt/schemas/nodedev.rng
 /usr/share/libvirt/schemas/nwfilter.rng
 /usr/share/libvirt/schemas/nwfilter_params.rng
@@ -448,6 +454,7 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/share/libvirt/schemas/secret.rng
 /usr/share/libvirt/schemas/storagecommon.rng
 /usr/share/libvirt/schemas/storagepool.rng
+/usr/share/libvirt/schemas/storagepoolcaps.rng
 /usr/share/libvirt/schemas/storagevol.rng
 /usr/share/libvirt/test-screenshot.png
 /usr/share/polkit-1/actions/org.libvirt.api.policy
@@ -458,6 +465,7 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 %defattr(-,root,root,-)
 /usr/include/libvirt/libvirt-admin.h
 /usr/include/libvirt/libvirt-common.h
+/usr/include/libvirt/libvirt-domain-checkpoint.h
 /usr/include/libvirt/libvirt-domain-snapshot.h
 /usr/include/libvirt/libvirt-domain.h
 /usr/include/libvirt/libvirt-event.h
@@ -485,28 +493,19 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 %files doc
 %defattr(0644,root,root,0755)
 %doc /usr/share/doc/libvirt/*
-/usr/share/gtk-doc/html/libvirt/general.html
-/usr/share/gtk-doc/html/libvirt/home.png
-/usr/share/gtk-doc/html/libvirt/index.html
-/usr/share/gtk-doc/html/libvirt/left.png
-/usr/share/gtk-doc/html/libvirt/libvirt-virterror.html
-/usr/share/gtk-doc/html/libvirt/libvirt.devhelp
-/usr/share/gtk-doc/html/libvirt/right.png
-/usr/share/gtk-doc/html/libvirt/style.css
-/usr/share/gtk-doc/html/libvirt/up.png
 
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.4010.0
+/usr/lib64/libvirt-admin.so.0.5008.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.4010.0
+/usr/lib64/libvirt-lxc.so.0.5008.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.4010.0
+/usr/lib64/libvirt-qemu.so.0.5008.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.4010.0
+/usr/lib64/libvirt.so.0.5008.0
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_network.so
@@ -531,12 +530,13 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/libexec/libvirt_leaseshelper
 /usr/libexec/libvirt_lxc
 /usr/libexec/libvirt_parthelper
+/usr/libexec/virt-login-shell-helper
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libvirt/COPYING
-/usr/share/package-licenses/libvirt/COPYING.LESSER
-/usr/share/package-licenses/libvirt/docs_fonts_LICENSE.md
+/usr/share/package-licenses/libvirt/3704f4680301a60004b20f94e0b5b8c7ff1484a9
+/usr/share/package-licenses/libvirt/395cbfe3e7e4a5da6e5f41c406fcb0eab7e38426
+/usr/share/package-licenses/libvirt/4cc77b90af91e615a64ae04893fdffa7939db84c
 
 %files man
 %defattr(0644,root,root,0755)
@@ -566,14 +566,57 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 %defattr(-,root,root,-)
 %exclude /usr/lib/systemd/system/multi-user.target.wants/libvirtd.service
 /usr/lib/systemd/system/libvirt-guests.service
+/usr/lib/systemd/system/libvirtd-admin.socket
+/usr/lib/systemd/system/libvirtd-ro.socket
+/usr/lib/systemd/system/libvirtd-tcp.socket
+/usr/lib/systemd/system/libvirtd-tls.socket
 /usr/lib/systemd/system/libvirtd.service
+/usr/lib/systemd/system/libvirtd.socket
 /usr/lib/systemd/system/virt-guest-shutdown.target
+/usr/lib/systemd/system/virtinterfaced-admin.socket
+/usr/lib/systemd/system/virtinterfaced-ro.socket
+/usr/lib/systemd/system/virtinterfaced.service
+/usr/lib/systemd/system/virtinterfaced.socket
 /usr/lib/systemd/system/virtlockd-admin.socket
 /usr/lib/systemd/system/virtlockd.service
 /usr/lib/systemd/system/virtlockd.socket
 /usr/lib/systemd/system/virtlogd-admin.socket
 /usr/lib/systemd/system/virtlogd.service
 /usr/lib/systemd/system/virtlogd.socket
+/usr/lib/systemd/system/virtlxcd-admin.socket
+/usr/lib/systemd/system/virtlxcd-ro.socket
+/usr/lib/systemd/system/virtlxcd.service
+/usr/lib/systemd/system/virtlxcd.socket
+/usr/lib/systemd/system/virtnetworkd-admin.socket
+/usr/lib/systemd/system/virtnetworkd-ro.socket
+/usr/lib/systemd/system/virtnetworkd.service
+/usr/lib/systemd/system/virtnetworkd.socket
+/usr/lib/systemd/system/virtnodedevd-admin.socket
+/usr/lib/systemd/system/virtnodedevd-ro.socket
+/usr/lib/systemd/system/virtnodedevd.service
+/usr/lib/systemd/system/virtnodedevd.socket
+/usr/lib/systemd/system/virtnwfilterd-admin.socket
+/usr/lib/systemd/system/virtnwfilterd-ro.socket
+/usr/lib/systemd/system/virtnwfilterd.service
+/usr/lib/systemd/system/virtnwfilterd.socket
+/usr/lib/systemd/system/virtproxyd-admin.socket
+/usr/lib/systemd/system/virtproxyd-ro.socket
+/usr/lib/systemd/system/virtproxyd-tcp.socket
+/usr/lib/systemd/system/virtproxyd-tls.socket
+/usr/lib/systemd/system/virtproxyd.service
+/usr/lib/systemd/system/virtproxyd.socket
+/usr/lib/systemd/system/virtqemud-admin.socket
+/usr/lib/systemd/system/virtqemud-ro.socket
+/usr/lib/systemd/system/virtqemud.service
+/usr/lib/systemd/system/virtqemud.socket
+/usr/lib/systemd/system/virtsecretd-admin.socket
+/usr/lib/systemd/system/virtsecretd-ro.socket
+/usr/lib/systemd/system/virtsecretd.service
+/usr/lib/systemd/system/virtsecretd.socket
+/usr/lib/systemd/system/virtstoraged-admin.socket
+/usr/lib/systemd/system/virtstoraged-ro.socket
+/usr/lib/systemd/system/virtstoraged.service
+/usr/lib/systemd/system/virtstoraged.socket
 
 %files locales -f libvirt.lang
 %defattr(-,root,root,-)

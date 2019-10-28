@@ -1,26 +1,26 @@
-From c82a730b01a05321965e9a6a4142efc2c586de5c Mon Sep 17 00:00:00 2001
-From: Icarus Sparry <icarus.w.sparry@intel.com>
-Date: Wed, 26 Apr 2017 11:18:26 -0700
-Subject: [PATCH 7/8] Arjan's malloc patch, converted to git
+From d0616ee144bef535add79c94206da9275c209d50 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Mon, 28 Oct 2019 10:11:40 -0700
+Subject: [PATCH 5/6] release unused memory back to the system
 
-Signed-off-by: Icarus Sparry <icarus.w.sparry@intel.com>
+Maybe not required still?
 ---
  src/util/vireventpoll.c | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/src/util/vireventpoll.c b/src/util/vireventpoll.c
-index 2fe58c7..c834372 100644
+index db01088..09e2551 100644
 --- a/src/util/vireventpoll.c
 +++ b/src/util/vireventpoll.c
-@@ -30,6 +30,7 @@
- #include <errno.h>
+@@ -25,6 +25,7 @@
+ #include <sys/time.h>
  #include <unistd.h>
  #include <fcntl.h>
 +#include <malloc.h>
  
  #include "virthread.h"
  #include "virlog.h"
-@@ -638,6 +639,7 @@ int virEventPollRunOnce(void)
+@@ -633,6 +634,7 @@ int virEventPollRunOnce(void)
      PROBE(EVENT_POLL_RUN,
            "nhandles=%d timeout=%d",
            nfds, timeout);
@@ -29,5 +29,5 @@ index 2fe58c7..c834372 100644
      if (ret < 0) {
          EVENT_DEBUG("Poll got error event %d", errno);
 -- 
-2.18.0
+2.23.0
 
