@@ -27,7 +27,6 @@ Configure miss: whether gcc gives bogus warnings for -Wlogical-op
 Configure miss: whether clang gives bogus warnings for -Wdouble-promotion
 Configure miss: whether -Wno-missing-field-initializers is needed
 Configure miss: BASH_COMPLETION
-Configure miss: whether to install firewalld libvirt zone
 Configure miss: GLUSTERFS
 Configure miss: HAL
 Configure miss: LIBISCSI
@@ -103,7 +102,6 @@ Configure miss: whether gcc gives bogus warnings for -Wlogical-op
 Configure miss: whether clang gives bogus warnings for -Wdouble-promotion
 Configure miss: whether -Wno-missing-field-initializers is needed
 Configure miss: bash-completion >= 2.0
-Configure miss: whether to install firewalld libvirt zone
 Configure miss: glusterfs-api >= 3.4.1
 Configure miss: hal >= 0.5.0
 Configure miss: libiscsi >= 1.18.0

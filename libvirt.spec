@@ -6,10 +6,10 @@
 #
 Name     : libvirt
 Version  : 5.8.0
-Release  : 116
+Release  : 117
 URL      : https://libvirt.org/sources/libvirt-5.8.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-5.8.0.tar.xz
-Source1 : https://libvirt.org/sources/libvirt-5.8.0.tar.xz.asc
+Source1  : https://libvirt.org/sources/libvirt-5.8.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1 LGPL-2.1+ OFL-1.1
@@ -62,7 +62,6 @@ BuildRequires : polkit-dev
 BuildRequires : readline-dev
 BuildRequires : systemd
 BuildRequires : systemd-dev
-BuildRequires : util-linux
 BuildRequires : util-linux-dev
 BuildRequires : yajl-dev
 BuildRequires : yajl-lib
@@ -192,6 +191,7 @@ services components for the libvirt package.
 
 %prep
 %setup -q -n libvirt-5.8.0
+cd %{_builddir}/libvirt-5.8.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -204,11 +204,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1572284108
+export SOURCE_DATE_EPOCH=1589821977
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static ac_cv_path_EBTABLES_PATH=%{_bindir}/ebtables \
 ac_cv_path_IP_PATH= \
@@ -250,7 +250,9 @@ ac_cv_path_IP_PATH= \
 --with-yajl \
 --with-openssl \
 --with-polkit \
---with-loader-nvram=/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF_CODE.fd:/usr/share/qemu/OVMF_VARS.fd
+--with-loader-nvram=/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF_CODE.fd:/usr/share/qemu/OVMF_VARS.fd \
+--with-firewalld \
+--with-firewalld-zone
 make  %{?_smp_mflags}
 
 %check
@@ -261,7 +263,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1572284108
+export SOURCE_DATE_EPOCH=1589821977
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libvirt
 cp %{_builddir}/libvirt-5.8.0/COPYING %{buildroot}/usr/share/package-licenses/libvirt/4cc77b90af91e615a64ae04893fdffa7939db84c
@@ -293,6 +295,7 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 
 %files
 %defattr(-,root,root,-)
+/usr/lib/firewalld/zones/libvirt.xml
 
 %files autostart
 %defattr(-,root,root,-)
