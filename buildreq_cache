@@ -1,4 +1,9 @@
-5.8.0
-audit-dev
-glibc-locale
-intltool-dev
+6.10.0
+bash-completion-dev
+libssh-dev
+pkgconfig(bash-completion)
+pkgconfig(glusterfs-api)
+pkgconfig(libiscsi)
+pkgconfig(libssh)
+pkgconfig(libtirpc)
+pkgconfig(wireshark)

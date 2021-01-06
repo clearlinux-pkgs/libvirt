@@ -38,3 +38,4 @@ acl-dev
 LVM2-dev
 LVM2-extras
 polkit-dev
+docutils

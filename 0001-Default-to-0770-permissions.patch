@@ -1,0 +1,29 @@
+From d7ccaa61a352ab6769dd0fb8560fea39ada28e53 Mon Sep 17 00:00:00 2001
+From: Mark D Horn <mark.d.horn@intel.com>
+Date: Wed, 9 Dec 2020 13:16:04 -0800
+Subject: [PATCH] Default to 0770 permissions
+
+Default to 0770 permissions, with group libvirt for the control socket.
+
+Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
+Signed-off-by: Mark D Horn <mark.d.horn@intel.com>
+---
+ src/remote/remote_daemon_config.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/remote/remote_daemon_config.c b/src/remote/remote_daemon_config.c
+index f0cca429259c..8817dd09d0ed 100644
+--- a/src/remote/remote_daemon_config.c
++++ b/src/remote/remote_daemon_config.c
+@@ -121,7 +121,7 @@ daemonConfigNew(bool privileged G_GNUC_UNUSED)
+     }
+ #endif
+ 
+-    data->unix_sock_rw_perms = g_strdup(data->auth_unix_rw == REMOTE_AUTH_POLKIT ? "0777" : "0700");
++    data->unix_sock_rw_perms = g_strdup(data->auth_unix_rw == REMOTE_AUTH_POLKIT ? "0777" : "0770");
+     data->unix_sock_ro_perms = g_strdup("0777");
+     data->unix_sock_admin_perms = g_strdup("0700");
+ 
+-- 
+2.29.2
+
