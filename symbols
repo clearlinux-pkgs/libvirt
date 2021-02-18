@@ -8,7 +8,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname4_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_6.10.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_7.0.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -176,7 +176,7 @@ libvirt.so.0:LIBVIRT_5.7.0
 libvirt.so.0:LIBVIRT_5.8.0
 libvirt.so.0:LIBVIRT_6.0.0
 libvirt.so.0:LIBVIRT_6.10.0
-libvirt.so.0:LIBVIRT_PRIVATE_6.10.0
+libvirt.so.0:LIBVIRT_PRIVATE_7.0.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -580,6 +580,7 @@ libvirt.so.0:virCommandNewVAList
 libvirt.so.0:virCommandNonblockingFDs
 libvirt.so.0:virCommandPassFD
 libvirt.so.0:virCommandPassFDGetFDIndex
+libvirt.so.0:virCommandPassFDIndex
 libvirt.so.0:virCommandRawStatus
 libvirt.so.0:virCommandRequireHandshake
 libvirt.so.0:virCommandRun
@@ -1569,7 +1570,6 @@ libvirt.so.0:virDomainMomentDropParent
 libvirt.so.0:virDomainMomentForEachChild
 libvirt.so.0:virDomainMomentForEachDescendant
 libvirt.so.0:virDomainMomentMoveChildren
-libvirt.so.0:virDomainNVDimmAlignSizePseries
 libvirt.so.0:virDomainNetARPInterfaces
 libvirt.so.0:virDomainNetAllocateActualDevice
 libvirt.so.0:virDomainNetAppendIPAddress
@@ -2072,6 +2072,7 @@ libvirt.so.0:virFileGetXAttr
 libvirt.so.0:virFileGetXAttrQuiet
 libvirt.so.0:virFileInData
 libvirt.so.0:virFileIsCDROM
+libvirt.so.0:virFileIsClusterFS
 libvirt.so.0:virFileIsDir
 libvirt.so.0:virFileIsExecutable
 libvirt.so.0:virFileIsLink
@@ -2106,6 +2107,7 @@ libvirt.so.0:virFileRelLinkPointsTo
 libvirt.so.0:virFileRemove
 libvirt.so.0:virFileRemoveLastComponent
 libvirt.so.0:virFileRemoveXAttr
+libvirt.so.0:virFileResize
 libvirt.so.0:virFileResolveAllLinks
 libvirt.so.0:virFileResolveLink
 libvirt.so.0:virFileRewrite
@@ -2448,6 +2450,7 @@ libvirt.so.0:virJSONValueObjectGetNumberUint
 libvirt.so.0:virJSONValueObjectGetNumberUlong
 libvirt.so.0:virJSONValueObjectGetObject
 libvirt.so.0:virJSONValueObjectGetString
+libvirt.so.0:virJSONValueObjectGetStringArray
 libvirt.so.0:virJSONValueObjectGetValue
 libvirt.so.0:virJSONValueObjectHasKey
 libvirt.so.0:virJSONValueObjectIsNull
@@ -2819,6 +2822,7 @@ libvirt.so.0:virNetDevDelMulti
 libvirt.so.0:virNetDevExists
 libvirt.so.0:virNetDevFeatureTypeFromString
 libvirt.so.0:virNetDevFeatureTypeToString
+libvirt.so.0:virNetDevGenerateName
 libvirt.so.0:virNetDevGetFeatures
 libvirt.so.0:virNetDevGetIndex
 libvirt.so.0:virNetDevGetLinkInfo
@@ -2861,7 +2865,6 @@ libvirt.so.0:virNetDevMacVLanDelete
 libvirt.so.0:virNetDevMacVLanDeleteWithVPortProfile
 libvirt.so.0:virNetDevMacVLanIsMacvtap
 libvirt.so.0:virNetDevMacVLanModeTypeFromString
-libvirt.so.0:virNetDevMacVLanReserveName
 libvirt.so.0:virNetDevMacVLanRestartWithVPortProfile
 libvirt.so.0:virNetDevMacVLanTapOpen
 libvirt.so.0:virNetDevMacVLanTapSetup
@@ -2874,12 +2877,14 @@ libvirt.so.0:virNetDevOpenvswitchGetVhostuserIfname
 libvirt.so.0:virNetDevOpenvswitchInterfaceGetMaster
 libvirt.so.0:virNetDevOpenvswitchInterfaceParseStats
 libvirt.so.0:virNetDevOpenvswitchInterfaceStats
+libvirt.so.0:virNetDevOpenvswitchMaybeUnescapeReply
 libvirt.so.0:virNetDevOpenvswitchRemovePort
 libvirt.so.0:virNetDevOpenvswitchSetMigrateData
 libvirt.so.0:virNetDevOpenvswitchSetTimeout
 libvirt.so.0:virNetDevOpenvswitchUpdateVlan
 libvirt.so.0:virNetDevPFGetVF
 libvirt.so.0:virNetDevReadNetConfig
+libvirt.so.0:virNetDevReserveName
 libvirt.so.0:virNetDevRunEthernetScript
 libvirt.so.0:virNetDevRxFilterFree
 libvirt.so.0:virNetDevRxFilterModeTypeFromString
@@ -2909,7 +2914,6 @@ libvirt.so.0:virNetDevTapGetName
 libvirt.so.0:virNetDevTapGetRealDeviceName
 libvirt.so.0:virNetDevTapInterfaceStats
 libvirt.so.0:virNetDevTapReattachBridge
-libvirt.so.0:virNetDevTapReserveName
 libvirt.so.0:virNetDevVFInterfaceStats
 libvirt.so.0:virNetDevVPortProfileAssociate
 libvirt.so.0:virNetDevVPortProfileCheckComplete
@@ -3305,6 +3309,7 @@ libvirt.so.0:virNodeDeviceEventLifecycleNew
 libvirt.so.0:virNodeDeviceEventStateRegisterID
 libvirt.so.0:virNodeDeviceEventUpdateNew
 libvirt.so.0:virNodeDeviceFree
+libvirt.so.0:virNodeDeviceGetAPMatrixDynamicCaps
 libvirt.so.0:virNodeDeviceGetCSSDynamicCaps
 libvirt.so.0:virNodeDeviceGetName
 libvirt.so.0:virNodeDeviceGetPCIDynamicCaps
@@ -3551,7 +3556,6 @@ libvirt.so.0:virQEMUBuildCommandLineJSONArrayNumbered
 libvirt.so.0:virQEMUBuildDriveCommandlineFromJSON
 libvirt.so.0:virQEMUBuildNetdevCommandlineFromJSON
 libvirt.so.0:virQEMUBuildObjectCommandlineFromJSON
-libvirt.so.0:virQEMUBuildQemuImgKeySecretOpts
 libvirt.so.0:virRWLockDestroy
 libvirt.so.0:virRWLockInit
 libvirt.so.0:virRWLockRead
@@ -3795,6 +3799,7 @@ libvirt.so.0:virShrinkN
 libvirt.so.0:virSkipSpaces
 libvirt.so.0:virSkipSpacesAndBackslash
 libvirt.so.0:virSkipSpacesBackwards
+libvirt.so.0:virSkipToDigit
 libvirt.so.0:virSocketAddrBroadcast
 libvirt.so.0:virSocketAddrBroadcastByPrefix
 libvirt.so.0:virSocketAddrCheckNetmask
@@ -3847,7 +3852,6 @@ libvirt.so.0:virStorageEncryptionParseNode
 libvirt.so.0:virStorageFileAccess
 libvirt.so.0:virStorageFileBackendRegister
 libvirt.so.0:virStorageFileCanonicalizePath
-libvirt.so.0:virStorageFileChainGetBroken
 libvirt.so.0:virStorageFileChainLookup
 libvirt.so.0:virStorageFileChown
 libvirt.so.0:virStorageFileCreate
@@ -3857,7 +3861,6 @@ libvirt.so.0:virStorageFileFeatureTypeToString
 libvirt.so.0:virStorageFileFormatTypeFromString
 libvirt.so.0:virStorageFileFormatTypeToString
 libvirt.so.0:virStorageFileGetBackingStoreStr
-libvirt.so.0:virStorageFileGetLVMKey
 libvirt.so.0:virStorageFileGetMetadata
 libvirt.so.0:virStorageFileGetMetadataFromBuf
 libvirt.so.0:virStorageFileGetMetadataFromFD
@@ -3867,20 +3870,17 @@ libvirt.so.0:virStorageFileGetSCSIKey
 libvirt.so.0:virStorageFileGetUniqueIdentifier
 libvirt.so.0:virStorageFileInit
 libvirt.so.0:virStorageFileInitAs
-libvirt.so.0:virStorageFileIsClusterFS
 libvirt.so.0:virStorageFileParseBackingStoreStr
 libvirt.so.0:virStorageFileParseChainIndex
 libvirt.so.0:virStorageFileProbeFormat
 libvirt.so.0:virStorageFileRead
 libvirt.so.0:virStorageFileReportBrokenChain
-libvirt.so.0:virStorageFileResize
 libvirt.so.0:virStorageFileStat
 libvirt.so.0:virStorageFileSupportsAccess
 libvirt.so.0:virStorageFileSupportsBackingChainTraversal
 libvirt.so.0:virStorageFileSupportsCreate
 libvirt.so.0:virStorageFileSupportsSecurityDriver
 libvirt.so.0:virStorageFileUnlink
-libvirt.so.0:virStorageGenerateQcowPassphrase
 libvirt.so.0:virStorageIsFile
 libvirt.so.0:virStorageIsRelative
 libvirt.so.0:virStorageNetHostDefClear
@@ -4138,7 +4138,6 @@ libvirt.so.0:virStringHasSuffix
 libvirt.so.0:virStringIsEmpty
 libvirt.so.0:virStringIsPrintable
 libvirt.so.0:virStringListAdd
-libvirt.so.0:virStringListAutoFree
 libvirt.so.0:virStringListFreeCount
 libvirt.so.0:virStringListGetFirstWithPrefix
 libvirt.so.0:virStringListHasString
