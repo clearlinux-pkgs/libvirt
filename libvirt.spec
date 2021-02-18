@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 7.0.0
-Release  : 120
+Release  : 121
 URL      : https://libvirt.org/sources/libvirt-7.0.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-7.0.0.tar.xz
 Source1  : https://libvirt.org/sources/libvirt-7.0.0.tar.xz.asc
@@ -205,7 +205,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1613671058
+export SOURCE_DATE_EPOCH=1613673111
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -288,6 +288,8 @@ rm -f %{buildroot}/etc/libvirt/qemu/networks/default.xml
 ## install_append content
 mkdir %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
 ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/libvirtd.service
+mv %{buildroot}/usr/sbin/*  %{buildroot}/usr/bin/
+rmdir %{buildroot}/usr/sbin
 ## install_append end
 
 %files
@@ -301,6 +303,7 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 
 %files bin
 %defattr(-,root,root,-)
+/usr/bin/libvirtd
 /usr/bin/virsh
 /usr/bin/virt-admin
 /usr/bin/virt-host-validate
@@ -309,18 +312,17 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 /usr/bin/virt-qemu-run
 /usr/bin/virt-ssh-helper
 /usr/bin/virt-xml-validate
-/usr/sbin/libvirtd
-/usr/sbin/virtinterfaced
-/usr/sbin/virtlockd
-/usr/sbin/virtlogd
-/usr/sbin/virtlxcd
-/usr/sbin/virtnetworkd
-/usr/sbin/virtnodedevd
-/usr/sbin/virtnwfilterd
-/usr/sbin/virtproxyd
-/usr/sbin/virtqemud
-/usr/sbin/virtsecretd
-/usr/sbin/virtstoraged
+/usr/bin/virtinterfaced
+/usr/bin/virtlockd
+/usr/bin/virtlogd
+/usr/bin/virtlxcd
+/usr/bin/virtnetworkd
+/usr/bin/virtnodedevd
+/usr/bin/virtnwfilterd
+/usr/bin/virtproxyd
+/usr/bin/virtqemud
+/usr/bin/virtsecretd
+/usr/bin/virtstoraged
 
 %files config
 %defattr(-,root,root,-)
