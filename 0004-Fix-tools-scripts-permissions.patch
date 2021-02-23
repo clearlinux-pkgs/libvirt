@@ -1,0 +1,56 @@
+From fe66e56a733978c3ef9f4d7c11d8acaa46f3af45 Mon Sep 17 00:00:00 2001
+From: Mark D Horn <mark.d.horn@intel.com>
+Date: Tue, 23 Feb 2021 14:17:39 -0800
+Subject: [PATCH] Fix tools scripts permissions
+
+Clear Linux OS does not leave group write permissions enabled
+unless explicitly needed for operational reasons.
+
+Signed-off-by: Mark D Horn <mark.d.horn@intel.com>
+---
+ tools/meson.build | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/tools/meson.build b/tools/meson.build
+index b8c6802f0ac5..fe539cf745b0 100644
+--- a/tools/meson.build
++++ b/tools/meson.build
+@@ -239,7 +239,7 @@ configure_file(
+   configuration: tools_conf,
+   install: true,
+   install_dir: bindir,
+-  install_mode: 'rwxrwxr-x',
++  install_mode: 'rwxr-xr-x',
+ )
+ 
+ configure_file(
+@@ -248,7 +248,7 @@ configure_file(
+   configuration: tools_conf,
+   install: true,
+   install_dir: bindir,
+-  install_mode: 'rwxrwxr-x',
++  install_mode: 'rwxr-xr-x',
+ )
+ 
+ if conf.has('WITH_SANLOCK')
+@@ -258,7 +258,7 @@ if conf.has('WITH_SANLOCK')
+     configuration: tools_conf,
+     install: true,
+     install_dir: sbindir,
+-    install_mode: 'rwxrwxr-x',
++    install_mode: 'rwxr-xr-x',
+   )
+ endif
+ 
+@@ -268,7 +268,7 @@ configure_file(
+   configuration: tools_conf,
+   install: true,
+   install_dir: libexecdir,
+-  install_mode: 'rwxrwxr-x',
++  install_mode: 'rwxr-xr-x',
+ )
+ 
+ if init_script == 'systemd'
+-- 
+2.30.1
+

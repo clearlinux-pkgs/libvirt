@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 7.0.0
-Release  : 121
+Release  : 122
 URL      : https://libvirt.org/sources/libvirt-7.0.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-7.0.0.tar.xz
 Source1  : https://libvirt.org/sources/libvirt-7.0.0.tar.xz.asc
@@ -75,6 +75,7 @@ BuildRequires : yajl-lib
 Patch1: 0001-Default-to-0770-permissions.patch
 Patch2: 0002-drop-timeout-ping.patch
 Patch3: 0003-Arjan-s-patch-for-locale.patch
+Patch4: 0004-Fix-tools-scripts-permissions.patch
 
 %description
 Libvirt is a C toolkit to interact with the virtualization capabilities
@@ -199,13 +200,14 @@ cd %{_builddir}/libvirt-7.0.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1613673111
+export SOURCE_DATE_EPOCH=1614119262
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
