@@ -41,3 +41,5 @@ polkit-dev
 docutils
 dmidecode
 iproute2
+xfsprogs-dev
+qemu-setuid

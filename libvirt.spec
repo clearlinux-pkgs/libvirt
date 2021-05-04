@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 7.3.0
-Release  : 124
+Release  : 125
 URL      : https://libvirt.org/sources/libvirt-7.3.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-7.3.0.tar.xz
 Source1  : https://libvirt.org/sources/libvirt-7.3.0.tar.xz.asc
@@ -23,6 +23,7 @@ Requires: libvirt-locales = %{version}-%{release}
 Requires: libvirt-man = %{version}-%{release}
 Requires: libvirt-services = %{version}-%{release}
 Requires: polkit
+Requires: qemu-setuid
 BuildRequires : LVM2
 BuildRequires : LVM2-dev
 BuildRequires : LVM2-extras
@@ -68,10 +69,12 @@ BuildRequires : pkgconfig(libtirpc)
 BuildRequires : pkgconfig(wireshark)
 BuildRequires : polkit
 BuildRequires : polkit-dev
+BuildRequires : qemu-setuid
 BuildRequires : readline-dev
 BuildRequires : systemd
 BuildRequires : systemd-dev
 BuildRequires : util-linux-dev
+BuildRequires : xfsprogs-dev
 BuildRequires : yajl-dev
 BuildRequires : yajl-lib
 Patch1: 0001-Default-to-0770-permissions.patch
@@ -209,7 +212,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1620165725
+export SOURCE_DATE_EPOCH=1620166356
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
