@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCA68BE8010084C9C (jdenemar@redhat.com)
 #
 Name     : libvirt
-Version  : 7.0.0
-Release  : 123
-URL      : https://libvirt.org/sources/libvirt-7.0.0.tar.xz
-Source0  : https://libvirt.org/sources/libvirt-7.0.0.tar.xz
-Source1  : https://libvirt.org/sources/libvirt-7.0.0.tar.xz.asc
+Version  : 7.3.0
+Release  : 124
+URL      : https://libvirt.org/sources/libvirt-7.3.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-7.3.0.tar.xz
+Source1  : https://libvirt.org/sources/libvirt-7.3.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 LGPL-2.1 LGPL-2.1+ OFL-1.1
@@ -33,11 +33,13 @@ BuildRequires : bridge-utils
 BuildRequires : buildreq-meson
 BuildRequires : curl-dev
 BuildRequires : dbus-dev
+BuildRequires : dmidecode
 BuildRequires : dnsmasq
 BuildRequires : docutils
 BuildRequires : ebtables
 BuildRequires : fuse-dev
 BuildRequires : gettext-dev
+BuildRequires : iproute2
 BuildRequires : iptables
 BuildRequires : kmod-bin
 BuildRequires : libcap-ng-dev
@@ -195,8 +197,8 @@ services components for the libvirt package.
 
 
 %prep
-%setup -q -n libvirt-7.0.0
-cd %{_builddir}/libvirt-7.0.0
+%setup -q -n libvirt-7.3.0
+cd %{_builddir}/libvirt-7.3.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -207,7 +209,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1614119262
+export SOURCE_DATE_EPOCH=1620165725
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
@@ -263,11 +265,11 @@ meson test -C builddir || :
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/libvirt
-cp %{_builddir}/libvirt-7.0.0/COPYING %{buildroot}/usr/share/package-licenses/libvirt/4cc77b90af91e615a64ae04893fdffa7939db84c
-cp %{_builddir}/libvirt-7.0.0/COPYING.LESSER %{buildroot}/usr/share/package-licenses/libvirt/3704f4680301a60004b20f94e0b5b8c7ff1484a9
-cp %{_builddir}/libvirt-7.0.0/docs/fonts/LICENSE.rst %{buildroot}/usr/share/package-licenses/libvirt/f4e4f4ac8fa716d051ac27a5415491544c8f456e
-cp %{_builddir}/libvirt-7.0.0/src/keycodemapdb/LICENSE.BSD %{buildroot}/usr/share/package-licenses/libvirt/ea5b412c09f3b29ba1d81a61b878c5c16ffe69d8
-cp %{_builddir}/libvirt-7.0.0/src/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/libvirt/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
+cp %{_builddir}/libvirt-7.3.0/COPYING %{buildroot}/usr/share/package-licenses/libvirt/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/libvirt-7.3.0/COPYING.LESSER %{buildroot}/usr/share/package-licenses/libvirt/3704f4680301a60004b20f94e0b5b8c7ff1484a9
+cp %{_builddir}/libvirt-7.3.0/docs/fonts/LICENSE.rst %{buildroot}/usr/share/package-licenses/libvirt/f4e4f4ac8fa716d051ac27a5415491544c8f456e
+cp %{_builddir}/libvirt-7.3.0/src/keycodemapdb/LICENSE.BSD %{buildroot}/usr/share/package-licenses/libvirt/ea5b412c09f3b29ba1d81a61b878c5c16ffe69d8
+cp %{_builddir}/libvirt-7.3.0/src/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/libvirt/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang libvirt
 ## Remove excluded files
@@ -364,7 +366,6 @@ rmdir %{buildroot}/usr/sbin
 /usr/share/augeas/lenses/virtstoraged.aug
 /usr/share/bash-completion/completions/virsh
 /usr/share/bash-completion/completions/virt-admin
-/usr/share/bash-completion/completions/vsh
 /usr/share/libvirt/api/libvirt-admin-api.xml
 /usr/share/libvirt/api/libvirt-api.xml
 /usr/share/libvirt/api/libvirt-lxc-api.xml
@@ -398,6 +399,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/share/libvirt/cpu_map/x86_Cooperlake.xml
 /usr/share/libvirt/cpu_map/x86_Dhyana.xml
 /usr/share/libvirt/cpu_map/x86_EPYC-IBPB.xml
+/usr/share/libvirt/cpu_map/x86_EPYC-Milan.xml
 /usr/share/libvirt/cpu_map/x86_EPYC-Rome.xml
 /usr/share/libvirt/cpu_map/x86_EPYC.xml
 /usr/share/libvirt/cpu_map/x86_Haswell-IBRS.xml
@@ -512,13 +514,13 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.7000.0
+/usr/lib64/libvirt-admin.so.0.7003.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.7000.0
+/usr/lib64/libvirt-lxc.so.0.7003.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.7000.0
+/usr/lib64/libvirt-qemu.so.0.7003.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.7000.0
+/usr/lib64/libvirt.so.0.7003.0
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_network.so
@@ -536,6 +538,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_logical.so
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_mpath.so
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_scsi.so
+/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_vstorage.so
 /usr/lib64/libvirt/storage-file/libvirt_storage_file_fs.so
 /usr/lib64/libvirt/storage-file/libvirt_storage_file_gluster.so
 
@@ -578,8 +581,17 @@ rmdir %{buildroot}/usr/sbin
 /usr/share/man/man7/virkeyname-osx.7
 /usr/share/man/man7/virkeyname-win32.7
 /usr/share/man/man8/libvirtd.8
+/usr/share/man/man8/virtinterfaced.8
 /usr/share/man/man8/virtlockd.8
 /usr/share/man/man8/virtlogd.8
+/usr/share/man/man8/virtlxcd.8
+/usr/share/man/man8/virtnetworkd.8
+/usr/share/man/man8/virtnodedevd.8
+/usr/share/man/man8/virtnwfilterd.8
+/usr/share/man/man8/virtproxyd.8
+/usr/share/man/man8/virtqemud.8
+/usr/share/man/man8/virtsecretd.8
+/usr/share/man/man8/virtstoraged.8
 
 %files services
 %defattr(-,root,root,-)
