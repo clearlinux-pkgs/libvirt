@@ -8,7 +8,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname4_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_7.3.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_7.4.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -179,7 +179,7 @@ libvirt.so.0:LIBVIRT_6.10.0
 libvirt.so.0:LIBVIRT_7.1.0
 libvirt.so.0:LIBVIRT_7.2.0
 libvirt.so.0:LIBVIRT_7.3.0
-libvirt.so.0:LIBVIRT_PRIVATE_7.3.0
+libvirt.so.0:LIBVIRT_PRIVATE_7.4.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -1190,7 +1190,6 @@ libvirt.so.0:virDomainDiskGetType
 libvirt.so.0:virDomainDiskIndexByAddress
 libvirt.so.0:virDomainDiskIndexByName
 libvirt.so.0:virDomainDiskInsert
-libvirt.so.0:virDomainDiskInsertPreAlloced
 libvirt.so.0:virDomainDiskIoTypeFromString
 libvirt.so.0:virDomainDiskIoTypeToString
 libvirt.so.0:virDomainDiskMirrorStateTypeFromString
@@ -1445,6 +1444,8 @@ libvirt.so.0:virDomainInputBusTypeToString
 libvirt.so.0:virDomainInputDefFind
 libvirt.so.0:virDomainInputDefFree
 libvirt.so.0:virDomainInputDefGetPath
+libvirt.so.0:virDomainInputSourceGrabTypeFromString
+libvirt.so.0:virDomainInputSourceGrabTypeToString
 libvirt.so.0:virDomainInputTypeToString
 libvirt.so.0:virDomainInterfaceAddresses
 libvirt.so.0:virDomainInterfaceAddressesEnsureACL
@@ -1618,6 +1619,7 @@ libvirt.so.0:virDomainNetModelTypeToString
 libvirt.so.0:virDomainNetNotifyActualDevice
 libvirt.so.0:virDomainNetReleaseActualDevice
 libvirt.so.0:virDomainNetRemove
+libvirt.so.0:virDomainNetRemoveByObj
 libvirt.so.0:virDomainNetRemoveHostdev
 libvirt.so.0:virDomainNetResolveActualType
 libvirt.so.0:virDomainNetSetModelString
@@ -2330,6 +2332,8 @@ libvirt.so.0:virISCSINodeNew
 libvirt.so.0:virISCSINodeUpdate
 libvirt.so.0:virISCSIRescanLUNs
 libvirt.so.0:virISCSIScanTargets
+libvirt.so.0:virIdentityElevateCurrent
+libvirt.so.0:virIdentityEnsureSystemToken
 libvirt.so.0:virIdentityGetCurrent
 libvirt.so.0:virIdentityGetGroupName
 libvirt.so.0:virIdentityGetParameters
@@ -2338,11 +2342,15 @@ libvirt.so.0:virIdentityGetProcessTime
 libvirt.so.0:virIdentityGetSASLUserName
 libvirt.so.0:virIdentityGetSELinuxContext
 libvirt.so.0:virIdentityGetSystem
+libvirt.so.0:virIdentityGetSystemToken
 libvirt.so.0:virIdentityGetUNIXGroupID
 libvirt.so.0:virIdentityGetUNIXUserID
 libvirt.so.0:virIdentityGetUserName
 libvirt.so.0:virIdentityGetX509DName
+libvirt.so.0:virIdentityIsCurrentElevated
 libvirt.so.0:virIdentityNew
+libvirt.so.0:virIdentityNewCopy
+libvirt.so.0:virIdentityRestoreHelper
 libvirt.so.0:virIdentitySetCurrent
 libvirt.so.0:virIdentitySetGroupName
 libvirt.so.0:virIdentitySetParameters
@@ -2350,6 +2358,7 @@ libvirt.so.0:virIdentitySetProcessID
 libvirt.so.0:virIdentitySetProcessTime
 libvirt.so.0:virIdentitySetSASLUserName
 libvirt.so.0:virIdentitySetSELinuxContext
+libvirt.so.0:virIdentitySetSystemToken
 libvirt.so.0:virIdentitySetUNIXGroupID
 libvirt.so.0:virIdentitySetUNIXUserID
 libvirt.so.0:virIdentitySetUserName
@@ -3413,9 +3422,11 @@ libvirt.so.0:virNodeSuspend
 libvirt.so.0:virNodeSuspendForDuration
 libvirt.so.0:virNodeSuspendForDurationEnsureACL
 libvirt.so.0:virNodeSuspendGetTargetMask
+libvirt.so.0:virNumaDistanceFormat
 libvirt.so.0:virNumaGetAutoPlacementAdvice
 libvirt.so.0:virNumaGetDistances
 libvirt.so.0:virNumaGetHostMemoryNodeset
+libvirt.so.0:virNumaGetMaxCPUs
 libvirt.so.0:virNumaGetMaxNode
 libvirt.so.0:virNumaGetNodeCPUs
 libvirt.so.0:virNumaGetNodeMemory
@@ -3600,6 +3611,7 @@ libvirt.so.0:virRandomBits
 libvirt.so.0:virRandomBytes
 libvirt.so.0:virRandomGenerateWWN
 libvirt.so.0:virRandomInt
+libvirt.so.0:virRandomToken
 libvirt.so.0:virReallocN
 libvirt.so.0:virRegisterConnectDriver
 libvirt.so.0:virRegisterStateDriver
@@ -4350,6 +4362,7 @@ libvirt.so.0:virXMLCheckIllegalChars
 libvirt.so.0:virXMLExtractNamespaceXML
 libvirt.so.0:virXMLFormatElement
 libvirt.so.0:virXMLFormatElementEmpty
+libvirt.so.0:virXMLFormatMetadata
 libvirt.so.0:virXMLNewNode
 libvirt.so.0:virXMLNodeContentString
 libvirt.so.0:virXMLNodeNameEqual
@@ -4358,6 +4371,7 @@ libvirt.so.0:virXMLNodeToString
 libvirt.so.0:virXMLParseHelper
 libvirt.so.0:virXMLPickShellSafeComment
 libvirt.so.0:virXMLPropEnum
+libvirt.so.0:virXMLPropEnumDefault
 libvirt.so.0:virXMLPropInt
 libvirt.so.0:virXMLPropString
 libvirt.so.0:virXMLPropStringLimit
