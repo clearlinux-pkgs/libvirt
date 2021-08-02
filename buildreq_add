@@ -43,3 +43,4 @@ dmidecode
 iproute2
 xfsprogs-dev
 qemu-setuid
+openvswitch

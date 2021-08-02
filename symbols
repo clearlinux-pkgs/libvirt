@@ -8,7 +8,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname4_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_7.4.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_7.6.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -179,7 +179,7 @@ libvirt.so.0:LIBVIRT_6.10.0
 libvirt.so.0:LIBVIRT_7.1.0
 libvirt.so.0:LIBVIRT_7.2.0
 libvirt.so.0:LIBVIRT_7.3.0
-libvirt.so.0:LIBVIRT_PRIVATE_7.4.0
+libvirt.so.0:LIBVIRT_PRIVATE_7.6.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -228,6 +228,9 @@ libvirt.so.0:iptablesRemoveUdpInput
 libvirt.so.0:iptablesRemoveUdpOutput
 libvirt.so.0:iptablesSetDeletePrivate
 libvirt.so.0:iptablesSetupPrivateChains
+libvirt.so.0:remoteProbeSessionDriverFromBinary
+libvirt.so.0:remoteProbeSessionDriverFromSocket
+libvirt.so.0:remoteProbeSystemDriverFromSocket
 libvirt.so.0:saferead
 libvirt.so.0:safewrite
 libvirt.so.0:safezero
@@ -609,6 +612,7 @@ libvirt.so.0:virCommandSetUID
 libvirt.so.0:virCommandSetUmask
 libvirt.so.0:virCommandSetWorkingDirectory
 libvirt.so.0:virCommandToString
+libvirt.so.0:virCommandToStringBuf
 libvirt.so.0:virCommandToStringFull
 libvirt.so.0:virCommandWait
 libvirt.so.0:virCommandWriteArgLog
@@ -866,6 +870,7 @@ libvirt.so.0:virDomainAttachDevice
 libvirt.so.0:virDomainAttachDeviceEnsureACL
 libvirt.so.0:virDomainAttachDeviceFlags
 libvirt.so.0:virDomainAttachDeviceFlagsEnsureACL
+libvirt.so.0:virDomainAudioDefFree
 libvirt.so.0:virDomainAudioFormatTypeFromString
 libvirt.so.0:virDomainAudioFormatTypeToString
 libvirt.so.0:virDomainAudioIOCommonIsSet
@@ -942,10 +947,6 @@ libvirt.so.0:virDomainCCWAddressSetCreateFromDomain
 libvirt.so.0:virDomainCCWAddressSetFree
 libvirt.so.0:virDomainCFPCTypeFromString
 libvirt.so.0:virDomainCFPCTypeToString
-libvirt.so.0:virDomainCacheAssociativityTypeFromString
-libvirt.so.0:virDomainCacheAssociativityTypeToString
-libvirt.so.0:virDomainCachePolicyTypeFromString
-libvirt.so.0:virDomainCachePolicyTypeToString
 libvirt.so.0:virDomainCapabilitiesPolicyTypeToString
 libvirt.so.0:virDomainCapsCPUModelsAdd
 libvirt.so.0:virDomainCapsCPUModelsCopy
@@ -1419,6 +1420,7 @@ libvirt.so.0:virDomainHostdevDefFree
 libvirt.so.0:virDomainHostdevDefNew
 libvirt.so.0:virDomainHostdevFind
 libvirt.so.0:virDomainHostdevInsert
+libvirt.so.0:virDomainHostdevMatch
 libvirt.so.0:virDomainHostdevModeTypeToString
 libvirt.so.0:virDomainHostdevRemove
 libvirt.so.0:virDomainHostdevSubsysPCIBackendTypeToString
@@ -1444,6 +1446,8 @@ libvirt.so.0:virDomainInputBusTypeToString
 libvirt.so.0:virDomainInputDefFind
 libvirt.so.0:virDomainInputDefFree
 libvirt.so.0:virDomainInputDefGetPath
+libvirt.so.0:virDomainInputSourceGrabToggleTypeFromString
+libvirt.so.0:virDomainInputSourceGrabToggleTypeToString
 libvirt.so.0:virDomainInputSourceGrabTypeFromString
 libvirt.so.0:virDomainInputSourceGrabTypeToString
 libvirt.so.0:virDomainInputTypeToString
@@ -1513,8 +1517,6 @@ libvirt.so.0:virDomainMemoryDefFree
 libvirt.so.0:virDomainMemoryFindByDef
 libvirt.so.0:virDomainMemoryFindInactiveByDef
 libvirt.so.0:virDomainMemoryInsert
-libvirt.so.0:virDomainMemoryLatencyTypeFromString
-libvirt.so.0:virDomainMemoryLatencyTypeToString
 libvirt.so.0:virDomainMemoryModelTypeToString
 libvirt.so.0:virDomainMemoryPeek
 libvirt.so.0:virDomainMemoryPeekEnsureACL
@@ -1594,6 +1596,7 @@ libvirt.so.0:virDomainNetDefActualFromNetworkPort
 libvirt.so.0:virDomainNetDefActualToNetworkPort
 libvirt.so.0:virDomainNetDefFormat
 libvirt.so.0:virDomainNetDefFree
+libvirt.so.0:virDomainNetDefIsOvsport
 libvirt.so.0:virDomainNetDefNew
 libvirt.so.0:virDomainNetDefToNetworkPort
 libvirt.so.0:virDomainNetFind
@@ -2058,7 +2061,6 @@ libvirt.so.0:virFDStreamOpenBlockDevice
 libvirt.so.0:virFDStreamOpenFile
 libvirt.so.0:virFDStreamOpenPTY
 libvirt.so.0:virFDStreamSetInternalCloseCb
-libvirt.so.0:virFileAbsPath
 libvirt.so.0:virFileAccessibleAs
 libvirt.so.0:virFileActivateDirOverrideForLib
 libvirt.so.0:virFileActivateDirOverrideForProg
@@ -2124,6 +2126,7 @@ libvirt.so.0:virFileReadValueScaledInt
 libvirt.so.0:virFileReadValueString
 libvirt.so.0:virFileReadValueUint
 libvirt.so.0:virFileReadValueUllong
+libvirt.so.0:virFileReadValueUllongQuiet
 libvirt.so.0:virFileRelLinkPointsTo
 libvirt.so.0:virFileRemove
 libvirt.so.0:virFileRemoveLastComponent
@@ -2266,6 +2269,7 @@ libvirt.so.0:virHostCPUGetAvailableCPUsBitmap
 libvirt.so.0:virHostCPUGetCore
 libvirt.so.0:virHostCPUGetCount
 libvirt.so.0:virHostCPUGetDie
+libvirt.so.0:virHostCPUGetHaltPollTime
 libvirt.so.0:virHostCPUGetInfo
 libvirt.so.0:virHostCPUGetInfoPopulateLinux
 libvirt.so.0:virHostCPUGetKVMMaxVCPUs
@@ -2605,6 +2609,8 @@ libvirt.so.0:virMediatedDeviceNew
 libvirt.so.0:virMediatedDeviceSetUsedBy
 libvirt.so.0:virMediatedDeviceTypeFree
 libvirt.so.0:virMediatedDeviceTypeReadAttrs
+libvirt.so.0:virMemoryLatencyTypeFromString
+libvirt.so.0:virMemoryLatencyTypeToString
 libvirt.so.0:virMemoryLimitIsSet
 libvirt.so.0:virMemoryLimitTruncate
 libvirt.so.0:virMemoryMaxValue
@@ -2904,8 +2910,10 @@ libvirt.so.0:virNetDevMidonetUnbindPort
 libvirt.so.0:virNetDevOpenvswitchAddPort
 libvirt.so.0:virNetDevOpenvswitchGetMigrateData
 libvirt.so.0:virNetDevOpenvswitchGetVhostuserIfname
+libvirt.so.0:virNetDevOpenvswitchInterfaceClearQos
 libvirt.so.0:virNetDevOpenvswitchInterfaceGetMaster
 libvirt.so.0:virNetDevOpenvswitchInterfaceParseStats
+libvirt.so.0:virNetDevOpenvswitchInterfaceSetQos
 libvirt.so.0:virNetDevOpenvswitchInterfaceStats
 libvirt.so.0:virNetDevOpenvswitchMaybeUnescapeReply
 libvirt.so.0:virNetDevOpenvswitchRemovePort
@@ -3422,6 +3430,11 @@ libvirt.so.0:virNodeSuspend
 libvirt.so.0:virNodeSuspendForDuration
 libvirt.so.0:virNodeSuspendForDurationEnsureACL
 libvirt.so.0:virNodeSuspendGetTargetMask
+libvirt.so.0:virNumaCacheAssociativityTypeFromString
+libvirt.so.0:virNumaCacheAssociativityTypeToString
+libvirt.so.0:virNumaCacheFormat
+libvirt.so.0:virNumaCachePolicyTypeFromString
+libvirt.so.0:virNumaCachePolicyTypeToString
 libvirt.so.0:virNumaDistanceFormat
 libvirt.so.0:virNumaGetAutoPlacementAdvice
 libvirt.so.0:virNumaGetDistances
@@ -3432,6 +3445,7 @@ libvirt.so.0:virNumaGetNodeCPUs
 libvirt.so.0:virNumaGetNodeMemory
 libvirt.so.0:virNumaGetPageInfo
 libvirt.so.0:virNumaGetPages
+libvirt.so.0:virNumaInterconnectFormat
 libvirt.so.0:virNumaIsAvailable
 libvirt.so.0:virNumaNodeIsAvailable
 libvirt.so.0:virNumaNodesetIsAvailable
@@ -4032,6 +4046,7 @@ libvirt.so.0:virStoragePoolSourceClear
 libvirt.so.0:virStoragePoolSourceDeviceClear
 libvirt.so.0:virStoragePoolSourceFree
 libvirt.so.0:virStoragePoolSourceListFormat
+libvirt.so.0:virStoragePoolSourceListFree
 libvirt.so.0:virStoragePoolSourceListNewSource
 libvirt.so.0:virStoragePoolTypeFromString
 libvirt.so.0:virStoragePoolTypeToString

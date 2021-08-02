@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCA68BE8010084C9C (jdenemar@redhat.com)
 #
 Name     : libvirt
-Version  : 7.4.0
-Release  : 126
-URL      : https://libvirt.org/sources/libvirt-7.4.0.tar.xz
-Source0  : https://libvirt.org/sources/libvirt-7.4.0.tar.xz
-Source1  : https://libvirt.org/sources/libvirt-7.4.0.tar.xz.asc
+Version  : 7.6.0
+Release  : 127
+URL      : https://libvirt.org/sources/libvirt-7.6.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-7.6.0.tar.xz
+Source1  : https://libvirt.org/sources/libvirt-7.6.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 LGPL-2.1 LGPL-2.1+ OFL-1.1
@@ -59,7 +59,9 @@ BuildRequires : numactl-dev
 BuildRequires : open-iscsi
 BuildRequires : openssh
 BuildRequires : openssl-dev
+BuildRequires : openvswitch
 BuildRequires : parted-dev
+BuildRequires : pkgconfig(audit)
 BuildRequires : pkgconfig(bash-completion)
 BuildRequires : pkgconfig(glusterfs-api)
 BuildRequires : pkgconfig(gnutls)
@@ -200,8 +202,8 @@ services components for the libvirt package.
 
 
 %prep
-%setup -q -n libvirt-7.4.0
-cd %{_builddir}/libvirt-7.4.0
+%setup -q -n libvirt-7.6.0
+cd %{_builddir}/libvirt-7.6.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -212,7 +214,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1622565086
+export SOURCE_DATE_EPOCH=1627939246
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
@@ -227,7 +229,7 @@ CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --
 -Ddriver_numactl=enabled \
 -Dapparmor=disabled \
 -Dsecdriver_apparmor=disabled \
--Dapparmor_profiles=false \
+-Dapparmor_profiles=disabled \
 -Ddtrace=disabled \
 -Ddriver_esx=disabled \
 -Dfirewalld=enabled \
@@ -268,11 +270,11 @@ meson test -C builddir || :
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/libvirt
-cp %{_builddir}/libvirt-7.4.0/COPYING %{buildroot}/usr/share/package-licenses/libvirt/4cc77b90af91e615a64ae04893fdffa7939db84c
-cp %{_builddir}/libvirt-7.4.0/COPYING.LESSER %{buildroot}/usr/share/package-licenses/libvirt/3704f4680301a60004b20f94e0b5b8c7ff1484a9
-cp %{_builddir}/libvirt-7.4.0/docs/fonts/LICENSE.rst %{buildroot}/usr/share/package-licenses/libvirt/f4e4f4ac8fa716d051ac27a5415491544c8f456e
-cp %{_builddir}/libvirt-7.4.0/src/keycodemapdb/LICENSE.BSD %{buildroot}/usr/share/package-licenses/libvirt/ea5b412c09f3b29ba1d81a61b878c5c16ffe69d8
-cp %{_builddir}/libvirt-7.4.0/src/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/libvirt/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
+cp %{_builddir}/libvirt-7.6.0/COPYING %{buildroot}/usr/share/package-licenses/libvirt/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/libvirt-7.6.0/COPYING.LESSER %{buildroot}/usr/share/package-licenses/libvirt/3704f4680301a60004b20f94e0b5b8c7ff1484a9
+cp %{_builddir}/libvirt-7.6.0/docs/fonts/LICENSE.rst %{buildroot}/usr/share/package-licenses/libvirt/f4e4f4ac8fa716d051ac27a5415491544c8f456e
+cp %{_builddir}/libvirt-7.6.0/src/keycodemapdb/LICENSE.BSD %{buildroot}/usr/share/package-licenses/libvirt/ea5b412c09f3b29ba1d81a61b878c5c16ffe69d8
+cp %{_builddir}/libvirt-7.6.0/src/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/libvirt/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang libvirt
 ## Remove excluded files
@@ -319,6 +321,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/bin/virt-qemu-run
 /usr/bin/virt-ssh-helper
 /usr/bin/virt-xml-validate
+/usr/bin/virtchd
 /usr/bin/virtinterfaced
 /usr/bin/virtlockd
 /usr/bin/virtlogd
@@ -345,6 +348,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/share/augeas/lenses/tests/test_libvirtd.aug
 /usr/share/augeas/lenses/tests/test_libvirtd_lxc.aug
 /usr/share/augeas/lenses/tests/test_libvirtd_qemu.aug
+/usr/share/augeas/lenses/tests/test_virtchd.aug
 /usr/share/augeas/lenses/tests/test_virtinterfaced.aug
 /usr/share/augeas/lenses/tests/test_virtlockd.aug
 /usr/share/augeas/lenses/tests/test_virtlogd.aug
@@ -356,6 +360,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/share/augeas/lenses/tests/test_virtqemud.aug
 /usr/share/augeas/lenses/tests/test_virtsecretd.aug
 /usr/share/augeas/lenses/tests/test_virtstoraged.aug
+/usr/share/augeas/lenses/virtchd.aug
 /usr/share/augeas/lenses/virtinterfaced.aug
 /usr/share/augeas/lenses/virtlockd.aug
 /usr/share/augeas/lenses/virtlogd.aug
@@ -517,13 +522,14 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.7004.0
+/usr/lib64/libvirt-admin.so.0.7006.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.7004.0
+/usr/lib64/libvirt-lxc.so.0.7006.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.7004.0
+/usr/lib64/libvirt-qemu.so.0.7006.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.7004.0
+/usr/lib64/libvirt.so.0.7006.0
+/usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_network.so
@@ -607,6 +613,10 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib/systemd/system/libvirtd.service
 /usr/lib/systemd/system/libvirtd.socket
 /usr/lib/systemd/system/virt-guest-shutdown.target
+/usr/lib/systemd/system/virtchd-admin.socket
+/usr/lib/systemd/system/virtchd-ro.socket
+/usr/lib/systemd/system/virtchd.service
+/usr/lib/systemd/system/virtchd.socket
 /usr/lib/systemd/system/virtinterfaced-admin.socket
 /usr/lib/systemd/system/virtinterfaced-ro.socket
 /usr/lib/systemd/system/virtinterfaced.service

@@ -7,7 +7,7 @@
 -Ddriver_numactl=enabled
 -Dapparmor=disabled
 -Dsecdriver_apparmor=disabled
--Dapparmor_profiles=false
+-Dapparmor_profiles=disabled
 -Ddtrace=disabled
 -Ddriver_esx=disabled
 -Dfirewalld=enabled
