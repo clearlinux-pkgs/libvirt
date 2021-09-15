@@ -8,7 +8,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname4_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_7.6.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_7.7.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -179,7 +179,8 @@ libvirt.so.0:LIBVIRT_6.10.0
 libvirt.so.0:LIBVIRT_7.1.0
 libvirt.so.0:LIBVIRT_7.2.0
 libvirt.so.0:LIBVIRT_7.3.0
-libvirt.so.0:LIBVIRT_PRIVATE_7.6.0
+libvirt.so.0:LIBVIRT_7.7.0
+libvirt.so.0:LIBVIRT_PRIVATE_7.7.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -265,6 +266,7 @@ libvirt.so.0:virAccessPermStoragePoolTypeFromString
 libvirt.so.0:virAccessPermStoragePoolTypeToString
 libvirt.so.0:virAccessPermStorageVolTypeFromString
 libvirt.so.0:virAccessPermStorageVolTypeToString
+libvirt.so.0:virAppendElement
 libvirt.so.0:virArchFromHost
 libvirt.so.0:virArchFromString
 libvirt.so.0:virArchGetEndian
@@ -440,6 +442,7 @@ libvirt.so.0:virCapabilitiesGetNodeInfo
 libvirt.so.0:virCapabilitiesHostInitIOMMU
 libvirt.so.0:virCapabilitiesHostNUMAAddCell
 libvirt.so.0:virCapabilitiesHostNUMAGetCpus
+libvirt.so.0:virCapabilitiesHostNUMAGetMaxNode
 libvirt.so.0:virCapabilitiesHostNUMANew
 libvirt.so.0:virCapabilitiesHostNUMANewHost
 libvirt.so.0:virCapabilitiesHostNUMARef
@@ -483,6 +486,7 @@ libvirt.so.0:virCgroupGetCpusetMems
 libvirt.so.0:virCgroupGetDevicePermsString
 libvirt.so.0:virCgroupGetDomainTotalCpuStats
 libvirt.so.0:virCgroupGetFreezerState
+libvirt.so.0:virCgroupGetInode
 libvirt.so.0:virCgroupGetMemSwapHardLimit
 libvirt.so.0:virCgroupGetMemSwapUsage
 libvirt.so.0:virCgroupGetMemoryHardLimit
@@ -1687,6 +1691,7 @@ libvirt.so.0:virDomainObjDeprecation
 libvirt.so.0:virDomainObjEndAPI
 libvirt.so.0:virDomainObjFormat
 libvirt.so.0:virDomainObjGetDefs
+libvirt.so.0:virDomainObjGetMessages
 libvirt.so.0:virDomainObjGetMetadata
 libvirt.so.0:virDomainObjGetOneDef
 libvirt.so.0:virDomainObjGetOneDefState
@@ -2682,6 +2687,8 @@ libvirt.so.0:virNWFilterDefParseFile
 libvirt.so.0:virNWFilterDefParseString
 libvirt.so.0:virNWFilterDefineXML
 libvirt.so.0:virNWFilterDefineXMLEnsureACL
+libvirt.so.0:virNWFilterDefineXMLFlags
+libvirt.so.0:virNWFilterDefineXMLFlagsEnsureACL
 libvirt.so.0:virNWFilterDeleteDef
 libvirt.so.0:virNWFilterFree
 libvirt.so.0:virNWFilterGetName
@@ -2911,6 +2918,8 @@ libvirt.so.0:virNetDevOpenvswitchAddPort
 libvirt.so.0:virNetDevOpenvswitchGetMigrateData
 libvirt.so.0:virNetDevOpenvswitchGetVhostuserIfname
 libvirt.so.0:virNetDevOpenvswitchInterfaceClearQos
+libvirt.so.0:virNetDevOpenvswitchInterfaceClearRxQos
+libvirt.so.0:virNetDevOpenvswitchInterfaceClearTxQos
 libvirt.so.0:virNetDevOpenvswitchInterfaceGetMaster
 libvirt.so.0:virNetDevOpenvswitchInterfaceParseStats
 libvirt.so.0:virNetDevOpenvswitchInterfaceSetQos
@@ -3200,6 +3209,8 @@ libvirt.so.0:virNetworkDefParseXML
 libvirt.so.0:virNetworkDefUpdateSection
 libvirt.so.0:virNetworkDefineXML
 libvirt.so.0:virNetworkDefineXMLEnsureACL
+libvirt.so.0:virNetworkDefineXMLFlags
+libvirt.so.0:virNetworkDefineXMLFlagsEnsureACL
 libvirt.so.0:virNetworkDestroy
 libvirt.so.0:virNetworkDestroyEnsureACL
 libvirt.so.0:virNetworkEventLifecycleNew
@@ -3376,6 +3387,7 @@ libvirt.so.0:virNodeDeviceObjIsActive
 libvirt.so.0:virNodeDeviceObjIsPersistent
 libvirt.so.0:virNodeDeviceObjListAssignDef
 libvirt.so.0:virNodeDeviceObjListExport
+libvirt.so.0:virNodeDeviceObjListFind
 libvirt.so.0:virNodeDeviceObjListFindByName
 libvirt.so.0:virNodeDeviceObjListFindBySysfsPath
 libvirt.so.0:virNodeDeviceObjListFindMediatedDeviceByUUID
@@ -3539,11 +3551,13 @@ libvirt.so.0:virPCIGetPhysicalFunction
 libvirt.so.0:virPCIGetVirtualFunctionIndex
 libvirt.so.0:virPCIGetVirtualFunctionInfo
 libvirt.so.0:virPCIGetVirtualFunctions
+libvirt.so.0:virPCIGetVirtualFunctionsFull
 libvirt.so.0:virPCIHeaderTypeFromString
 libvirt.so.0:virPCIHeaderTypeToString
 libvirt.so.0:virPCIIsVirtualFunction
 libvirt.so.0:virPCIStubDriverTypeFromString
 libvirt.so.0:virPCIStubDriverTypeToString
+libvirt.so.0:virPCIVirtualFunctionListFree
 libvirt.so.0:virParseOwnershipIds
 libvirt.so.0:virParseScaledValue
 libvirt.so.0:virParseVersionString
@@ -3562,6 +3576,7 @@ libvirt.so.0:virPidFileConstructPath
 libvirt.so.0:virPidFileDelete
 libvirt.so.0:virPidFileDeletePath
 libvirt.so.0:virPidFileForceCleanupPath
+libvirt.so.0:virPidFileForceCleanupPathFull
 libvirt.so.0:virPidFileRead
 libvirt.so.0:virPidFileReadIfAlive
 libvirt.so.0:virPidFileReadPath
@@ -3589,6 +3604,8 @@ libvirt.so.0:virProcessGetMaxMemLock
 libvirt.so.0:virProcessGetNamespaces
 libvirt.so.0:virProcessGetPids
 libvirt.so.0:virProcessGetStartTime
+libvirt.so.0:virProcessGroupGet
+libvirt.so.0:virProcessGroupKill
 libvirt.so.0:virProcessKill
 libvirt.so.0:virProcessKillPainfully
 libvirt.so.0:virProcessKillPainfullyDelay
@@ -3808,6 +3825,7 @@ libvirt.so.0:virSecurityManagerRestoreHostdevLabel
 libvirt.so.0:virSecurityManagerRestoreImageLabel
 libvirt.so.0:virSecurityManagerRestoreInputLabel
 libvirt.so.0:virSecurityManagerRestoreMemoryLabel
+libvirt.so.0:virSecurityManagerRestoreNetdevLabel
 libvirt.so.0:virSecurityManagerRestoreSavedStateLabel
 libvirt.so.0:virSecurityManagerRestoreTPMLabels
 libvirt.so.0:virSecurityManagerSetAllLabel
@@ -3819,6 +3837,7 @@ libvirt.so.0:virSecurityManagerSetImageFDLabel
 libvirt.so.0:virSecurityManagerSetImageLabel
 libvirt.so.0:virSecurityManagerSetInputLabel
 libvirt.so.0:virSecurityManagerSetMemoryLabel
+libvirt.so.0:virSecurityManagerSetNetdevLabel
 libvirt.so.0:virSecurityManagerSetProcessLabel
 libvirt.so.0:virSecurityManagerSetSavedStateLabel
 libvirt.so.0:virSecurityManagerSetSocketLabel
@@ -4192,7 +4211,6 @@ libvirt.so.0:virStringHasControlChars
 libvirt.so.0:virStringHasSuffix
 libvirt.so.0:virStringIsEmpty
 libvirt.so.0:virStringIsPrintable
-libvirt.so.0:virStringListFreeCount
 libvirt.so.0:virStringListMerge
 libvirt.so.0:virStringMatch
 libvirt.so.0:virStringMatchesNameSuffix
@@ -4917,6 +4935,8 @@ libvirt.so.0:xdr_remote_network_create_args
 libvirt.so.0:xdr_remote_network_create_xml_args
 libvirt.so.0:xdr_remote_network_create_xml_ret
 libvirt.so.0:xdr_remote_network_define_xml_args
+libvirt.so.0:xdr_remote_network_define_xml_flags_args
+libvirt.so.0:xdr_remote_network_define_xml_flags_ret
 libvirt.so.0:xdr_remote_network_define_xml_ret
 libvirt.so.0:xdr_remote_network_destroy_args
 libvirt.so.0:xdr_remote_network_dhcp_lease
@@ -5029,6 +5049,8 @@ libvirt.so.0:xdr_remote_nwfilter_binding_get_xml_desc_ret
 libvirt.so.0:xdr_remote_nwfilter_binding_lookup_by_port_dev_args
 libvirt.so.0:xdr_remote_nwfilter_binding_lookup_by_port_dev_ret
 libvirt.so.0:xdr_remote_nwfilter_define_xml_args
+libvirt.so.0:xdr_remote_nwfilter_define_xml_flags_args
+libvirt.so.0:xdr_remote_nwfilter_define_xml_flags_ret
 libvirt.so.0:xdr_remote_nwfilter_define_xml_ret
 libvirt.so.0:xdr_remote_nwfilter_get_xml_desc_args
 libvirt.so.0:xdr_remote_nwfilter_get_xml_desc_ret
