@@ -4,7 +4,6 @@
 -Ddriver_interface=enabled
 -Ddriver_libvirtd=enabled
 -Ddriver_lxc=enabled
--Ddriver_numactl=enabled
 -Dapparmor=disabled
 -Dsecdriver_apparmor=disabled
 -Dapparmor_profiles=disabled
@@ -25,7 +24,6 @@
 -Ddriver_vmware=disabled
 -Dpciaccess=enabled
 -Ddriver_qemu=enabled
--Dqemu=enabled
 -Dqemu_user=qemu
 -Dqemu_group=qemu
 -Ddriver_remote=enabled
@@ -34,6 +32,5 @@
 -Dyajl=enabled
 -Dpolkit=enabled
 -Dloader_nvram=/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF_CODE.fd:/usr/share/qemu/OVMF_VARS.fd
--Dqemu_dbus_daemon_path=/usr/bin/dbus-daemon
 -Ddriver_libxl=disabled
 -Dsanlock=disabled

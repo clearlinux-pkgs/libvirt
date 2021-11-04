@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCA68BE8010084C9C (jdenemar@redhat.com)
 #
 Name     : libvirt
-Version  : 7.7.0
-Release  : 128
-URL      : https://libvirt.org/sources/libvirt-7.7.0.tar.xz
-Source0  : https://libvirt.org/sources/libvirt-7.7.0.tar.xz
-Source1  : https://libvirt.org/sources/libvirt-7.7.0.tar.xz.asc
+Version  : 7.9.0
+Release  : 129
+URL      : https://libvirt.org/sources/libvirt-7.9.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-7.9.0.tar.xz
+Source1  : https://libvirt.org/sources/libvirt-7.9.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 LGPL-2.1 LGPL-2.1+ OFL-1.1
@@ -76,6 +76,7 @@ BuildRequires : readline-dev
 BuildRequires : systemd
 BuildRequires : systemd-dev
 BuildRequires : util-linux-dev
+BuildRequires : wireshark
 BuildRequires : xfsprogs-dev
 BuildRequires : yajl-dev
 BuildRequires : yajl-lib
@@ -202,8 +203,8 @@ services components for the libvirt package.
 
 
 %prep
-%setup -q -n libvirt-7.7.0
-cd %{_builddir}/libvirt-7.7.0
+%setup -q -n libvirt-7.9.0
+cd %{_builddir}/libvirt-7.9.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -214,7 +215,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1631722919
+export SOURCE_DATE_EPOCH=1636046652
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
@@ -226,7 +227,6 @@ CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --
 -Ddriver_interface=enabled \
 -Ddriver_libvirtd=enabled \
 -Ddriver_lxc=enabled \
--Ddriver_numactl=enabled \
 -Dapparmor=disabled \
 -Dsecdriver_apparmor=disabled \
 -Dapparmor_profiles=disabled \
@@ -247,7 +247,6 @@ CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --
 -Ddriver_vmware=disabled \
 -Dpciaccess=enabled \
 -Ddriver_qemu=enabled \
--Dqemu=enabled \
 -Dqemu_user=qemu \
 -Dqemu_group=qemu \
 -Ddriver_remote=enabled \
@@ -256,7 +255,6 @@ CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --
 -Dyajl=enabled \
 -Dpolkit=enabled \
 -Dloader_nvram=/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF_CODE.fd:/usr/share/qemu/OVMF_VARS.fd \
--Dqemu_dbus_daemon_path=/usr/bin/dbus-daemon \
 -Ddriver_libxl=disabled \
 -Dsanlock=disabled  builddir
 ninja -v -C builddir
@@ -266,34 +264,34 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-meson test -C builddir || :
+meson test -C builddir --print-errorlogs || :
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/libvirt
-cp %{_builddir}/libvirt-7.7.0/COPYING %{buildroot}/usr/share/package-licenses/libvirt/4cc77b90af91e615a64ae04893fdffa7939db84c
-cp %{_builddir}/libvirt-7.7.0/COPYING.LESSER %{buildroot}/usr/share/package-licenses/libvirt/3704f4680301a60004b20f94e0b5b8c7ff1484a9
-cp %{_builddir}/libvirt-7.7.0/docs/fonts/LICENSE.rst %{buildroot}/usr/share/package-licenses/libvirt/f4e4f4ac8fa716d051ac27a5415491544c8f456e
-cp %{_builddir}/libvirt-7.7.0/src/keycodemapdb/LICENSE.BSD %{buildroot}/usr/share/package-licenses/libvirt/ea5b412c09f3b29ba1d81a61b878c5c16ffe69d8
-cp %{_builddir}/libvirt-7.7.0/src/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/libvirt/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
+cp %{_builddir}/libvirt-7.9.0/COPYING %{buildroot}/usr/share/package-licenses/libvirt/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/libvirt-7.9.0/COPYING.LESSER %{buildroot}/usr/share/package-licenses/libvirt/3704f4680301a60004b20f94e0b5b8c7ff1484a9
+cp %{_builddir}/libvirt-7.9.0/docs/fonts/LICENSE.rst %{buildroot}/usr/share/package-licenses/libvirt/f4e4f4ac8fa716d051ac27a5415491544c8f456e
+cp %{_builddir}/libvirt-7.9.0/src/keycodemapdb/LICENSE.BSD %{buildroot}/usr/share/package-licenses/libvirt/ea5b412c09f3b29ba1d81a61b878c5c16ffe69d8
+cp %{_builddir}/libvirt-7.9.0/src/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/libvirt/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang libvirt
 ## Remove excluded files
-rm -f %{buildroot}/etc/logrotate.d/libvirtd
-rm -f %{buildroot}/etc/logrotate.d/libvirtd.lxc
-rm -f %{buildroot}/etc/logrotate.d/libvirtd.qemu
-rm -f %{buildroot}/etc/logrotate.d/libvirtd.uml
-rm -f %{buildroot}/etc/sysconfig/libvirtd
-rm -f %{buildroot}/etc/sysconfig/libvirt-guests
-rm -f %{buildroot}/etc/sysconfig/virtlockd
-rm -f %{buildroot}/etc/libvirt/libvirt.conf
-rm -f %{buildroot}/etc/libvirt/libvirtd.conf
-rm -f %{buildroot}/etc/libvirt/lxc.conf
-rm -f %{buildroot}/etc/libvirt/qemu.conf
-rm -f %{buildroot}/etc/libvirt/qemu-lockd.conf
-rm -f %{buildroot}/etc/libvirt/virtlockd.conf
-rm -f %{buildroot}/etc/libvirt/virt-login-shell.conf
-rm -f %{buildroot}/etc/libvirt/qemu/networks/autostart/default.xml
-rm -f %{buildroot}/etc/libvirt/qemu/networks/default.xml
+rm -f %{buildroot}*/etc/logrotate.d/libvirtd
+rm -f %{buildroot}*/etc/logrotate.d/libvirtd.lxc
+rm -f %{buildroot}*/etc/logrotate.d/libvirtd.qemu
+rm -f %{buildroot}*/etc/logrotate.d/libvirtd.uml
+rm -f %{buildroot}*/etc/sysconfig/libvirtd
+rm -f %{buildroot}*/etc/sysconfig/libvirt-guests
+rm -f %{buildroot}*/etc/sysconfig/virtlockd
+rm -f %{buildroot}*/etc/libvirt/libvirt.conf
+rm -f %{buildroot}*/etc/libvirt/libvirtd.conf
+rm -f %{buildroot}*/etc/libvirt/lxc.conf
+rm -f %{buildroot}*/etc/libvirt/qemu.conf
+rm -f %{buildroot}*/etc/libvirt/qemu-lockd.conf
+rm -f %{buildroot}*/etc/libvirt/virtlockd.conf
+rm -f %{buildroot}*/etc/libvirt/virt-login-shell.conf
+rm -f %{buildroot}*/etc/libvirt/qemu/networks/autostart/default.xml
+rm -f %{buildroot}*/etc/libvirt/qemu/networks/default.xml
 ## install_append content
 mkdir %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
 ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/libvirtd.service
@@ -522,13 +520,13 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.7007.0
+/usr/lib64/libvirt-admin.so.0.7009.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.7007.0
+/usr/lib64/libvirt-lxc.so.0.7009.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.7007.0
+/usr/lib64/libvirt-qemu.so.0.7009.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.7007.0
+/usr/lib64/libvirt.so.0.7009.0
 /usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
@@ -548,6 +546,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_mpath.so
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_scsi.so
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_vstorage.so
+/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_zfs.so
 /usr/lib64/libvirt/storage-file/libvirt_storage_file_fs.so
 /usr/lib64/libvirt/storage-file/libvirt_storage_file_gluster.so
 
