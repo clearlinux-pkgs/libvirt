@@ -24,6 +24,5 @@ libssh.so.4
 libssh2.so.1
 libtirpc.so.3
 libudev.so.1
-libwireshark.so.14
 libxml2.so.2
 libyajl.so.2
