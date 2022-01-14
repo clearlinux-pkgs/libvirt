@@ -1,10 +1,14 @@
+libnss_libvirt.so.2:_nss_libvirt_gethostbyname2_r
+libnss_libvirt.so.2:_nss_libvirt_gethostbyname3_r
+libnss_libvirt.so.2:_nss_libvirt_gethostbyname4_r
+libnss_libvirt.so.2:_nss_libvirt_gethostbyname_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname2_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname3_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname4_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_7.9.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.0.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -177,14 +181,13 @@ libvirt.so.0:LIBVIRT_7.2.0
 libvirt.so.0:LIBVIRT_7.3.0
 libvirt.so.0:LIBVIRT_7.7.0
 libvirt.so.0:LIBVIRT_7.8.0
-libvirt.so.0:LIBVIRT_PRIVATE_7.9.0
+libvirt.so.0:LIBVIRT_8.0.0
+libvirt.so.0:LIBVIRT_PRIVATE_8.0.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
 libvirt.so.0:dnsmasqAddHost
-libvirt.so.0:dnsmasqCapsGet
 libvirt.so.0:dnsmasqCapsGetBinaryPath
-libvirt.so.0:dnsmasqCapsGetVersion
 libvirt.so.0:dnsmasqCapsNewFromBinary
 libvirt.so.0:dnsmasqCapsNewFromBuffer
 libvirt.so.0:dnsmasqContextFree
@@ -224,7 +227,6 @@ libvirt.so.0:iptablesRemoveTcpInput
 libvirt.so.0:iptablesRemoveTcpOutput
 libvirt.so.0:iptablesRemoveUdpInput
 libvirt.so.0:iptablesRemoveUdpOutput
-libvirt.so.0:iptablesSetDeletePrivate
 libvirt.so.0:iptablesSetupPrivateChains
 libvirt.so.0:remoteProbeSessionDriverFromBinary
 libvirt.so.0:remoteProbeSessionDriverFromSocket
@@ -321,7 +323,6 @@ libvirt.so.0:virBitmapNextClearBit
 libvirt.so.0:virBitmapNextSetBit
 libvirt.so.0:virBitmapOverlaps
 libvirt.so.0:virBitmapParse
-libvirt.so.0:virBitmapParseSeparator
 libvirt.so.0:virBitmapParseUnlimited
 libvirt.so.0:virBitmapSetAll
 libvirt.so.0:virBitmapSetBit
@@ -375,8 +376,12 @@ libvirt.so.0:virCPUDataAddFeature
 libvirt.so.0:virCPUDataCheckFeature
 libvirt.so.0:virCPUDataFormat
 libvirt.so.0:virCPUDataFree
+libvirt.so.0:virCPUDataGetHost
+libvirt.so.0:virCPUDataIsIdentical
 libvirt.so.0:virCPUDataNew
+libvirt.so.0:virCPUDataNewCopy
 libvirt.so.0:virCPUDataParse
+libvirt.so.0:virCPUDataParseNode
 libvirt.so.0:virCPUDefAddFeature
 libvirt.so.0:virCPUDefAddFeatureIfMissing
 libvirt.so.0:virCPUDefCheckFeatures
@@ -874,6 +879,7 @@ libvirt.so.0:virDomainAudioDefFree
 libvirt.so.0:virDomainAudioFormatTypeFromString
 libvirt.so.0:virDomainAudioFormatTypeToString
 libvirt.so.0:virDomainAudioIOCommonIsSet
+libvirt.so.0:virDomainAudioIsEqual
 libvirt.so.0:virDomainAudioSDLDriverTypeFromString
 libvirt.so.0:virDomainAudioSDLDriverTypeToString
 libvirt.so.0:virDomainAudioTypeTypeFromString
@@ -1154,6 +1160,7 @@ libvirt.so.0:virDomainDeviceFindSCSIController
 libvirt.so.0:virDomainDeviceGetInfo
 libvirt.so.0:virDomainDeviceInfoAddressIsEqual
 libvirt.so.0:virDomainDeviceInfoIterate
+libvirt.so.0:virDomainDeviceInfoIterateFlags
 libvirt.so.0:virDomainDeviceSetData
 libvirt.so.0:virDomainDeviceSpaprVioAddressParseXML
 libvirt.so.0:virDomainDeviceTypeToString
@@ -1596,6 +1603,8 @@ libvirt.so.0:virDomainMomentDropParent
 libvirt.so.0:virDomainMomentForEachChild
 libvirt.so.0:virDomainMomentForEachDescendant
 libvirt.so.0:virDomainMomentMoveChildren
+libvirt.so.0:virDomainMomentObjFree
+libvirt.so.0:virDomainMomentObjNew
 libvirt.so.0:virDomainNetARPInterfaces
 libvirt.so.0:virDomainNetAllocateActualDevice
 libvirt.so.0:virDomainNetAppendIPAddress
@@ -1838,6 +1847,8 @@ libvirt.so.0:virDomainSetIOThreadParams
 libvirt.so.0:virDomainSetIOThreadParamsEnsureACL
 libvirt.so.0:virDomainSetInterfaceParameters
 libvirt.so.0:virDomainSetInterfaceParametersEnsureACL
+libvirt.so.0:virDomainSetLaunchSecurityState
+libvirt.so.0:virDomainSetLaunchSecurityStateEnsureACL
 libvirt.so.0:virDomainSetLifecycleAction
 libvirt.so.0:virDomainSetLifecycleActionEnsureACL
 libvirt.so.0:virDomainSetMaxMemory
@@ -1977,6 +1988,8 @@ libvirt.so.0:virDomainTPMBackendTypeToString
 libvirt.so.0:virDomainTPMDefFree
 libvirt.so.0:virDomainTPMModelTypeFromString
 libvirt.so.0:virDomainTPMModelTypeToString
+libvirt.so.0:virDomainTPMPcrBankTypeFromString
+libvirt.so.0:virDomainTPMPcrBankTypeToString
 libvirt.so.0:virDomainTaintMessageTypeFromString
 libvirt.so.0:virDomainTaintMessageTypeToString
 libvirt.so.0:virDomainTaintTypeFromString
@@ -2162,13 +2175,13 @@ libvirt.so.0:virFileWriteStr
 libvirt.so.0:virFindFileInPath
 libvirt.so.0:virFirewallAddRuleFull
 libvirt.so.0:virFirewallApply
-libvirt.so.0:virFirewallBackendSynchronize
 libvirt.so.0:virFirewallDApplyRule
 libvirt.so.0:virFirewallDGetBackend
 libvirt.so.0:virFirewallDGetVersion
 libvirt.so.0:virFirewallDGetZones
 libvirt.so.0:virFirewallDInterfaceSetZone
 libvirt.so.0:virFirewallDIsRegistered
+libvirt.so.0:virFirewallDSynchronize
 libvirt.so.0:virFirewallDZoneExists
 libvirt.so.0:virFirewallFree
 libvirt.so.0:virFirewallNew
@@ -2178,7 +2191,6 @@ libvirt.so.0:virFirewallRuleAddArgFormat
 libvirt.so.0:virFirewallRuleAddArgList
 libvirt.so.0:virFirewallRuleAddArgSet
 libvirt.so.0:virFirewallRuleGetArgCount
-libvirt.so.0:virFirewallSetBackend
 libvirt.so.0:virFirewallStartRollback
 libvirt.so.0:virFirewallStartTransaction
 libvirt.so.0:virFirmwareFree
@@ -2259,7 +2271,6 @@ libvirt.so.0:virHashEqual
 libvirt.so.0:virHashForEach
 libvirt.so.0:virHashForEachSafe
 libvirt.so.0:virHashForEachSorted
-libvirt.so.0:virHashFree
 libvirt.so.0:virHashGetItems
 libvirt.so.0:virHashHasEntry
 libvirt.so.0:virHashLookup
@@ -2276,6 +2287,7 @@ libvirt.so.0:virHookInitialize
 libvirt.so.0:virHookPresent
 libvirt.so.0:virHostBootTimeInit
 libvirt.so.0:virHostCPUGetAvailableCPUsBitmap
+libvirt.so.0:virHostCPUGetCPUID
 libvirt.so.0:virHostCPUGetCore
 libvirt.so.0:virHostCPUGetCount
 libvirt.so.0:virHostCPUGetDie
@@ -2298,6 +2310,7 @@ libvirt.so.0:virHostCPUGetThreadsPerSubcore
 libvirt.so.0:virHostCPUHasBitmap
 libvirt.so.0:virHostCPUReadSignature
 libvirt.so.0:virHostCPUStatsAssign
+libvirt.so.0:virHostCPUX86GetCPUID
 libvirt.so.0:virHostGetBootTime
 libvirt.so.0:virHostGetDRMRenderNode
 libvirt.so.0:virHostHasIOMMU
@@ -2452,7 +2465,6 @@ libvirt.so.0:virJSONValueGetString
 libvirt.so.0:virJSONValueGetType
 libvirt.so.0:virJSONValueHashFree
 libvirt.so.0:virJSONValueIsArray
-libvirt.so.0:virJSONValueIsNull
 libvirt.so.0:virJSONValueIsObject
 libvirt.so.0:virJSONValueNewArray
 libvirt.so.0:virJSONValueNewBoolean
@@ -2464,7 +2476,6 @@ libvirt.so.0:virJSONValueNewNumberUint
 libvirt.so.0:virJSONValueNewNumberUlong
 libvirt.so.0:virJSONValueNewObject
 libvirt.so.0:virJSONValueNewString
-libvirt.so.0:virJSONValueNewStringLen
 libvirt.so.0:virJSONValueObjectAdd
 libvirt.so.0:virJSONValueObjectAddVArgs
 libvirt.so.0:virJSONValueObjectAppend
@@ -2477,8 +2488,6 @@ libvirt.so.0:virJSONValueObjectAppendNumberUint
 libvirt.so.0:virJSONValueObjectAppendNumberUlong
 libvirt.so.0:virJSONValueObjectAppendString
 libvirt.so.0:virJSONValueObjectAppendStringPrintf
-libvirt.so.0:virJSONValueObjectCreate
-libvirt.so.0:virJSONValueObjectCreateVArgs
 libvirt.so.0:virJSONValueObjectDeflatten
 libvirt.so.0:virJSONValueObjectForeachKeyValue
 libvirt.so.0:virJSONValueObjectGet
@@ -2496,10 +2505,10 @@ libvirt.so.0:virJSONValueObjectGetString
 libvirt.so.0:virJSONValueObjectGetStringArray
 libvirt.so.0:virJSONValueObjectGetValue
 libvirt.so.0:virJSONValueObjectHasKey
-libvirt.so.0:virJSONValueObjectIsNull
 libvirt.so.0:virJSONValueObjectKeysNumber
 libvirt.so.0:virJSONValueObjectPrependString
 libvirt.so.0:virJSONValueObjectRemoveKey
+libvirt.so.0:virJSONValueObjectReplaceValue
 libvirt.so.0:virJSONValueObjectStealArray
 libvirt.so.0:virJSONValueObjectStealObject
 libvirt.so.0:virJSONValueToBuffer
@@ -2807,6 +2816,7 @@ libvirt.so.0:virNetClientStreamEOF
 libvirt.so.0:virNetClientStreamEventAddCallback
 libvirt.so.0:virNetClientStreamEventRemoveCallback
 libvirt.so.0:virNetClientStreamEventUpdateCallback
+libvirt.so.0:virNetClientStreamInData
 libvirt.so.0:virNetClientStreamMatches
 libvirt.so.0:virNetClientStreamNew
 libvirt.so.0:virNetClientStreamQueuePacket
@@ -3269,7 +3279,6 @@ libvirt.so.0:virNetworkObjGetMacMap
 libvirt.so.0:virNetworkObjGetNewDef
 libvirt.so.0:virNetworkObjGetPersistentDef
 libvirt.so.0:virNetworkObjGetPortStatusDir
-libvirt.so.0:virNetworkObjGetRadvdPid
 libvirt.so.0:virNetworkObjIsActive
 libvirt.so.0:virNetworkObjIsAutostart
 libvirt.so.0:virNetworkObjIsPersistent
@@ -3297,7 +3306,6 @@ libvirt.so.0:virNetworkObjSetDefTransient
 libvirt.so.0:virNetworkObjSetDnsmasqPid
 libvirt.so.0:virNetworkObjSetFloorSum
 libvirt.so.0:virNetworkObjSetMacMap
-libvirt.so.0:virNetworkObjSetRadvdPid
 libvirt.so.0:virNetworkObjTaint
 libvirt.so.0:virNetworkObjUnrefMacMap
 libvirt.so.0:virNetworkObjUnsetDefTransient
@@ -3624,6 +3632,7 @@ libvirt.so.0:virPidFileWritePath
 libvirt.so.0:virPipe
 libvirt.so.0:virPipeNonBlock
 libvirt.so.0:virPipeQuiet
+libvirt.so.0:virPolkitAgentAvailable
 libvirt.so.0:virPolkitAgentCreate
 libvirt.so.0:virPolkitAgentDestroy
 libvirt.so.0:virPolkitCheckAuth
@@ -3639,7 +3648,10 @@ libvirt.so.0:virProcessGetAffinity
 libvirt.so.0:virProcessGetMaxMemLock
 libvirt.so.0:virProcessGetNamespaces
 libvirt.so.0:virProcessGetPids
+libvirt.so.0:virProcessGetSchedInfo
 libvirt.so.0:virProcessGetStartTime
+libvirt.so.0:virProcessGetStat
+libvirt.so.0:virProcessGetStatInfo
 libvirt.so.0:virProcessGroupGet
 libvirt.so.0:virProcessGroupKill
 libvirt.so.0:virProcessKill
@@ -3919,6 +3931,7 @@ libvirt.so.0:virSocketAddrCheckNetmask
 libvirt.so.0:virSocketAddrEqual
 libvirt.so.0:virSocketAddrFormat
 libvirt.so.0:virSocketAddrFormatFull
+libvirt.so.0:virSocketAddrFormatWithPrefix
 libvirt.so.0:virSocketAddrGetIPPrefix
 libvirt.so.0:virSocketAddrGetNumNetmaskBits
 libvirt.so.0:virSocketAddrGetPath
@@ -4291,10 +4304,10 @@ libvirt.so.0:virSystemdMakeSliceName
 libvirt.so.0:virSystemdNotifyStartup
 libvirt.so.0:virSystemdTerminateMachine
 libvirt.so.0:virTPMCreateCancelPath
-libvirt.so.0:virTPMEmulatorInit
 libvirt.so.0:virTPMGetSwtpm
 libvirt.so.0:virTPMGetSwtpmIoctl
 libvirt.so.0:virTPMGetSwtpmSetup
+libvirt.so.0:virTPMHasSwtpm
 libvirt.so.0:virTPMSwtpmCapsGet
 libvirt.so.0:virTPMSwtpmFeatureTypeFromString
 libvirt.so.0:virTPMSwtpmSetupCapsGet
@@ -4337,9 +4350,11 @@ libvirt.so.0:virTimeStringThen
 libvirt.so.0:virTimeStringThenRaw
 libvirt.so.0:virTrimSpaces
 libvirt.so.0:virTristateBoolFromBool
+libvirt.so.0:virTristateBoolToBool
 libvirt.so.0:virTristateBoolTypeFromString
 libvirt.so.0:virTristateBoolTypeToString
 libvirt.so.0:virTristateSwitchFromBool
+libvirt.so.0:virTristateSwitchToBool
 libvirt.so.0:virTristateSwitchTypeFromString
 libvirt.so.0:virTristateSwitchTypeToString
 libvirt.so.0:virTypedParamListAddBoolean
@@ -4441,7 +4456,6 @@ libvirt.so.0:virXMLPropEnum
 libvirt.so.0:virXMLPropEnumDefault
 libvirt.so.0:virXMLPropInt
 libvirt.so.0:virXMLPropString
-libvirt.so.0:virXMLPropStringLimit
 libvirt.so.0:virXMLPropTristateBool
 libvirt.so.0:virXMLPropTristateSwitch
 libvirt.so.0:virXMLPropUInt
@@ -4462,7 +4476,6 @@ libvirt.so.0:virXPathNode
 libvirt.so.0:virXPathNodeSet
 libvirt.so.0:virXPathNumber
 libvirt.so.0:virXPathString
-libvirt.so.0:virXPathStringLimit
 libvirt.so.0:virXPathUInt
 libvirt.so.0:virXPathULong
 libvirt.so.0:virXPathULongHex
@@ -4899,6 +4912,7 @@ libvirt.so.0:xdr_remote_domain_set_block_threshold_args
 libvirt.so.0:xdr_remote_domain_set_guest_vcpus_args
 libvirt.so.0:xdr_remote_domain_set_interface_parameters_args
 libvirt.so.0:xdr_remote_domain_set_iothread_params_args
+libvirt.so.0:xdr_remote_domain_set_launch_security_state_args
 libvirt.so.0:xdr_remote_domain_set_lifecycle_action_args
 libvirt.so.0:xdr_remote_domain_set_max_memory_args
 libvirt.so.0:xdr_remote_domain_set_memory_args
