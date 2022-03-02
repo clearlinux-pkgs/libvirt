@@ -8,7 +8,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname4_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.0.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.1.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -182,14 +182,13 @@ libvirt.so.0:LIBVIRT_7.3.0
 libvirt.so.0:LIBVIRT_7.7.0
 libvirt.so.0:LIBVIRT_7.8.0
 libvirt.so.0:LIBVIRT_8.0.0
-libvirt.so.0:LIBVIRT_PRIVATE_8.0.0
+libvirt.so.0:LIBVIRT_PRIVATE_8.1.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
 libvirt.so.0:dnsmasqAddHost
 libvirt.so.0:dnsmasqCapsGetBinaryPath
 libvirt.so.0:dnsmasqCapsNewFromBinary
-libvirt.so.0:dnsmasqCapsNewFromBuffer
 libvirt.so.0:dnsmasqContextFree
 libvirt.so.0:dnsmasqContextNew
 libvirt.so.0:dnsmasqDelete
@@ -964,10 +963,23 @@ libvirt.so.0:virDomainCapsEnumClear
 libvirt.so.0:virDomainCapsEnumSet
 libvirt.so.0:virDomainCapsFormat
 libvirt.so.0:virDomainCapsNew
+libvirt.so.0:virDomainCgroupConnectCgroup
+libvirt.so.0:virDomainCgroupEmulatorAllNodesAllow
+libvirt.so.0:virDomainCgroupEmulatorAllNodesRestore
+libvirt.so.0:virDomainCgroupInitCgroup
+libvirt.so.0:virDomainCgroupRemoveCgroup
 libvirt.so.0:virDomainCgroupSetMemoryLimitParameters
 libvirt.so.0:virDomainCgroupSetupBlkio
+libvirt.so.0:virDomainCgroupSetupBlkioCgroup
+libvirt.so.0:virDomainCgroupSetupCgroup
+libvirt.so.0:virDomainCgroupSetupCpuCgroup
+libvirt.so.0:virDomainCgroupSetupCpusetCgroup
+libvirt.so.0:virDomainCgroupSetupCpusetCpus
 libvirt.so.0:virDomainCgroupSetupDomainBlkioParameters
+libvirt.so.0:virDomainCgroupSetupGlobalCpuCgroup
+libvirt.so.0:virDomainCgroupSetupMemoryCgroup
 libvirt.so.0:virDomainCgroupSetupMemtune
+libvirt.so.0:virDomainCgroupSetupVcpuBW
 libvirt.so.0:virDomainCheckpointAlignDisks
 libvirt.so.0:virDomainCheckpointAssignDef
 libvirt.so.0:virDomainCheckpointCreateXML
@@ -1476,6 +1488,10 @@ libvirt.so.0:virDomainIsPersistent
 libvirt.so.0:virDomainIsPersistentEnsureACL
 libvirt.so.0:virDomainIsUpdated
 libvirt.so.0:virDomainIsUpdatedEnsureACL
+libvirt.so.0:virDomainJobDataCopy
+libvirt.so.0:virDomainJobDataFree
+libvirt.so.0:virDomainJobDataInit
+libvirt.so.0:virDomainJobStatusToType
 libvirt.so.0:virDomainKeyWrapCipherNameTypeFromString
 libvirt.so.0:virDomainKeyWrapCipherNameTypeToString
 libvirt.so.0:virDomainLeaseDefFree
@@ -1959,6 +1975,7 @@ libvirt.so.0:virDomainSnapshotObjListRemove
 libvirt.so.0:virDomainSnapshotObjListRemoveAll
 libvirt.so.0:virDomainSnapshotRedefinePrep
 libvirt.so.0:virDomainSnapshotRef
+libvirt.so.0:virDomainSnapshotReplaceDef
 libvirt.so.0:virDomainSnapshotSetCurrent
 libvirt.so.0:virDomainSnapshotStateTypeFromString
 libvirt.so.0:virDomainSnapshotStateTypeToString
@@ -2051,6 +2068,7 @@ libvirt.so.0:virDomainXMLOptionSetMomentPostParse
 libvirt.so.0:virDomainXenPassthroughModeTypeFromString
 libvirt.so.0:virDomainXenPassthroughModeTypeToString
 libvirt.so.0:virDoubleToStr
+libvirt.so.0:virDriverFeatureIsGlobal
 libvirt.so.0:virDriverLoadModule
 libvirt.so.0:virDriverShouldAutostart
 libvirt.so.0:virEnumFromString
@@ -2222,8 +2240,6 @@ libvirt.so.0:virGetConnectNetwork
 libvirt.so.0:virGetConnectNodeDev
 libvirt.so.0:virGetConnectSecret
 libvirt.so.0:virGetConnectStorage
-libvirt.so.0:virGetDeviceID
-libvirt.so.0:virGetDeviceUnprivSGIO
 libvirt.so.0:virGetDomain
 libvirt.so.0:virGetDomainCheckpoint
 libvirt.so.0:virGetDomainSnapshot
@@ -2251,7 +2267,6 @@ libvirt.so.0:virGetStorageVol
 libvirt.so.0:virGetStream
 libvirt.so.0:virGetSystemPageSize
 libvirt.so.0:virGetSystemPageSizeKB
-libvirt.so.0:virGetUnprivSGIOSysfsPath
 libvirt.so.0:virGetUserCacheDirectory
 libvirt.so.0:virGetUserConfigDirectory
 libvirt.so.0:virGetUserDirectory
@@ -2527,6 +2542,8 @@ libvirt.so.0:virLastErrorPrefixMessage
 libvirt.so.0:virLeaseNew
 libvirt.so.0:virLeasePrintLeases
 libvirt.so.0:virLeaseReadCustomLeaseFile
+libvirt.so.0:virLockGuardLock
+libvirt.so.0:virLockGuardUnlock
 libvirt.so.0:virLockManagerAcquire
 libvirt.so.0:virLockManagerAddResource
 libvirt.so.0:virLockManagerFree
@@ -2934,8 +2951,6 @@ libvirt.so.0:virNetDevOpenvswitchAddPort
 libvirt.so.0:virNetDevOpenvswitchGetMigrateData
 libvirt.so.0:virNetDevOpenvswitchGetVhostuserIfname
 libvirt.so.0:virNetDevOpenvswitchInterfaceClearQos
-libvirt.so.0:virNetDevOpenvswitchInterfaceClearRxQos
-libvirt.so.0:virNetDevOpenvswitchInterfaceClearTxQos
 libvirt.so.0:virNetDevOpenvswitchInterfaceGetMaster
 libvirt.so.0:virNetDevOpenvswitchInterfaceParseStats
 libvirt.so.0:virNetDevOpenvswitchInterfaceSetQos
@@ -2954,6 +2969,7 @@ libvirt.so.0:virNetDevRxFilterModeTypeFromString
 libvirt.so.0:virNetDevRxFilterModeTypeToString
 libvirt.so.0:virNetDevRxFilterNew
 libvirt.so.0:virNetDevSaveNetConfig
+libvirt.so.0:virNetDevSendVfSetLinkRequest
 libvirt.so.0:virNetDevSetCoalesce
 libvirt.so.0:virNetDevSetMAC
 libvirt.so.0:virNetDevSetMTU
@@ -2965,6 +2981,9 @@ libvirt.so.0:virNetDevSetOnline
 libvirt.so.0:virNetDevSetPromiscuous
 libvirt.so.0:virNetDevSetRcvAllMulti
 libvirt.so.0:virNetDevSetRcvMulti
+libvirt.so.0:virNetDevSetVfConfig
+libvirt.so.0:virNetDevSetVfMac
+libvirt.so.0:virNetDevSetVfVlan
 libvirt.so.0:virNetDevSetupControl
 libvirt.so.0:virNetDevSupportsBandwidth
 libvirt.so.0:virNetDevSysfsFile
@@ -3501,6 +3520,7 @@ libvirt.so.0:virObjectIsClass
 libvirt.so.0:virObjectListFree
 libvirt.so.0:virObjectListFreeCount
 libvirt.so.0:virObjectLock
+libvirt.so.0:virObjectLockGuard
 libvirt.so.0:virObjectLockableNew
 libvirt.so.0:virObjectNew
 libvirt.so.0:virObjectRWLockRead
@@ -3604,7 +3624,6 @@ libvirt.so.0:virPCIVPDResourceUpdateKeyword
 libvirt.so.0:virPCIVirtualFunctionListFree
 libvirt.so.0:virParseOwnershipIds
 libvirt.so.0:virParseScaledValue
-libvirt.so.0:virParseVersionString
 libvirt.so.0:virPerfEventDisable
 libvirt.so.0:virPerfEventEnable
 libvirt.so.0:virPerfEventIsEnabled
@@ -3625,6 +3644,7 @@ libvirt.so.0:virPidFileRead
 libvirt.so.0:virPidFileReadIfAlive
 libvirt.so.0:virPidFileReadPath
 libvirt.so.0:virPidFileReadPathIfAlive
+libvirt.so.0:virPidFileReadPathIfLocked
 libvirt.so.0:virPidFileRelease
 libvirt.so.0:virPidFileReleasePath
 libvirt.so.0:virPidFileWrite
@@ -3904,7 +3924,6 @@ libvirt.so.0:virSetConnectNetwork
 libvirt.so.0:virSetConnectNodeDev
 libvirt.so.0:virSetConnectSecret
 libvirt.so.0:virSetConnectStorage
-libvirt.so.0:virSetDeviceUnprivSGIO
 libvirt.so.0:virSetError
 libvirt.so.0:virSetErrorFunc
 libvirt.so.0:virSetErrorLogPriorityFunc
@@ -4262,6 +4281,7 @@ libvirt.so.0:virStringIsPrintable
 libvirt.so.0:virStringMatch
 libvirt.so.0:virStringMatchesNameSuffix
 libvirt.so.0:virStringParsePort
+libvirt.so.0:virStringParseVersion
 libvirt.so.0:virStringParseYesNo
 libvirt.so.0:virStringReplace
 libvirt.so.0:virStringSearch

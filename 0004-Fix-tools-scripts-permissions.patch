@@ -42,15 +42,4 @@ index b8c6802f0ac5..fe539cf745b0 100644
    )
  endif
  
-@@ -268,7 +268,7 @@ configure_file(
-   configuration: tools_conf,
-   install: true,
-   install_dir: libexecdir,
--  install_mode: 'rwxrwxr-x',
-+  install_mode: 'rwxr-xr-x',
- )
- 
- if init_script == 'systemd'
--- 
-2.30.1
 
