@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 8.1.0
-Release  : 133
+Release  : 134
 URL      : https://libvirt.org/sources/libvirt-8.1.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-8.1.0.tar.xz
 Source1  : https://libvirt.org/sources/libvirt-8.1.0.tar.xz.asc
@@ -81,6 +81,7 @@ Patch1: 0001-Default-to-0770-permissions.patch
 Patch2: 0002-drop-timeout-ping.patch
 Patch3: 0003-Arjan-s-patch-for-locale.patch
 Patch4: 0004-Fix-tools-scripts-permissions.patch
+Patch5: 0005-qemu-segmentation-fault-in-virtqemud-executing-qemuD.patch
 
 %description
 Libvirt is a C toolkit to interact with the virtualization capabilities
@@ -206,13 +207,14 @@ cd %{_builddir}/libvirt-8.1.0
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1646263117
+export SOURCE_DATE_EPOCH=1646765722
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
