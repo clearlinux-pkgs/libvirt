@@ -1,6 +1,4 @@
-From e301b90f955d69c1e80015d21d475f644f621d4d Mon Sep 17 00:00:00 2001
-From: Icarus Sparry <icarus.w.sparry@intel.com>
-Date: Wed, 26 Apr 2017 11:43:40 -0700
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Mark D Horn <mark.d.horn@intel.com>
 Date: Mon, 4 Jan 2021 19:07:15 -0800
 Subject: [PATCH] Arjan's patch for locale
@@ -13,7 +11,7 @@ Signed-off-by: Mark D Horn <mark.d.horn@intel.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/util/virgettext.c b/src/util/virgettext.c
-index 35dfba07fc32..2595b6813549 100644
+index 35dfba0..2595b68 100644
 --- a/src/util/virgettext.c
 +++ b/src/util/virgettext.c
 @@ -40,7 +40,7 @@ int
@@ -25,6 +23,3 @@ index 35dfba07fc32..2595b6813549 100644
          perror("setlocale");
          /* failure to setup locale is not fatal */
      }
--- 
-2.29.2
-

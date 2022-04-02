@@ -1,4 +1,4 @@
-From d7ccaa61a352ab6769dd0fb8560fea39ada28e53 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Mark D Horn <mark.d.horn@intel.com>
 Date: Wed, 9 Dec 2020 13:16:04 -0800
 Subject: [PATCH] Default to 0770 permissions
@@ -12,7 +12,7 @@ Signed-off-by: Mark D Horn <mark.d.horn@intel.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/remote/remote_daemon_config.c b/src/remote/remote_daemon_config.c
-index f0cca429259c..8817dd09d0ed 100644
+index 30653e8..2fd1855 100644
 --- a/src/remote/remote_daemon_config.c
 +++ b/src/remote/remote_daemon_config.c
 @@ -121,7 +121,7 @@ daemonConfigNew(bool privileged G_GNUC_UNUSED)
@@ -24,6 +24,3 @@ index f0cca429259c..8817dd09d0ed 100644
      data->unix_sock_ro_perms = g_strdup("0777");
      data->unix_sock_admin_perms = g_strdup("0700");
  
--- 
-2.29.2
-

@@ -6,6 +6,7 @@ libc.so.6
 libcap-ng.so.0
 libcurl.so.4
 libdevmapper.so.1.02
+libfuse3.so.3
 libgcc_s.so.1
 libgfapi.so.0
 libgio-2.0.so.0
