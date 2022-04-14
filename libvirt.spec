@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 8.2.0
-Release  : 135
+Release  : 136
 URL      : https://libvirt.org/sources/libvirt-8.2.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-8.2.0.tar.xz
 Source1  : https://libvirt.org/sources/libvirt-8.2.0.tar.xz.asc
@@ -36,7 +36,6 @@ BuildRequires : curl-dev
 BuildRequires : dbus-dev
 BuildRequires : dmidecode
 BuildRequires : dnsmasq
-BuildRequires : docutils
 BuildRequires : ebtables
 BuildRequires : fuse-dev
 BuildRequires : gettext-dev
@@ -69,6 +68,7 @@ BuildRequires : pkgconfig(libiscsi)
 BuildRequires : pkgconfig(libssh)
 BuildRequires : pkgconfig(libtirpc)
 BuildRequires : polkit-dev
+BuildRequires : pypi-docutils
 BuildRequires : qemu-setuid
 BuildRequires : readline-dev
 BuildRequires : systemd
@@ -212,7 +212,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1648872121
+export SOURCE_DATE_EPOCH=1649966894
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "

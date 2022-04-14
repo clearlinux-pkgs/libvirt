@@ -10,7 +10,7 @@ curl-dev
 dbus-dev
 dmidecode
 dnsmasq
-docutils
+pypi-docutils
 ebtables
 fuse-dev
 gettext-dev
