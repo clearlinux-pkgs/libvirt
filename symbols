@@ -8,7 +8,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname4_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.2.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.3.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -184,7 +184,7 @@ libvirt.so.0:LIBVIRT_7.3.0
 libvirt.so.0:LIBVIRT_7.7.0
 libvirt.so.0:LIBVIRT_7.8.0
 libvirt.so.0:LIBVIRT_8.0.0
-libvirt.so.0:LIBVIRT_PRIVATE_8.2.0
+libvirt.so.0:LIBVIRT_PRIVATE_8.3.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -4471,6 +4471,7 @@ libvirt.so.0:virXMLCheckIllegalChars
 libvirt.so.0:virXMLExtractNamespaceXML
 libvirt.so.0:virXMLFormatElement
 libvirt.so.0:virXMLFormatElementEmpty
+libvirt.so.0:virXMLFormatElementInternal
 libvirt.so.0:virXMLFormatMetadata
 libvirt.so.0:virXMLNewNode
 libvirt.so.0:virXMLNodeContentString
@@ -4484,6 +4485,7 @@ libvirt.so.0:virXMLPropEnumDefault
 libvirt.so.0:virXMLPropInt
 libvirt.so.0:virXMLPropString
 libvirt.so.0:virXMLPropTristateBool
+libvirt.so.0:virXMLPropTristateBoolAllowDefault
 libvirt.so.0:virXMLPropTristateSwitch
 libvirt.so.0:virXMLPropUInt
 libvirt.so.0:virXMLPropULongLong

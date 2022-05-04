@@ -1,5 +1,5 @@
 PKG_NAME := libvirt
-URL = https://libvirt.org/sources/libvirt-8.2.0.tar.xz
+URL = https://libvirt.org/sources/libvirt-8.3.0.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common
