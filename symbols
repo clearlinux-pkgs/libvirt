@@ -8,7 +8,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname4_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.3.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.4.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -184,7 +184,8 @@ libvirt.so.0:LIBVIRT_7.3.0
 libvirt.so.0:LIBVIRT_7.7.0
 libvirt.so.0:LIBVIRT_7.8.0
 libvirt.so.0:LIBVIRT_8.0.0
-libvirt.so.0:LIBVIRT_PRIVATE_8.3.0
+libvirt.so.0:LIBVIRT_8.4.0
+libvirt.so.0:LIBVIRT_PRIVATE_8.4.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -363,6 +364,13 @@ libvirt.so.0:virBufferURIEncodeString
 libvirt.so.0:virBufferUse
 libvirt.so.0:virBufferVasprintf
 libvirt.so.0:virBuildPathInternal
+libvirt.so.0:virCCWDeviceAddressAsString
+libvirt.so.0:virCCWDeviceAddressEqual
+libvirt.so.0:virCCWDeviceAddressFromString
+libvirt.so.0:virCCWDeviceAddressIncrement
+libvirt.so.0:virCCWDeviceAddressIsValid
+libvirt.so.0:virCCWDeviceAddressParseFromString
+libvirt.so.0:virCCWDeviceAddressParseXML
 libvirt.so.0:virCPUArchIsSupported
 libvirt.so.0:virCPUBaseline
 libvirt.so.0:virCPUCacheModeTypeFromString
@@ -590,8 +598,6 @@ libvirt.so.0:virCommandNewArgs
 libvirt.so.0:virCommandNewVAList
 libvirt.so.0:virCommandNonblockingFDs
 libvirt.so.0:virCommandPassFD
-libvirt.so.0:virCommandPassFDGetFDIndex
-libvirt.so.0:virCommandPassFDIndex
 libvirt.so.0:virCommandRawStatus
 libvirt.so.0:virCommandRequireHandshake
 libvirt.so.0:virCommandRun
@@ -951,7 +957,6 @@ libvirt.so.0:virDomainBlockedReasonTypeFromString
 libvirt.so.0:virDomainBlockedReasonTypeToString
 libvirt.so.0:virDomainBootTypeFromString
 libvirt.so.0:virDomainBootTypeToString
-libvirt.so.0:virDomainCCWAddressAsString
 libvirt.so.0:virDomainCCWAddressAssign
 libvirt.so.0:virDomainCCWAddressSetCreateFromDomain
 libvirt.so.0:virDomainCCWAddressSetFree
@@ -1126,6 +1131,7 @@ libvirt.so.0:virDomainDefHasMemoryHotplug
 libvirt.so.0:virDomainDefHasNVMeDisk
 libvirt.so.0:virDomainDefHasOldStyleROUEFI
 libvirt.so.0:virDomainDefHasOldStyleUEFI
+libvirt.so.0:virDomainDefHasSpiceGraphics
 libvirt.so.0:virDomainDefHasUSB
 libvirt.so.0:virDomainDefHasVDPANet
 libvirt.so.0:virDomainDefHasVFIOHostdev
@@ -1165,9 +1171,6 @@ libvirt.so.0:virDomainDetachDeviceFlagsEnsureACL
 libvirt.so.0:virDomainDeviceAddressIsValid
 libvirt.so.0:virDomainDeviceAddressTypeToString
 libvirt.so.0:virDomainDeviceAliasIsUserAlias
-libvirt.so.0:virDomainDeviceCCWAddressEqual
-libvirt.so.0:virDomainDeviceCCWAddressIsValid
-libvirt.so.0:virDomainDeviceCCWAddressParseXML
 libvirt.so.0:virDomainDeviceCcidAddressParseXML
 libvirt.so.0:virDomainDeviceDefCopy
 libvirt.so.0:virDomainDeviceDefFree
@@ -1428,8 +1431,6 @@ libvirt.so.0:virDomainGraphicsSpiceImageCompressionTypeFromString
 libvirt.so.0:virDomainGraphicsSpiceImageCompressionTypeToString
 libvirt.so.0:virDomainGraphicsSpiceJpegCompressionTypeFromString
 libvirt.so.0:virDomainGraphicsSpiceJpegCompressionTypeToString
-libvirt.so.0:virDomainGraphicsSpiceMouseModeTypeFromString
-libvirt.so.0:virDomainGraphicsSpiceMouseModeTypeToString
 libvirt.so.0:virDomainGraphicsSpiceStreamingModeTypeFromString
 libvirt.so.0:virDomainGraphicsSpiceStreamingModeTypeToString
 libvirt.so.0:virDomainGraphicsSpiceZlibCompressionTypeFromString
@@ -1628,6 +1629,8 @@ libvirt.so.0:virDomainMomentForEachDescendant
 libvirt.so.0:virDomainMomentMoveChildren
 libvirt.so.0:virDomainMomentObjFree
 libvirt.so.0:virDomainMomentObjNew
+libvirt.so.0:virDomainMouseModeTypeFromString
+libvirt.so.0:virDomainMouseModeTypeToString
 libvirt.so.0:virDomainNetARPInterfaces
 libvirt.so.0:virDomainNetAllocateActualDevice
 libvirt.so.0:virDomainNetAppendIPAddress
@@ -1832,6 +1835,8 @@ libvirt.so.0:virDomainRestore
 libvirt.so.0:virDomainRestoreEnsureACL
 libvirt.so.0:virDomainRestoreFlags
 libvirt.so.0:virDomainRestoreFlagsEnsureACL
+libvirt.so.0:virDomainRestoreParams
+libvirt.so.0:virDomainRestoreParamsEnsureACL
 libvirt.so.0:virDomainResume
 libvirt.so.0:virDomainResumeEnsureACL
 libvirt.so.0:virDomainRevertToSnapshot
@@ -1849,6 +1854,8 @@ libvirt.so.0:virDomainSaveImageDefineXML
 libvirt.so.0:virDomainSaveImageDefineXMLEnsureACL
 libvirt.so.0:virDomainSaveImageGetXMLDesc
 libvirt.so.0:virDomainSaveImageGetXMLDescEnsureACL
+libvirt.so.0:virDomainSaveParams
+libvirt.so.0:virDomainSaveParamsEnsureACL
 libvirt.so.0:virDomainScreenshot
 libvirt.so.0:virDomainScreenshotEnsureACL
 libvirt.so.0:virDomainSeclabelTypeFromString
@@ -4392,6 +4399,7 @@ libvirt.so.0:virTypedParamListAddString
 libvirt.so.0:virTypedParamListAddUInt
 libvirt.so.0:virTypedParamListAddULLong
 libvirt.so.0:virTypedParamListFree
+libvirt.so.0:virTypedParamListFromParams
 libvirt.so.0:virTypedParamListStealParams
 libvirt.so.0:virTypedParameterAssign
 libvirt.so.0:virTypedParameterToString
@@ -4925,6 +4933,7 @@ libvirt.so.0:xdr_remote_domain_rename_ret
 libvirt.so.0:xdr_remote_domain_reset_args
 libvirt.so.0:xdr_remote_domain_restore_args
 libvirt.so.0:xdr_remote_domain_restore_flags_args
+libvirt.so.0:xdr_remote_domain_restore_params_args
 libvirt.so.0:xdr_remote_domain_resume_args
 libvirt.so.0:xdr_remote_domain_revert_to_snapshot_args
 libvirt.so.0:xdr_remote_domain_save_args
@@ -4932,6 +4941,7 @@ libvirt.so.0:xdr_remote_domain_save_flags_args
 libvirt.so.0:xdr_remote_domain_save_image_define_xml_args
 libvirt.so.0:xdr_remote_domain_save_image_get_xml_desc_args
 libvirt.so.0:xdr_remote_domain_save_image_get_xml_desc_ret
+libvirt.so.0:xdr_remote_domain_save_params_args
 libvirt.so.0:xdr_remote_domain_screenshot_args
 libvirt.so.0:xdr_remote_domain_screenshot_ret
 libvirt.so.0:xdr_remote_domain_send_key_args
