@@ -8,7 +8,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname4_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.4.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.5.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -185,7 +185,8 @@ libvirt.so.0:LIBVIRT_7.7.0
 libvirt.so.0:LIBVIRT_7.8.0
 libvirt.so.0:LIBVIRT_8.0.0
 libvirt.so.0:LIBVIRT_8.4.0
-libvirt.so.0:LIBVIRT_PRIVATE_8.4.0
+libvirt.so.0:LIBVIRT_8.5.0
+libvirt.so.0:LIBVIRT_PRIVATE_8.5.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -872,6 +873,8 @@ libvirt.so.0:virDoesGroupExist
 libvirt.so.0:virDoesUserExist
 libvirt.so.0:virDomainAbortJob
 libvirt.so.0:virDomainAbortJobEnsureACL
+libvirt.so.0:virDomainAbortJobFlags
+libvirt.so.0:virDomainAbortJobFlagsEnsureACL
 libvirt.so.0:virDomainActualNetDefFree
 libvirt.so.0:virDomainActualNetDefValidate
 libvirt.so.0:virDomainAddIOThread
@@ -1202,6 +1205,7 @@ libvirt.so.0:virDomainDiskDefNew
 libvirt.so.0:virDomainDiskDefParse
 libvirt.so.0:virDomainDiskDefParseSource
 libvirt.so.0:virDomainDiskDefSourceLUNValidate
+libvirt.so.0:virDomainDiskDefValidateStartupPolicy
 libvirt.so.0:virDomainDiskDetectZeroesTypeFromString
 libvirt.so.0:virDomainDiskDetectZeroesTypeToString
 libvirt.so.0:virDomainDiskDeviceTypeToString
@@ -1737,6 +1741,8 @@ libvirt.so.0:virDomainObjGetOneDef
 libvirt.so.0:virDomainObjGetOneDefState
 libvirt.so.0:virDomainObjGetPersistentDef
 libvirt.so.0:virDomainObjGetState
+libvirt.so.0:virDomainObjIsFailedPostcopy
+libvirt.so.0:virDomainObjIsPostcopy
 libvirt.so.0:virDomainObjListAdd
 libvirt.so.0:virDomainObjListCollect
 libvirt.so.0:virDomainObjListConvert
@@ -4653,6 +4659,7 @@ libvirt.so.0:xdr_remote_connect_supports_feature_args
 libvirt.so.0:xdr_remote_connect_supports_feature_ret
 libvirt.so.0:xdr_remote_domain
 libvirt.so.0:xdr_remote_domain_abort_job_args
+libvirt.so.0:xdr_remote_domain_abort_job_flags_args
 libvirt.so.0:xdr_remote_domain_add_iothread_args
 libvirt.so.0:xdr_remote_domain_agent_set_response_timeout_args
 libvirt.so.0:xdr_remote_domain_agent_set_response_timeout_ret
