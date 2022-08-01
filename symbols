@@ -8,7 +8,8 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname4_r
 libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.5.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.6.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -29,6 +30,7 @@ libvirt-admin.so.0:virAdmConnectLookupServer
 libvirt-admin.so.0:virAdmConnectOpen
 libvirt-admin.so.0:virAdmConnectRef
 libvirt-admin.so.0:virAdmConnectRegisterCloseCallback
+libvirt-admin.so.0:virAdmConnectSetDaemonTimeout
 libvirt-admin.so.0:virAdmConnectSetLoggingFilters
 libvirt-admin.so.0:virAdmConnectSetLoggingOutputs
 libvirt-admin.so.0:virAdmConnectUnregisterCloseCallback
@@ -186,7 +188,7 @@ libvirt.so.0:LIBVIRT_7.8.0
 libvirt.so.0:LIBVIRT_8.0.0
 libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
-libvirt.so.0:LIBVIRT_PRIVATE_8.5.0
+libvirt.so.0:LIBVIRT_PRIVATE_8.6.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -562,7 +564,6 @@ libvirt.so.0:virClassIsDerivedFrom
 libvirt.so.0:virClassName
 libvirt.so.0:virClassNew
 libvirt.so.0:virCloseCallbacksGet
-libvirt.so.0:virCloseCallbacksGetConn
 libvirt.so.0:virCloseCallbacksNew
 libvirt.so.0:virCloseCallbacksRun
 libvirt.so.0:virCloseCallbacksSet
@@ -1741,6 +1742,7 @@ libvirt.so.0:virDomainObjGetOneDef
 libvirt.so.0:virDomainObjGetOneDefState
 libvirt.so.0:virDomainObjGetPersistentDef
 libvirt.so.0:virDomainObjGetState
+libvirt.so.0:virDomainObjInitJob
 libvirt.so.0:virDomainObjIsFailedPostcopy
 libvirt.so.0:virDomainObjIsPostcopy
 libvirt.so.0:virDomainObjListAdd
@@ -3534,8 +3536,6 @@ libvirt.so.0:virObjectEventStateDeregisterID
 libvirt.so.0:virObjectEventStateEventID
 libvirt.so.0:virObjectEventStateNew
 libvirt.so.0:virObjectEventStateQueue
-libvirt.so.0:virObjectFreeCallback
-libvirt.so.0:virObjectFreeHashData
 libvirt.so.0:virObjectIsClass
 libvirt.so.0:virObjectListFree
 libvirt.so.0:virObjectListFreeCount
