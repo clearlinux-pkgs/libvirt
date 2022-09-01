@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.6.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.7.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -188,7 +188,7 @@ libvirt.so.0:LIBVIRT_7.8.0
 libvirt.so.0:LIBVIRT_8.0.0
 libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
-libvirt.so.0:LIBVIRT_PRIVATE_8.6.0
+libvirt.so.0:LIBVIRT_PRIVATE_8.7.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -422,6 +422,8 @@ libvirt.so.0:virCPUExpandFeatures
 libvirt.so.0:virCPUGetHost
 libvirt.so.0:virCPUGetHostIsSupported
 libvirt.so.0:virCPUGetModels
+libvirt.so.0:virCPUMaxPhysAddrModeTypeFromString
+libvirt.so.0:virCPUMaxPhysAddrModeTypeToString
 libvirt.so.0:virCPUModeTypeToString
 libvirt.so.0:virCPUProbeHost
 libvirt.so.0:virCPUTranslate
@@ -1636,6 +1638,7 @@ libvirt.so.0:virDomainMomentObjFree
 libvirt.so.0:virDomainMomentObjNew
 libvirt.so.0:virDomainMouseModeTypeFromString
 libvirt.so.0:virDomainMouseModeTypeToString
+libvirt.so.0:virDomainNestedJobAllowed
 libvirt.so.0:virDomainNetARPInterfaces
 libvirt.so.0:virDomainNetAllocateActualDevice
 libvirt.so.0:virDomainNetAppendIPAddress
@@ -1730,7 +1733,9 @@ libvirt.so.0:virDomainOSTypeFromString
 libvirt.so.0:virDomainOSTypeToString
 libvirt.so.0:virDomainObjAssignDef
 libvirt.so.0:virDomainObjBroadcast
+libvirt.so.0:virDomainObjCanSetJob
 libvirt.so.0:virDomainObjCheckActive
+libvirt.so.0:virDomainObjClearJob
 libvirt.so.0:virDomainObjCopyPersistentDef
 libvirt.so.0:virDomainObjDeprecation
 libvirt.so.0:virDomainObjEndAPI
@@ -1764,7 +1769,11 @@ libvirt.so.0:virDomainObjListRename
 libvirt.so.0:virDomainObjNew
 libvirt.so.0:virDomainObjParseFile
 libvirt.so.0:virDomainObjParseNode
+libvirt.so.0:virDomainObjPreserveJob
 libvirt.so.0:virDomainObjRemoveTransientDef
+libvirt.so.0:virDomainObjResetAgentJob
+libvirt.so.0:virDomainObjResetAsyncJob
+libvirt.so.0:virDomainObjResetJob
 libvirt.so.0:virDomainObjSave
 libvirt.so.0:virDomainObjSetDefTransient
 libvirt.so.0:virDomainObjSetMetadata
@@ -2030,6 +2039,8 @@ libvirt.so.0:virDomainTPMModelTypeFromString
 libvirt.so.0:virDomainTPMModelTypeToString
 libvirt.so.0:virDomainTPMPcrBankTypeFromString
 libvirt.so.0:virDomainTPMPcrBankTypeToString
+libvirt.so.0:virDomainTPMVersionTypeFromString
+libvirt.so.0:virDomainTPMVersionTypeToString
 libvirt.so.0:virDomainTaintMessageTypeFromString
 libvirt.so.0:virDomainTaintMessageTypeToString
 libvirt.so.0:virDomainTaintTypeFromString
@@ -2042,6 +2053,7 @@ libvirt.so.0:virDomainTimerTickpolicyTypeFromString
 libvirt.so.0:virDomainTimerTickpolicyTypeToString
 libvirt.so.0:virDomainTimerTrackTypeFromString
 libvirt.so.0:virDomainTimerTrackTypeToString
+libvirt.so.0:virDomainTrackJob
 libvirt.so.0:virDomainUSBAddressAssign
 libvirt.so.0:virDomainUSBAddressCountAllPorts
 libvirt.so.0:virDomainUSBAddressEnsure
@@ -2232,6 +2244,7 @@ libvirt.so.0:virFirewallRuleAddArgFormat
 libvirt.so.0:virFirewallRuleAddArgList
 libvirt.so.0:virFirewallRuleAddArgSet
 libvirt.so.0:virFirewallRuleGetArgCount
+libvirt.so.0:virFirewallRuleToString
 libvirt.so.0:virFirewallStartRollback
 libvirt.so.0:virFirewallStartTransaction
 libvirt.so.0:virFirmwareFree
@@ -2338,6 +2351,7 @@ libvirt.so.0:virHostCPUGetMap
 libvirt.so.0:virHostCPUGetMicrocodeVersion
 libvirt.so.0:virHostCPUGetOnline
 libvirt.so.0:virHostCPUGetOnlineBitmap
+libvirt.so.0:virHostCPUGetPhysAddrSize
 libvirt.so.0:virHostCPUGetPresentBitmap
 libvirt.so.0:virHostCPUGetSiblingsList
 libvirt.so.0:virHostCPUGetSignature
@@ -2666,6 +2680,7 @@ libvirt.so.0:virMediatedDeviceListStealIndex
 libvirt.so.0:virMediatedDeviceModelTypeFromString
 libvirt.so.0:virMediatedDeviceModelTypeToString
 libvirt.so.0:virMediatedDeviceNew
+libvirt.so.0:virMediatedDeviceParentGetAddress
 libvirt.so.0:virMediatedDeviceSetUsedBy
 libvirt.so.0:virMediatedDeviceTypeFree
 libvirt.so.0:virMediatedDeviceTypeReadAttrs
@@ -3422,6 +3437,7 @@ libvirt.so.0:virNodeDeviceGetAPMatrixDynamicCaps
 libvirt.so.0:virNodeDeviceGetAutostart
 libvirt.so.0:virNodeDeviceGetAutostartEnsureACL
 libvirt.so.0:virNodeDeviceGetCSSDynamicCaps
+libvirt.so.0:virNodeDeviceGetMdevParentDynamicCaps
 libvirt.so.0:virNodeDeviceGetName
 libvirt.so.0:virNodeDeviceGetPCIDynamicCaps
 libvirt.so.0:virNodeDeviceGetParent
