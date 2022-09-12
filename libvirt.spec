@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 8.7.0
-Release  : 141
+Release  : 142
 URL      : https://libvirt.org/sources/libvirt-8.7.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-8.7.0.tar.xz
 Source1  : https://libvirt.org/sources/libvirt-8.7.0.tar.xz.asc
