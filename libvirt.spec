@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCA68BE8010084C9C (jdenemar@redhat.com)
 #
 Name     : libvirt
-Version  : 8.7.0
-Release  : 142
-URL      : https://libvirt.org/sources/libvirt-8.7.0.tar.xz
-Source0  : https://libvirt.org/sources/libvirt-8.7.0.tar.xz
-Source1  : https://libvirt.org/sources/libvirt-8.7.0.tar.xz.asc
+Version  : 8.8.0
+Release  : 143
+URL      : https://libvirt.org/sources/libvirt-8.8.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-8.8.0.tar.xz
+Source1  : https://libvirt.org/sources/libvirt-8.8.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 LGPL-2.0+ LGPL-2.1 OFL-1.1
@@ -200,8 +200,8 @@ services components for the libvirt package.
 
 
 %prep
-%setup -q -n libvirt-8.7.0
-cd %{_builddir}/libvirt-8.7.0
+%setup -q -n libvirt-8.8.0
+cd %{_builddir}/libvirt-8.8.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -212,7 +212,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1662043953
+export SOURCE_DATE_EPOCH=1664805134
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
@@ -378,6 +378,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/share/libvirt/cpu_map/arm_Kunpeng-920.xml
 /usr/share/libvirt/cpu_map/arm_Tengyun-S2500.xml
 /usr/share/libvirt/cpu_map/arm_ThunderX299xx.xml
+/usr/share/libvirt/cpu_map/arm_a64fx.xml
 /usr/share/libvirt/cpu_map/arm_cortex-a53.xml
 /usr/share/libvirt/cpu_map/arm_cortex-a57.xml
 /usr/share/libvirt/cpu_map/arm_cortex-a72.xml
@@ -461,7 +462,9 @@ rmdir %{buildroot}/usr/sbin
 /usr/share/libvirt/schemas/domaincaps.rng
 /usr/share/libvirt/schemas/domaincheckpoint.rng
 /usr/share/libvirt/schemas/domaincommon.rng
+/usr/share/libvirt/schemas/domainoverrides.rng
 /usr/share/libvirt/schemas/domainsnapshot.rng
+/usr/share/libvirt/schemas/inactiveDomain.rng
 /usr/share/libvirt/schemas/interface.rng
 /usr/share/libvirt/schemas/network.rng
 /usr/share/libvirt/schemas/networkcommon.rng
@@ -518,13 +521,13 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.8007.0
+/usr/lib64/libvirt-admin.so.0.8008.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.8007.0
+/usr/lib64/libvirt-lxc.so.0.8008.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.8007.0
+/usr/lib64/libvirt-qemu.so.0.8008.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.8007.0
+/usr/lib64/libvirt.so.0.8008.0
 /usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so

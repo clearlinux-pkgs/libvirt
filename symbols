@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.7.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.8.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -188,7 +188,7 @@ libvirt.so.0:LIBVIRT_7.8.0
 libvirt.so.0:LIBVIRT_8.0.0
 libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
-libvirt.so.0:LIBVIRT_PRIVATE_8.7.0
+libvirt.so.0:LIBVIRT_PRIVATE_8.8.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -1504,6 +1504,7 @@ libvirt.so.0:virDomainIsUpdatedEnsureACL
 libvirt.so.0:virDomainJobDataCopy
 libvirt.so.0:virDomainJobDataFree
 libvirt.so.0:virDomainJobDataInit
+libvirt.so.0:virDomainJobObjFree
 libvirt.so.0:virDomainJobStatusToType
 libvirt.so.0:virDomainJobTypeFromString
 libvirt.so.0:virDomainJobTypeToString
@@ -1732,6 +1733,12 @@ libvirt.so.0:virDomainNumatuneSpecifiedMaxNode
 libvirt.so.0:virDomainOSTypeFromString
 libvirt.so.0:virDomainOSTypeToString
 libvirt.so.0:virDomainObjAssignDef
+libvirt.so.0:virDomainObjBeginAgentJob
+libvirt.so.0:virDomainObjBeginAsyncJob
+libvirt.so.0:virDomainObjBeginJob
+libvirt.so.0:virDomainObjBeginJobInternal
+libvirt.so.0:virDomainObjBeginJobNowait
+libvirt.so.0:virDomainObjBeginNestedJob
 libvirt.so.0:virDomainObjBroadcast
 libvirt.so.0:virDomainObjCanSetJob
 libvirt.so.0:virDomainObjCheckActive
@@ -1739,6 +1746,9 @@ libvirt.so.0:virDomainObjClearJob
 libvirt.so.0:virDomainObjCopyPersistentDef
 libvirt.so.0:virDomainObjDeprecation
 libvirt.so.0:virDomainObjEndAPI
+libvirt.so.0:virDomainObjEndAgentJob
+libvirt.so.0:virDomainObjEndAsyncJob
+libvirt.so.0:virDomainObjEndJob
 libvirt.so.0:virDomainObjFormat
 libvirt.so.0:virDomainObjGetDefs
 libvirt.so.0:virDomainObjGetMessages
