@@ -6,7 +6,7 @@
 #
 Name     : libvirt
 Version  : 8.8.0
-Release  : 143
+Release  : 144
 URL      : https://libvirt.org/sources/libvirt-8.8.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-8.8.0.tar.xz
 Source1  : https://libvirt.org/sources/libvirt-8.8.0.tar.xz.asc
@@ -212,12 +212,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1664805134
+export SOURCE_DATE_EPOCH=1664931892
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dapparmor=disabled \
 -Dapparmor_profiles=disabled \
 -Ddriver_esx=disabled \
