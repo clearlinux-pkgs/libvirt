@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCA68BE8010084C9C (jdenemar@redhat.com)
 #
 Name     : libvirt
-Version  : 8.9.0
-Release  : 145
-URL      : https://libvirt.org/sources/libvirt-8.9.0.tar.xz
-Source0  : https://libvirt.org/sources/libvirt-8.9.0.tar.xz
-Source1  : https://libvirt.org/sources/libvirt-8.9.0.tar.xz.asc
+Version  : 8.10.0
+Release  : 146
+URL      : https://libvirt.org/sources/libvirt-8.10.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-8.10.0.tar.xz
+Source1  : https://libvirt.org/sources/libvirt-8.10.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 LGPL-2.0+ LGPL-2.1 OFL-1.1
@@ -200,8 +200,8 @@ services components for the libvirt package.
 
 
 %prep
-%setup -q -n libvirt-8.9.0
-cd %{_builddir}/libvirt-8.9.0
+%setup -q -n libvirt-8.10.0
+cd %{_builddir}/libvirt-8.10.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -212,7 +212,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1667324995
+export SOURCE_DATE_EPOCH=1669929536
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -297,6 +297,10 @@ rmdir %{buildroot}/usr/sbin
 
 %files
 %defattr(-,root,root,-)
+/usr/lib/firewalld/policies/libvirt-routed-in.xml
+/usr/lib/firewalld/policies/libvirt-routed-out.xml
+/usr/lib/firewalld/policies/libvirt-to-host.xml
+/usr/lib/firewalld/zones/libvirt-routed.xml
 /usr/lib/firewalld/zones/libvirt.xml
 
 %files autostart
@@ -314,6 +318,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/bin/virt-pki-validate
 /usr/bin/virt-qemu-qmp-proxy
 /usr/bin/virt-qemu-run
+/usr/bin/virt-qemu-sev-validate
 /usr/bin/virt-ssh-helper
 /usr/bin/virt-xml-validate
 /usr/bin/virtchd
@@ -477,6 +482,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/share/libvirt/schemas/nwfilter.rng
 /usr/share/libvirt/schemas/nwfilter_params.rng
 /usr/share/libvirt/schemas/nwfilterbinding.rng
+/usr/share/libvirt/schemas/privatedata.rng
 /usr/share/libvirt/schemas/secret.rng
 /usr/share/libvirt/schemas/storagecommon.rng
 /usr/share/libvirt/schemas/storagepool.rng
@@ -525,13 +531,13 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.8009.0
+/usr/lib64/libvirt-admin.so.0.8010.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.8009.0
+/usr/lib64/libvirt-lxc.so.0.8010.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.8009.0
+/usr/lib64/libvirt-qemu.so.0.8010.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.8009.0
+/usr/lib64/libvirt.so.0.8010.0
 /usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
@@ -582,6 +588,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/share/man/man1/virt-pki-validate.1
 /usr/share/man/man1/virt-qemu-qmp-proxy.1
 /usr/share/man/man1/virt-qemu-run.1
+/usr/share/man/man1/virt-qemu-sev-validate.1
 /usr/share/man/man1/virt-xml-validate.1
 /usr/share/man/man7/virkeycode-atset1.7
 /usr/share/man/man7/virkeycode-atset2.7
