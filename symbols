@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_8.10.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.0.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -188,7 +188,8 @@ libvirt.so.0:LIBVIRT_7.8.0
 libvirt.so.0:LIBVIRT_8.0.0
 libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
-libvirt.so.0:LIBVIRT_PRIVATE_8.10.0
+libvirt.so.0:LIBVIRT_9.0.0
+libvirt.so.0:LIBVIRT_PRIVATE_9.0.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -566,11 +567,11 @@ libvirt.so.0:virClassForObjectRWLockable
 libvirt.so.0:virClassIsDerivedFrom
 libvirt.so.0:virClassName
 libvirt.so.0:virClassNew
-libvirt.so.0:virCloseCallbacksGet
-libvirt.so.0:virCloseCallbacksNew
-libvirt.so.0:virCloseCallbacksRun
-libvirt.so.0:virCloseCallbacksSet
-libvirt.so.0:virCloseCallbacksUnset
+libvirt.so.0:virCloseCallbacksDomainAdd
+libvirt.so.0:virCloseCallbacksDomainAlloc
+libvirt.so.0:virCloseCallbacksDomainIsRegistered
+libvirt.so.0:virCloseCallbacksDomainRemove
+libvirt.so.0:virCloseCallbacksDomainRunForConn
 libvirt.so.0:virCommandAbort
 libvirt.so.0:virCommandAddArg
 libvirt.so.0:virCommandAddArgBuffer
@@ -1181,7 +1182,6 @@ libvirt.so.0:virDomainDeviceAddressIsValid
 libvirt.so.0:virDomainDeviceAddressTypeToString
 libvirt.so.0:virDomainDeviceAliasIsUserAlias
 libvirt.so.0:virDomainDeviceCcidAddressParseXML
-libvirt.so.0:virDomainDeviceDefCopy
 libvirt.so.0:virDomainDeviceDefFree
 libvirt.so.0:virDomainDeviceDefParse
 libvirt.so.0:virDomainDeviceDriveAddressParseXML
@@ -1316,6 +1316,7 @@ libvirt.so.0:virDomainEventTunableNewFromDom
 libvirt.so.0:virDomainEventTunableNewFromObj
 libvirt.so.0:virDomainEventWatchdogNewFromDom
 libvirt.so.0:virDomainEventWatchdogNewFromObj
+libvirt.so.0:virDomainFDAssociate
 libvirt.so.0:virDomainFSAccessModeTypeToString
 libvirt.so.0:virDomainFSCacheModeTypeToString
 libvirt.so.0:virDomainFSDefFind
@@ -1337,6 +1338,7 @@ libvirt.so.0:virDomainFSTypeFromString
 libvirt.so.0:virDomainFSTypeToString
 libvirt.so.0:virDomainFSWrpolicyTypeFromString
 libvirt.so.0:virDomainFSWrpolicyTypeToString
+libvirt.so.0:virDomainFdAssociateEnsureACL
 libvirt.so.0:virDomainFeatureTypeFromString
 libvirt.so.0:virDomainFeatureTypeToString
 libvirt.so.0:virDomainFree
@@ -1676,6 +1678,7 @@ libvirt.so.0:virDomainNetIsVirtioModel
 libvirt.so.0:virDomainNetModelTypeFromString
 libvirt.so.0:virDomainNetModelTypeToString
 libvirt.so.0:virDomainNetNotifyActualDevice
+libvirt.so.0:virDomainNetPortForwardFree
 libvirt.so.0:virDomainNetReleaseActualDevice
 libvirt.so.0:virDomainNetRemove
 libvirt.so.0:virDomainNetRemoveByObj
@@ -1765,6 +1768,7 @@ libvirt.so.0:virDomainObjIsFailedPostcopy
 libvirt.so.0:virDomainObjIsPostcopy
 libvirt.so.0:virDomainObjListAdd
 libvirt.so.0:virDomainObjListCollect
+libvirt.so.0:virDomainObjListCollectAll
 libvirt.so.0:virDomainObjListConvert
 libvirt.so.0:virDomainObjListExport
 libvirt.so.0:virDomainObjListFindByID
@@ -2111,6 +2115,7 @@ libvirt.so.0:virDomainWatchdogModelTypeToString
 libvirt.so.0:virDomainXMLOptionGetNamespace
 libvirt.so.0:virDomainXMLOptionGetSaveCookie
 libvirt.so.0:virDomainXMLOptionNew
+libvirt.so.0:virDomainXMLOptionSetCloseCallbackAlloc
 libvirt.so.0:virDomainXMLOptionSetMomentPostParse
 libvirt.so.0:virDomainXenPassthroughModeTypeFromString
 libvirt.so.0:virDomainXenPassthroughModeTypeToString
@@ -2516,6 +2521,7 @@ libvirt.so.0:virJSONValueArrayForeachSteal
 libvirt.so.0:virJSONValueArrayGet
 libvirt.so.0:virJSONValueArraySize
 libvirt.so.0:virJSONValueArraySteal
+libvirt.so.0:virJSONValueArrayToStringList
 libvirt.so.0:virJSONValueCopy
 libvirt.so.0:virJSONValueFree
 libvirt.so.0:virJSONValueFromString
@@ -2567,7 +2573,6 @@ libvirt.so.0:virJSONValueObjectGetNumberUint
 libvirt.so.0:virJSONValueObjectGetNumberUlong
 libvirt.so.0:virJSONValueObjectGetObject
 libvirt.so.0:virJSONValueObjectGetString
-libvirt.so.0:virJSONValueObjectGetStringArray
 libvirt.so.0:virJSONValueObjectGetValue
 libvirt.so.0:virJSONValueObjectHasKey
 libvirt.so.0:virJSONValueObjectKeysNumber
@@ -4187,11 +4192,13 @@ libvirt.so.0:virStorageSourceBackingStoreClear
 libvirt.so.0:virStorageSourceChainHasManagedPR
 libvirt.so.0:virStorageSourceChainHasNVMe
 libvirt.so.0:virStorageSourceChainLookup
+libvirt.so.0:virStorageSourceChainLookupBySource
 libvirt.so.0:virStorageSourceChown
 libvirt.so.0:virStorageSourceClear
 libvirt.so.0:virStorageSourceCopy
 libvirt.so.0:virStorageSourceCreate
 libvirt.so.0:virStorageSourceDeinit
+libvirt.so.0:virStorageSourceFDTupleNew
 libvirt.so.0:virStorageSourceFetchRelativeBackingPath
 libvirt.so.0:virStorageSourceGetActualType
 libvirt.so.0:virStorageSourceGetMetadata
@@ -4210,6 +4217,7 @@ libvirt.so.0:virStorageSourceInitiatorParseXML
 libvirt.so.0:virStorageSourceIsBacking
 libvirt.so.0:virStorageSourceIsBlockLocal
 libvirt.so.0:virStorageSourceIsEmpty
+libvirt.so.0:virStorageSourceIsFD
 libvirt.so.0:virStorageSourceIsLocalStorage
 libvirt.so.0:virStorageSourceIsRelative
 libvirt.so.0:virStorageSourceIsSameLocation
@@ -4512,6 +4520,7 @@ libvirt.so.0:virXMLFormatElementInternal
 libvirt.so.0:virXMLFormatMetadata
 libvirt.so.0:virXMLNewNode
 libvirt.so.0:virXMLNodeContentString
+libvirt.so.0:virXMLNodeGetSubelement
 libvirt.so.0:virXMLNodeNameEqual
 libvirt.so.0:virXMLNodeSanitizeNamespaces
 libvirt.so.0:virXMLNodeToString
@@ -4784,6 +4793,7 @@ libvirt.so.0:xdr_remote_domain_event_reboot_msg
 libvirt.so.0:xdr_remote_domain_event_rtc_change_msg
 libvirt.so.0:xdr_remote_domain_event_tray_change_msg
 libvirt.so.0:xdr_remote_domain_event_watchdog_msg
+libvirt.so.0:xdr_remote_domain_fd_associate_args
 libvirt.so.0:xdr_remote_domain_fsfreeze_args
 libvirt.so.0:xdr_remote_domain_fsfreeze_ret
 libvirt.so.0:xdr_remote_domain_fsinfo

@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCA68BE8010084C9C (jdenemar@redhat.com)
 #
 Name     : libvirt
-Version  : 8.10.0
-Release  : 146
-URL      : https://libvirt.org/sources/libvirt-8.10.0.tar.xz
-Source0  : https://libvirt.org/sources/libvirt-8.10.0.tar.xz
-Source1  : https://libvirt.org/sources/libvirt-8.10.0.tar.xz.asc
+Version  : 9.0.0
+Release  : 147
+URL      : https://libvirt.org/sources/libvirt-9.0.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-9.0.0.tar.xz
+Source1  : https://libvirt.org/sources/libvirt-9.0.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 LGPL-2.0+ LGPL-2.1 OFL-1.1
@@ -77,10 +77,12 @@ BuildRequires : util-linux-dev
 BuildRequires : xfsprogs-dev
 BuildRequires : yajl-dev
 BuildRequires : yajl-lib
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 Patch1: 0001-Default-to-0770-permissions.patch
 Patch2: 0002-drop-timeout-ping.patch
 Patch3: 0003-Arjan-s-patch-for-locale.patch
-Patch4: 0004-Fix-tools-scripts-permissions.patch
 
 %description
 Libvirt is a C toolkit to interact with the virtualization capabilities
@@ -200,24 +202,23 @@ services components for the libvirt package.
 
 
 %prep
-%setup -q -n libvirt-8.10.0
-cd %{_builddir}/libvirt-8.10.0
+%setup -q -n libvirt-9.0.0
+cd %{_builddir}/libvirt-9.0.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1669929536
+export SOURCE_DATE_EPOCH=1673889107
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$FFLAGS -fno-lto "
-export FFLAGS="$FFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dapparmor=disabled \
 -Dapparmor_profiles=disabled \
 -Ddriver_esx=disabled \
@@ -531,13 +532,13 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.8010.0
+/usr/lib64/libvirt-admin.so.0.9000.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.8010.0
+/usr/lib64/libvirt-lxc.so.0.9000.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.8010.0
+/usr/lib64/libvirt-qemu.so.0.9000.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.8010.0
+/usr/lib64/libvirt.so.0.9000.0
 /usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
