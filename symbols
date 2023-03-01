@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.0.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.1.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -189,7 +189,7 @@ libvirt.so.0:LIBVIRT_8.0.0
 libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
 libvirt.so.0:LIBVIRT_9.0.0
-libvirt.so.0:LIBVIRT_PRIVATE_9.0.0
+libvirt.so.0:LIBVIRT_PRIVATE_9.1.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -284,12 +284,15 @@ libvirt.so.0:virAuditEncode
 libvirt.so.0:virAuditLog
 libvirt.so.0:virAuditOpen
 libvirt.so.0:virAuditSend
+libvirt.so.0:virAuthAskCredential
 libvirt.so.0:virAuthConfigFree
 libvirt.so.0:virAuthConfigLookup
 libvirt.so.0:virAuthConfigNew
 libvirt.so.0:virAuthConfigNewData
+libvirt.so.0:virAuthConnectCredentialFree
 libvirt.so.0:virAuthGetConfigFilePath
 libvirt.so.0:virAuthGetConfigFilePathURI
+libvirt.so.0:virAuthGetCredential
 libvirt.so.0:virAuthGetPassword
 libvirt.so.0:virAuthGetPasswordPath
 libvirt.so.0:virAuthGetUsername
@@ -1109,6 +1112,13 @@ libvirt.so.0:virDomainCreateXML
 libvirt.so.0:virDomainCreateXMLEnsureACL
 libvirt.so.0:virDomainCreateXMLWithFiles
 libvirt.so.0:virDomainCreateXMLWithFilesEnsureACL
+libvirt.so.0:virDomainCryptoBackendTypeFromString
+libvirt.so.0:virDomainCryptoBackendTypeToString
+libvirt.so.0:virDomainCryptoDefFree
+libvirt.so.0:virDomainCryptoModelTypeFromString
+libvirt.so.0:virDomainCryptoModelTypeToString
+libvirt.so.0:virDomainCryptoTypeTypeFromString
+libvirt.so.0:virDomainCryptoTypeTypeToString
 libvirt.so.0:virDomainDefAddController
 libvirt.so.0:virDomainDefAddImplicitDevices
 libvirt.so.0:virDomainDefAddUSBController
@@ -1648,6 +1658,7 @@ libvirt.so.0:virDomainNestedJobAllowed
 libvirt.so.0:virDomainNetARPInterfaces
 libvirt.so.0:virDomainNetAllocateActualDevice
 libvirt.so.0:virDomainNetAppendIPAddress
+libvirt.so.0:virDomainNetBackendIsEqual
 libvirt.so.0:virDomainNetBandwidthUpdate
 libvirt.so.0:virDomainNetDHCPInterfaces
 libvirt.so.0:virDomainNetDefActualFromNetworkPort
@@ -2109,6 +2120,7 @@ libvirt.so.0:virDomainVsockDefFree
 libvirt.so.0:virDomainVsockDefNew
 libvirt.so.0:virDomainWatchdogActionTypeFromString
 libvirt.so.0:virDomainWatchdogActionTypeToString
+libvirt.so.0:virDomainWatchdogDefFind
 libvirt.so.0:virDomainWatchdogDefFree
 libvirt.so.0:virDomainWatchdogModelTypeFromString
 libvirt.so.0:virDomainWatchdogModelTypeToString
@@ -4474,6 +4486,7 @@ libvirt.so.0:virURIFormat
 libvirt.so.0:virURIFormatParams
 libvirt.so.0:virURIFree
 libvirt.so.0:virURIGetParam
+libvirt.so.0:virURIParamsSetIgnore
 libvirt.so.0:virURIParse
 libvirt.so.0:virURIResolveAlias
 libvirt.so.0:virUSBDeviceFileIterate
