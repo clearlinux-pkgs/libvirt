@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.1.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.2.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -189,7 +189,7 @@ libvirt.so.0:LIBVIRT_8.0.0
 libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
 libvirt.so.0:LIBVIRT_9.0.0
-libvirt.so.0:LIBVIRT_PRIVATE_9.1.0
+libvirt.so.0:LIBVIRT_PRIVATE_9.2.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -597,6 +597,7 @@ libvirt.so.0:virCommandDryRunTokenNew
 libvirt.so.0:virCommandExec
 libvirt.so.0:virCommandFree
 libvirt.so.0:virCommandGetArgList
+libvirt.so.0:virCommandGetBinaryPath
 libvirt.so.0:virCommandGetGID
 libvirt.so.0:virCommandGetUID
 libvirt.so.0:virCommandHandshakeNotify
@@ -1161,6 +1162,7 @@ libvirt.so.0:virDomainDefMaybeAddController
 libvirt.so.0:virDomainDefMaybeAddInput
 libvirt.so.0:virDomainDefNeedsPlacementAdvice
 libvirt.so.0:virDomainDefNew
+libvirt.so.0:virDomainDefOSValidate
 libvirt.so.0:virDomainDefParseFile
 libvirt.so.0:virDomainDefParseNode
 libvirt.so.0:virDomainDefParseString
@@ -1542,6 +1544,7 @@ libvirt.so.0:virDomainListCheckpoints
 libvirt.so.0:virDomainListGetStats
 libvirt.so.0:virDomainListSnapshots
 libvirt.so.0:virDomainLoaderDefFree
+libvirt.so.0:virDomainLoaderDefNew
 libvirt.so.0:virDomainLoaderTypeFromString
 libvirt.so.0:virDomainLoaderTypeToString
 libvirt.so.0:virDomainLockFailureTypeFromString
@@ -1580,6 +1583,7 @@ libvirt.so.0:virDomainMemoryFindByDeviceAlias
 libvirt.so.0:virDomainMemoryFindByDeviceInfo
 libvirt.so.0:virDomainMemoryFindInactiveByDef
 libvirt.so.0:virDomainMemoryInsert
+libvirt.so.0:virDomainMemoryModelTypeFromString
 libvirt.so.0:virDomainMemoryModelTypeToString
 libvirt.so.0:virDomainMemoryPeek
 libvirt.so.0:virDomainMemoryPeekEnsureACL
@@ -2171,6 +2175,7 @@ libvirt.so.0:virFileActivateDirOverrideForLib
 libvirt.so.0:virFileActivateDirOverrideForProg
 libvirt.so.0:virFileBindMountDevice
 libvirt.so.0:virFileBuildPath
+libvirt.so.0:virFileCacheClear
 libvirt.so.0:virFileCacheGetPriv
 libvirt.so.0:virFileCacheInsertData
 libvirt.so.0:virFileCacheLookup
@@ -2570,7 +2575,6 @@ libvirt.so.0:virJSONValueObjectAppendNumberLong
 libvirt.so.0:virJSONValueObjectAppendNumberUint
 libvirt.so.0:virJSONValueObjectAppendNumberUlong
 libvirt.so.0:virJSONValueObjectAppendString
-libvirt.so.0:virJSONValueObjectAppendStringPrintf
 libvirt.so.0:virJSONValueObjectDeflatten
 libvirt.so.0:virJSONValueObjectForeachKeyValue
 libvirt.so.0:virJSONValueObjectGet
@@ -3549,6 +3553,7 @@ libvirt.so.0:virNodeSuspend
 libvirt.so.0:virNodeSuspendForDuration
 libvirt.so.0:virNodeSuspendForDurationEnsureACL
 libvirt.so.0:virNodeSuspendGetTargetMask
+libvirt.so.0:virNumaCPUSetToNodeset
 libvirt.so.0:virNumaCacheAssociativityTypeFromString
 libvirt.so.0:virNumaCacheAssociativityTypeToString
 libvirt.so.0:virNumaCacheFormat
@@ -3562,6 +3567,7 @@ libvirt.so.0:virNumaGetMaxCPUs
 libvirt.so.0:virNumaGetMaxNode
 libvirt.so.0:virNumaGetNodeCPUs
 libvirt.so.0:virNumaGetNodeMemory
+libvirt.so.0:virNumaGetNodeOfCPU
 libvirt.so.0:virNumaGetPageInfo
 libvirt.so.0:virNumaGetPages
 libvirt.so.0:virNumaInterconnectFormat
@@ -3693,6 +3699,7 @@ libvirt.so.0:virPerfNew
 libvirt.so.0:virPerfReadEvent
 libvirt.so.0:virPidFileAcquire
 libvirt.so.0:virPidFileAcquirePath
+libvirt.so.0:virPidFileAcquirePathFull
 libvirt.so.0:virPidFileBuildPath
 libvirt.so.0:virPidFileConstructPath
 libvirt.so.0:virPidFileDelete
@@ -4055,6 +4062,7 @@ libvirt.so.0:virStorageAuthDefFormat
 libvirt.so.0:virStorageAuthDefFree
 libvirt.so.0:virStorageAuthDefParse
 libvirt.so.0:virStorageEncryptionFormat
+libvirt.so.0:virStorageEncryptionFormatTypeToString
 libvirt.so.0:virStorageEncryptionFree
 libvirt.so.0:virStorageEncryptionParseNode
 libvirt.so.0:virStorageFileBackendRegister
