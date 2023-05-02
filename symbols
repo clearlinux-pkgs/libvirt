@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.2.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.3.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -189,7 +189,7 @@ libvirt.so.0:LIBVIRT_8.0.0
 libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
 libvirt.so.0:LIBVIRT_9.0.0
-libvirt.so.0:LIBVIRT_PRIVATE_9.2.0
+libvirt.so.0:LIBVIRT_PRIVATE_9.3.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -271,6 +271,8 @@ libvirt.so.0:virAccessPermStoragePoolTypeFromString
 libvirt.so.0:virAccessPermStoragePoolTypeToString
 libvirt.so.0:virAccessPermStorageVolTypeFromString
 libvirt.so.0:virAccessPermStorageVolTypeToString
+libvirt.so.0:virAcpiHasSMMU
+libvirt.so.0:virAcpiParseIORT
 libvirt.so.0:virAppendElement
 libvirt.so.0:virArchFromHost
 libvirt.so.0:virArchFromString
@@ -458,7 +460,6 @@ libvirt.so.0:virCapabilitiesDomainDataLookup
 libvirt.so.0:virCapabilitiesDomainSupported
 libvirt.so.0:virCapabilitiesFormatXML
 libvirt.so.0:virCapabilitiesFreeGuest
-libvirt.so.0:virCapabilitiesFreeMachines
 libvirt.so.0:virCapabilitiesGetNodeInfo
 libvirt.so.0:virCapabilitiesHostInitIOMMU
 libvirt.so.0:virCapabilitiesHostNUMAAddCell
@@ -1471,7 +1472,6 @@ libvirt.so.0:virDomainHasManagedSaveImage
 libvirt.so.0:virDomainHasManagedSaveImageEnsureACL
 libvirt.so.0:virDomainHasNet
 libvirt.so.0:virDomainHostdevCapsTypeToString
-libvirt.so.0:virDomainHostdevDefClear
 libvirt.so.0:virDomainHostdevDefFree
 libvirt.so.0:virDomainHostdevDefNew
 libvirt.so.0:virDomainHostdevFind
@@ -2441,6 +2441,8 @@ libvirt.so.0:virHostdevUpdateActiveNVMeDevices
 libvirt.so.0:virHostdevUpdateActivePCIDevices
 libvirt.so.0:virHostdevUpdateActiveSCSIDevices
 libvirt.so.0:virHostdevUpdateActiveUSBDevices
+libvirt.so.0:virIORTNodeTypeTypeFromString
+libvirt.so.0:virIORTNodeTypeTypeToString
 libvirt.so.0:virISCSIConnectionLogin
 libvirt.so.0:virISCSIConnectionLogout
 libvirt.so.0:virISCSIGetSession
