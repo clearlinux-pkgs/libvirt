@@ -7,7 +7,7 @@
 #
 Name     : libvirt
 Version  : 9.3.0
-Release  : 150
+Release  : 151
 URL      : https://libvirt.org/sources/libvirt-9.3.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-9.3.0.tar.xz
 Source1  : https://libvirt.org/sources/libvirt-9.3.0.tar.xz.asc
@@ -63,7 +63,6 @@ BuildRequires : openvswitch
 BuildRequires : parted-dev
 BuildRequires : pkgconfig(audit)
 BuildRequires : pkgconfig(bash-completion)
-BuildRequires : pkgconfig(glusterfs-api)
 BuildRequires : pkgconfig(gnutls)
 BuildRequires : pkgconfig(libiscsi)
 BuildRequires : pkgconfig(libssh)
@@ -209,13 +208,16 @@ cd %{_builddir}/libvirt-9.3.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+pushd ..
+cp -a libvirt-9.3.0 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683039259
+export SOURCE_DATE_EPOCH=1684267193
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -257,6 +259,42 @@ CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --
 -Dudev=enabled \
 -Dyajl=enabled  builddir
 ninja -v -C builddir
+CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -O3" CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 " LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dapparmor=disabled \
+-Dapparmor_profiles=disabled \
+-Ddriver_esx=disabled \
+-Ddriver_hyperv=disabled \
+-Ddriver_interface=enabled \
+-Ddriver_libvirtd=enabled \
+-Ddriver_libxl=disabled \
+-Ddriver_lxc=enabled \
+-Ddriver_openvz=disabled \
+-Ddriver_qemu=enabled \
+-Ddriver_remote=enabled \
+-Ddriver_test=enabled \
+-Ddriver_vbox=disabled \
+-Ddriver_vmware=disabled \
+-Ddtrace=disabled \
+-Dfirewalld=enabled \
+-Dfirewalld_zone=enabled \
+-Dfuse=disabled \
+-Dinit_script=systemd \
+-Dloader_nvram=/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF.fd:/usr/share/qemu/OVMF_CODE.fd:/usr/share/qemu/OVMF_VARS.fd \
+-Dnetcf=disabled \
+-Dnls=enabled \
+-Dopenwsman=disabled \
+-Dpciaccess=enabled \
+-Dpm_utils=disabled \
+-Dpolkit=enabled \
+-Dqemu_group=qemu \
+-Dqemu_user=qemu \
+-Dsanlock=disabled \
+-Dsasl=disabled \
+-Dsecdriver_apparmor=disabled \
+-Dselinux=disabled \
+-Dtls_priority="SECURE128" \
+-Dudev=enabled \
+-Dyajl=enabled  builddiravx2
+ninja -v -C builddiravx2
 
 %check
 export LANG=C.UTF-8
@@ -272,6 +310,7 @@ cp %{_builddir}/libvirt-%{version}/COPYING.LESSER %{buildroot}/usr/share/package
 cp %{_builddir}/libvirt-%{version}/docs/fonts/LICENSE.rst %{buildroot}/usr/share/package-licenses/libvirt/f4e4f4ac8fa716d051ac27a5415491544c8f456e || :
 cp %{_builddir}/libvirt-%{version}/subprojects/keycodemapdb/LICENSE.BSD %{buildroot}/usr/share/package-licenses/libvirt/ea5b412c09f3b29ba1d81a61b878c5c16ffe69d8 || :
 cp %{_builddir}/libvirt-%{version}/subprojects/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/libvirt/06877624ea5c77efe3b7e39b0f909eda6e25a4ec || :
+DESTDIR=%{buildroot}-v3 ninja -C builddiravx2 install
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang libvirt
 ## Remove excluded files
@@ -297,6 +336,7 @@ ln -s ../libvirtd.service %{buildroot}/usr/lib/systemd/system/multi-user.target.
 mv %{buildroot}/usr/sbin/*  %{buildroot}/usr/bin/
 rmdir %{buildroot}/usr/sbin
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -312,6 +352,26 @@ rmdir %{buildroot}/usr/sbin
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/virsh
+/V3/usr/bin/virt-admin
+/V3/usr/bin/virt-host-validate
+/V3/usr/bin/virt-login-shell
+/V3/usr/bin/virt-pki-query-dn
+/V3/usr/bin/virt-qemu-run
+/V3/usr/bin/virt-ssh-helper
+/V3/usr/sbin/libvirtd
+/V3/usr/sbin/virtchd
+/V3/usr/sbin/virtinterfaced
+/V3/usr/sbin/virtlockd
+/V3/usr/sbin/virtlogd
+/V3/usr/sbin/virtlxcd
+/V3/usr/sbin/virtnetworkd
+/V3/usr/sbin/virtnodedevd
+/V3/usr/sbin/virtnwfilterd
+/V3/usr/sbin/virtproxyd
+/V3/usr/sbin/virtqemud
+/V3/usr/sbin/virtsecretd
+/V3/usr/sbin/virtstoraged
 /usr/bin/libvirtd
 /usr/bin/virsh
 /usr/bin/virt-admin
@@ -498,6 +558,10 @@ rmdir %{buildroot}/usr/sbin
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libvirt-admin.so
+/V3/usr/lib64/libvirt-lxc.so
+/V3/usr/lib64/libvirt-qemu.so
+/V3/usr/lib64/libvirt.so
 /usr/include/libvirt/libvirt-admin.h
 /usr/include/libvirt/libvirt-common.h
 /usr/include/libvirt/libvirt-domain-checkpoint.h
@@ -531,6 +595,36 @@ rmdir %{buildroot}/usr/sbin
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/libnss_libvirt.so.2
+/V3/usr/lib64/libnss_libvirt_guest.so.2
+/V3/usr/lib64/libvirt-admin.so.0
+/V3/usr/lib64/libvirt-admin.so.0.9003.0
+/V3/usr/lib64/libvirt-lxc.so.0
+/V3/usr/lib64/libvirt-lxc.so.0.9003.0
+/V3/usr/lib64/libvirt-qemu.so.0
+/V3/usr/lib64/libvirt-qemu.so.0.9003.0
+/V3/usr/lib64/libvirt.so.0
+/V3/usr/lib64/libvirt.so.0.9003.0
+/V3/usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
+/V3/usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
+/V3/usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
+/V3/usr/lib64/libvirt/connection-driver/libvirt_driver_network.so
+/V3/usr/lib64/libvirt/connection-driver/libvirt_driver_nodedev.so
+/V3/usr/lib64/libvirt/connection-driver/libvirt_driver_nwfilter.so
+/V3/usr/lib64/libvirt/connection-driver/libvirt_driver_qemu.so
+/V3/usr/lib64/libvirt/connection-driver/libvirt_driver_secret.so
+/V3/usr/lib64/libvirt/connection-driver/libvirt_driver_storage.so
+/V3/usr/lib64/libvirt/lock-driver/lockd.so
+/V3/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_disk.so
+/V3/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_fs.so
+/V3/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_iscsi-direct.so
+/V3/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_iscsi.so
+/V3/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_logical.so
+/V3/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_mpath.so
+/V3/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_scsi.so
+/V3/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_vstorage.so
+/V3/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_zfs.so
+/V3/usr/lib64/libvirt/storage-file/libvirt_storage_file_fs.so
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
@@ -553,7 +647,6 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libvirt/lock-driver/lockd.so
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_disk.so
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_fs.so
-/usr/lib64/libvirt/storage-backend/libvirt_storage_backend_gluster.so
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_iscsi-direct.so
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_iscsi.so
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_logical.so
@@ -562,10 +655,14 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_vstorage.so
 /usr/lib64/libvirt/storage-backend/libvirt_storage_backend_zfs.so
 /usr/lib64/libvirt/storage-file/libvirt_storage_file_fs.so
-/usr/lib64/libvirt/storage-file/libvirt_storage_file_gluster.so
 
 %files libexec
 %defattr(-,root,root,-)
+/V3/usr/libexec/libvirt_iohelper
+/V3/usr/libexec/libvirt_leaseshelper
+/V3/usr/libexec/libvirt_lxc
+/V3/usr/libexec/libvirt_parthelper
+/V3/usr/libexec/virt-login-shell-helper
 /usr/libexec/libvirt-guests.sh
 /usr/libexec/libvirt_iohelper
 /usr/libexec/libvirt_leaseshelper
