@@ -7,7 +7,7 @@
 #
 Name     : libvirt
 Version  : 9.3.0
-Release  : 151
+Release  : 152
 URL      : https://libvirt.org/sources/libvirt-9.3.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-9.3.0.tar.xz
 Source1  : https://libvirt.org/sources/libvirt-9.3.0.tar.xz.asc
@@ -217,7 +217,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1684267193
+export SOURCE_DATE_EPOCH=1684374355
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -352,6 +352,7 @@ rmdir %{buildroot}/usr/sbin
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/libvirtd
 /V3/usr/bin/virsh
 /V3/usr/bin/virt-admin
 /V3/usr/bin/virt-host-validate
@@ -359,19 +360,18 @@ rmdir %{buildroot}/usr/sbin
 /V3/usr/bin/virt-pki-query-dn
 /V3/usr/bin/virt-qemu-run
 /V3/usr/bin/virt-ssh-helper
-/V3/usr/sbin/libvirtd
-/V3/usr/sbin/virtchd
-/V3/usr/sbin/virtinterfaced
-/V3/usr/sbin/virtlockd
-/V3/usr/sbin/virtlogd
-/V3/usr/sbin/virtlxcd
-/V3/usr/sbin/virtnetworkd
-/V3/usr/sbin/virtnodedevd
-/V3/usr/sbin/virtnwfilterd
-/V3/usr/sbin/virtproxyd
-/V3/usr/sbin/virtqemud
-/V3/usr/sbin/virtsecretd
-/V3/usr/sbin/virtstoraged
+/V3/usr/bin/virtchd
+/V3/usr/bin/virtinterfaced
+/V3/usr/bin/virtlockd
+/V3/usr/bin/virtlogd
+/V3/usr/bin/virtlxcd
+/V3/usr/bin/virtnetworkd
+/V3/usr/bin/virtnodedevd
+/V3/usr/bin/virtnwfilterd
+/V3/usr/bin/virtproxyd
+/V3/usr/bin/virtqemud
+/V3/usr/bin/virtsecretd
+/V3/usr/bin/virtstoraged
 /usr/bin/libvirtd
 /usr/bin/virsh
 /usr/bin/virt-admin
