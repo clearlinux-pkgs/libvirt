@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.3.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.4.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -189,7 +189,7 @@ libvirt.so.0:LIBVIRT_8.0.0
 libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
 libvirt.so.0:LIBVIRT_9.0.0
-libvirt.so.0:LIBVIRT_PRIVATE_9.3.0
+libvirt.so.0:LIBVIRT_PRIVATE_9.4.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -2260,6 +2260,7 @@ libvirt.so.0:virFileWrapperFdFree
 libvirt.so.0:virFileWrapperFdNew
 libvirt.so.0:virFileWriteStr
 libvirt.so.0:virFindFileInPath
+libvirt.so.0:virFindFileInPathFull
 libvirt.so.0:virFirewallAddRuleFull
 libvirt.so.0:virFirewallApply
 libvirt.so.0:virFirewallDApplyRule
@@ -4457,9 +4458,13 @@ libvirt.so.0:virTypedParamListAddLLong
 libvirt.so.0:virTypedParamListAddString
 libvirt.so.0:virTypedParamListAddUInt
 libvirt.so.0:virTypedParamListAddULLong
+libvirt.so.0:virTypedParamListAddUnsigned
+libvirt.so.0:virTypedParamListConcat
+libvirt.so.0:virTypedParamListFetch
 libvirt.so.0:virTypedParamListFree
 libvirt.so.0:virTypedParamListFromParams
-libvirt.so.0:virTypedParamListStealParams
+libvirt.so.0:virTypedParamListNew
+libvirt.so.0:virTypedParamListSteal
 libvirt.so.0:virTypedParameterAssign
 libvirt.so.0:virTypedParameterToString
 libvirt.so.0:virTypedParameterTypeFromString
@@ -4488,6 +4493,7 @@ libvirt.so.0:virTypedParamsGetString
 libvirt.so.0:virTypedParamsGetStringList
 libvirt.so.0:virTypedParamsGetUInt
 libvirt.so.0:virTypedParamsGetULLong
+libvirt.so.0:virTypedParamsGetUnsigned
 libvirt.so.0:virTypedParamsRemoteFree
 libvirt.so.0:virTypedParamsReplaceString
 libvirt.so.0:virTypedParamsSerialize

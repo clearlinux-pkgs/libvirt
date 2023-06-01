@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xCA68BE8010084C9C (jdenemar@redhat.com)
 #
 Name     : libvirt
-Version  : 9.3.0
-Release  : 152
-URL      : https://libvirt.org/sources/libvirt-9.3.0.tar.xz
-Source0  : https://libvirt.org/sources/libvirt-9.3.0.tar.xz
-Source1  : https://libvirt.org/sources/libvirt-9.3.0.tar.xz.asc
+Version  : 9.4.0
+Release  : 153
+URL      : https://libvirt.org/sources/libvirt-9.4.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-9.4.0.tar.xz
+Source1  : https://libvirt.org/sources/libvirt-9.4.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 GPL-2.0+ LGPL-2.1 LGPL-2.1+ LGPL-2.1-only OFL-1.1
@@ -203,13 +203,13 @@ services components for the libvirt package.
 
 
 %prep
-%setup -q -n libvirt-9.3.0
-cd %{_builddir}/libvirt-9.3.0
+%setup -q -n libvirt-9.4.0
+cd %{_builddir}/libvirt-9.4.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 pushd ..
-cp -a libvirt-9.3.0 buildavx2
+cp -a libvirt-9.4.0 buildavx2
 popd
 
 %build
@@ -217,7 +217,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1684374355
+export SOURCE_DATE_EPOCH=1685646500
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -499,6 +499,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/share/libvirt/cpu_map/x86_Penryn.xml
 /usr/share/libvirt/cpu_map/x86_SandyBridge-IBRS.xml
 /usr/share/libvirt/cpu_map/x86_SandyBridge.xml
+/usr/share/libvirt/cpu_map/x86_SapphireRapids.xml
 /usr/share/libvirt/cpu_map/x86_Skylake-Client-IBRS.xml
 /usr/share/libvirt/cpu_map/x86_Skylake-Client-noTSX-IBRS.xml
 /usr/share/libvirt/cpu_map/x86_Skylake-Client.xml
@@ -558,10 +559,6 @@ rmdir %{buildroot}/usr/sbin
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libvirt-admin.so
-/V3/usr/lib64/libvirt-lxc.so
-/V3/usr/lib64/libvirt-qemu.so
-/V3/usr/lib64/libvirt.so
 /usr/include/libvirt/libvirt-admin.h
 /usr/include/libvirt/libvirt-common.h
 /usr/include/libvirt/libvirt-domain-checkpoint.h
@@ -597,14 +594,10 @@ rmdir %{buildroot}/usr/sbin
 %defattr(-,root,root,-)
 /V3/usr/lib64/libnss_libvirt.so.2
 /V3/usr/lib64/libnss_libvirt_guest.so.2
-/V3/usr/lib64/libvirt-admin.so.0
-/V3/usr/lib64/libvirt-admin.so.0.9003.0
-/V3/usr/lib64/libvirt-lxc.so.0
-/V3/usr/lib64/libvirt-lxc.so.0.9003.0
-/V3/usr/lib64/libvirt-qemu.so.0
-/V3/usr/lib64/libvirt-qemu.so.0.9003.0
-/V3/usr/lib64/libvirt.so.0
-/V3/usr/lib64/libvirt.so.0.9003.0
+/V3/usr/lib64/libvirt-admin.so.0.9004.0
+/V3/usr/lib64/libvirt-lxc.so.0.9004.0
+/V3/usr/lib64/libvirt-qemu.so.0.9004.0
+/V3/usr/lib64/libvirt.so.0.9004.0
 /V3/usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
 /V3/usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /V3/usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
@@ -628,13 +621,13 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.9003.0
+/usr/lib64/libvirt-admin.so.0.9004.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.9003.0
+/usr/lib64/libvirt-lxc.so.0.9004.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.9003.0
+/usr/lib64/libvirt-qemu.so.0.9004.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.9003.0
+/usr/lib64/libvirt.so.0.9004.0
 /usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so

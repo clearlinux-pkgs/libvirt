@@ -1,9 +1,8 @@
-9.3.0
+9.4.0
 bash-completion-dev
 libssh-dev
 pkgconfig(audit)
 pkgconfig(bash-completion)
-pkgconfig(glusterfs-api)
 pkgconfig(libiscsi)
 pkgconfig(libssh)
 pkgconfig(libtirpc)
