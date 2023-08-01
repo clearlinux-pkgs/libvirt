@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.5.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.6.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -189,7 +189,7 @@ libvirt.so.0:LIBVIRT_8.0.0
 libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
 libvirt.so.0:LIBVIRT_9.0.0
-libvirt.so.0:LIBVIRT_PRIVATE_9.5.0
+libvirt.so.0:LIBVIRT_PRIVATE_9.6.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -873,6 +873,7 @@ libvirt.so.0:virDeviceInfoPCIAddressIsPresent
 libvirt.so.0:virDeviceInfoPCIAddressIsWanted
 libvirt.so.0:virDirClose
 libvirt.so.0:virDirCreate
+libvirt.so.0:virDirIsEmpty
 libvirt.so.0:virDirOpen
 libvirt.so.0:virDirOpenIfExists
 libvirt.so.0:virDirOpenQuiet
@@ -3732,6 +3733,7 @@ libvirt.so.0:virPortAllocatorRelease
 libvirt.so.0:virPortAllocatorSetUsed
 libvirt.so.0:virPortGroupFindByName
 libvirt.so.0:virProcessAbort
+libvirt.so.0:virProcessActivateMaxFiles
 libvirt.so.0:virProcessExitWithStatus
 libvirt.so.0:virProcessGetAffinity
 libvirt.so.0:virProcessGetMaxMemLock
