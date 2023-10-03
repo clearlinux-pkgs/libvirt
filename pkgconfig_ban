@@ -7,3 +7,4 @@ polkit-dbus
 wireshark
 xenlight
 glusterfs-api
+libnbd

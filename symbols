@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.7.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.8.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -190,7 +190,7 @@ libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
 libvirt.so.0:LIBVIRT_9.0.0
 libvirt.so.0:LIBVIRT_9.7.0
-libvirt.so.0:LIBVIRT_PRIVATE_9.7.0
+libvirt.so.0:LIBVIRT_PRIVATE_9.8.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -614,6 +614,7 @@ libvirt.so.0:virCommandNewArgs
 libvirt.so.0:virCommandNewVAList
 libvirt.so.0:virCommandNonblockingFDs
 libvirt.so.0:virCommandPassFD
+libvirt.so.0:virCommandPeekSendBuffers
 libvirt.so.0:virCommandRawStatus
 libvirt.so.0:virCommandRequireHandshake
 libvirt.so.0:virCommandRun
@@ -2691,6 +2692,7 @@ libvirt.so.0:virMacAddrCompare
 libvirt.so.0:virMacAddrFormat
 libvirt.so.0:virMacAddrGenerate
 libvirt.so.0:virMacAddrGetRaw
+libvirt.so.0:virMacAddrIsAllClear
 libvirt.so.0:virMacAddrIsBroadcastRaw
 libvirt.so.0:virMacAddrIsMulticast
 libvirt.so.0:virMacAddrIsUnicast
@@ -3330,6 +3332,8 @@ libvirt.so.0:virNetworkDefineXMLFlagsEnsureACL
 libvirt.so.0:virNetworkDestroy
 libvirt.so.0:virNetworkDestroyEnsureACL
 libvirt.so.0:virNetworkEventLifecycleNew
+libvirt.so.0:virNetworkEventMetadataChangeNewFromNet
+libvirt.so.0:virNetworkEventMetadataChangeNewFromObj
 libvirt.so.0:virNetworkEventStateRegisterID
 libvirt.so.0:virNetworkForwardTypeToString
 libvirt.so.0:virNetworkFree
@@ -5120,6 +5124,7 @@ libvirt.so.0:xdr_remote_network_define_xml_flags_ret
 libvirt.so.0:xdr_remote_network_define_xml_ret
 libvirt.so.0:xdr_remote_network_destroy_args
 libvirt.so.0:xdr_remote_network_dhcp_lease
+libvirt.so.0:xdr_remote_network_event_callback_metadata_change_msg
 libvirt.so.0:xdr_remote_network_event_lifecycle_msg
 libvirt.so.0:xdr_remote_network_get_autostart_args
 libvirt.so.0:xdr_remote_network_get_autostart_ret

@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xCA68BE8010084C9C (jdenemar@redhat.com)
 #
 Name     : libvirt
-Version  : 9.7.0
-Release  : 157
-URL      : https://libvirt.org/sources/libvirt-9.7.0.tar.xz
-Source0  : https://libvirt.org/sources/libvirt-9.7.0.tar.xz
-Source1  : https://libvirt.org/sources/libvirt-9.7.0.tar.xz.asc
+Version  : 9.8.0
+Release  : 158
+URL      : https://libvirt.org/sources/libvirt-9.8.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-9.8.0.tar.xz
+Source1  : https://libvirt.org/sources/libvirt-9.8.0.tar.xz.asc
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 GPL-2.0+ LGPL-2.1 LGPL-2.1+ LGPL-2.1-only OFL-1.1
@@ -203,13 +203,13 @@ services components for the libvirt package.
 
 
 %prep
-%setup -q -n libvirt-9.7.0
-cd %{_builddir}/libvirt-9.7.0
+%setup -q -n libvirt-9.8.0
+cd %{_builddir}/libvirt-9.8.0
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
 pushd ..
-cp -a libvirt-9.7.0 buildavx2
+cp -a libvirt-9.8.0 buildavx2
 popd
 
 %build
@@ -217,13 +217,19 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1693928122
+export SOURCE_DATE_EPOCH=1696359123
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dapparmor=disabled \
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
+meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dapparmor=disabled \
 -Dapparmor_profiles=disabled \
 -Ddriver_esx=disabled \
 -Ddriver_hyperv=disabled \
@@ -304,6 +310,17 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 meson test -C builddir --print-errorlogs || :
 
 %install
+export GCC_IGNORE_WERROR=1
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 mkdir -p %{buildroot}/usr/share/package-licenses/libvirt
 cp %{_builddir}/libvirt-%{version}/COPYING %{buildroot}/usr/share/package-licenses/libvirt/4cc77b90af91e615a64ae04893fdffa7939db84c || :
 cp %{_builddir}/libvirt-%{version}/COPYING.LESSER %{buildroot}/usr/share/package-licenses/libvirt/3704f4680301a60004b20f94e0b5b8c7ff1484a9 || :
@@ -475,6 +492,7 @@ rmdir %{buildroot}/usr/sbin
 /usr/share/libvirt/cpu_map/x86_Conroe.xml
 /usr/share/libvirt/cpu_map/x86_Cooperlake.xml
 /usr/share/libvirt/cpu_map/x86_Dhyana.xml
+/usr/share/libvirt/cpu_map/x86_EPYC-Genoa.xml
 /usr/share/libvirt/cpu_map/x86_EPYC-IBPB.xml
 /usr/share/libvirt/cpu_map/x86_EPYC-Milan.xml
 /usr/share/libvirt/cpu_map/x86_EPYC-Rome.xml
@@ -594,10 +612,10 @@ rmdir %{buildroot}/usr/sbin
 %defattr(-,root,root,-)
 /V3/usr/lib64/libnss_libvirt.so.2
 /V3/usr/lib64/libnss_libvirt_guest.so.2
-/V3/usr/lib64/libvirt-admin.so.0.9007.0
-/V3/usr/lib64/libvirt-lxc.so.0.9007.0
-/V3/usr/lib64/libvirt-qemu.so.0.9007.0
-/V3/usr/lib64/libvirt.so.0.9007.0
+/V3/usr/lib64/libvirt-admin.so.0.9008.0
+/V3/usr/lib64/libvirt-lxc.so.0.9008.0
+/V3/usr/lib64/libvirt-qemu.so.0.9008.0
+/V3/usr/lib64/libvirt.so.0.9008.0
 /V3/usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
 /V3/usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /V3/usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
@@ -621,13 +639,13 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.9007.0
+/usr/lib64/libvirt-admin.so.0.9008.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.9007.0
+/usr/lib64/libvirt-lxc.so.0.9008.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.9007.0
+/usr/lib64/libvirt-qemu.so.0.9008.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.9007.0
+/usr/lib64/libvirt.so.0.9008.0
 /usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
