@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.8.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_9.9.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -190,7 +190,7 @@ libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
 libvirt.so.0:LIBVIRT_9.0.0
 libvirt.so.0:LIBVIRT_9.7.0
-libvirt.so.0:LIBVIRT_PRIVATE_9.8.0
+libvirt.so.0:LIBVIRT_PRIVATE_9.9.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -373,7 +373,6 @@ libvirt.so.0:virBufferTrimLen
 libvirt.so.0:virBufferURIEncodeString
 libvirt.so.0:virBufferUse
 libvirt.so.0:virBufferVasprintf
-libvirt.so.0:virBuildPathInternal
 libvirt.so.0:virCCWDeviceAddressAsString
 libvirt.so.0:virCCWDeviceAddressEqual
 libvirt.so.0:virCCWDeviceAddressFromString

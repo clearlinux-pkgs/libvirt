@@ -1,9 +1,8 @@
-9.8.0
+9.9.0
 bash-completion-dev
 libssh-dev
 pkgconfig(audit)
 pkgconfig(bash-completion)
 pkgconfig(libiscsi)
-pkgconfig(libnbd)
 pkgconfig(libssh)
 pkgconfig(libtirpc)
