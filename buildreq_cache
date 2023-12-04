@@ -1,4 +1,4 @@
-9.9.0
+9.10.0
 bash-completion-dev
 libssh-dev
 pkgconfig(audit)
@@ -6,3 +6,4 @@ pkgconfig(bash-completion)
 pkgconfig(libiscsi)
 pkgconfig(libssh)
 pkgconfig(libtirpc)
+pypi-pytest
