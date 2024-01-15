@@ -1,7 +1,6 @@
-9.10.0
+10.0.0
 bash-completion-dev
 libssh-dev
-perl(Getopt::Long)
 pkgconfig(audit)
 pkgconfig(bash-completion)
 pkgconfig(libiscsi)
