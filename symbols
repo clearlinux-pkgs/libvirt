@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_10.0.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_10.1.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -161,6 +161,7 @@ libvirt.so.0:LIBVIRT_1.2.7
 libvirt.so.0:LIBVIRT_1.2.8
 libvirt.so.0:LIBVIRT_1.2.9
 libvirt.so.0:LIBVIRT_1.3.3
+libvirt.so.0:LIBVIRT_10.1.0
 libvirt.so.0:LIBVIRT_2.0.0
 libvirt.so.0:LIBVIRT_2.2.0
 libvirt.so.0:LIBVIRT_3.0.0
@@ -190,7 +191,7 @@ libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
 libvirt.so.0:LIBVIRT_9.0.0
 libvirt.so.0:LIBVIRT_9.7.0
-libvirt.so.0:LIBVIRT_PRIVATE_10.0.0
+libvirt.so.0:LIBVIRT_PRIVATE_10.1.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -1515,9 +1516,16 @@ libvirt.so.0:virDomainInputSourceGrabTypeToString
 libvirt.so.0:virDomainInputTypeToString
 libvirt.so.0:virDomainInterfaceAddresses
 libvirt.so.0:virDomainInterfaceAddressesEnsureACL
+libvirt.so.0:virDomainInterfaceDeleteDevice
+libvirt.so.0:virDomainInterfaceEthernetConnect
 libvirt.so.0:virDomainInterfaceFree
+libvirt.so.0:virDomainInterfaceIsVnetCompatModel
+libvirt.so.0:virDomainInterfaceStartDevice
+libvirt.so.0:virDomainInterfaceStartDevices
 libvirt.so.0:virDomainInterfaceStats
 libvirt.so.0:virDomainInterfaceStatsEnsureACL
+libvirt.so.0:virDomainInterfaceStopDevice
+libvirt.so.0:virDomainInterfaceStopDevices
 libvirt.so.0:virDomainIsActive
 libvirt.so.0:virDomainIsActiveEnsureACL
 libvirt.so.0:virDomainIsPersistent
@@ -2386,6 +2394,7 @@ libvirt.so.0:virHookPresent
 libvirt.so.0:virHostBootTimeInit
 libvirt.so.0:virHostCPUGetAvailableCPUsBitmap
 libvirt.so.0:virHostCPUGetCPUID
+libvirt.so.0:virHostCPUGetCluster
 libvirt.so.0:virHostCPUGetCore
 libvirt.so.0:virHostCPUGetCount
 libvirt.so.0:virHostCPUGetDie
@@ -2606,7 +2615,6 @@ libvirt.so.0:virJSONValueObjectHasKey
 libvirt.so.0:virJSONValueObjectKeysNumber
 libvirt.so.0:virJSONValueObjectPrependString
 libvirt.so.0:virJSONValueObjectRemoveKey
-libvirt.so.0:virJSONValueObjectReplaceValue
 libvirt.so.0:virJSONValueObjectStealArray
 libvirt.so.0:virJSONValueObjectStealObject
 libvirt.so.0:virJSONValueToBuffer
@@ -3533,6 +3541,7 @@ libvirt.so.0:virNodeDeviceObjListRemoveLocked
 libvirt.so.0:virNodeDeviceObjSetActive
 libvirt.so.0:virNodeDeviceObjSetAutostart
 libvirt.so.0:virNodeDeviceObjSetPersistent
+libvirt.so.0:virNodeDeviceObjUpdateModificationImpact
 libvirt.so.0:virNodeDeviceReAttach
 libvirt.so.0:virNodeDeviceReAttachEnsureACL
 libvirt.so.0:virNodeDeviceRef
@@ -3542,7 +3551,9 @@ libvirt.so.0:virNodeDeviceSetAutostart
 libvirt.so.0:virNodeDeviceSetAutostartEnsureACL
 libvirt.so.0:virNodeDeviceUndefine
 libvirt.so.0:virNodeDeviceUndefineEnsureACL
+libvirt.so.0:virNodeDeviceUpdate
 libvirt.so.0:virNodeDeviceUpdateCaps
+libvirt.so.0:virNodeDeviceUpdateEnsureACL
 libvirt.so.0:virNodeGetCPUMap
 libvirt.so.0:virNodeGetCPUMapEnsureACL
 libvirt.so.0:virNodeGetCPUStats
@@ -3698,9 +3709,6 @@ libvirt.so.0:virPCIIsVirtualFunction
 libvirt.so.0:virPCIStubDriverTypeFromString
 libvirt.so.0:virPCIStubDriverTypeToString
 libvirt.so.0:virPCIVPDParse
-libvirt.so.0:virPCIVPDParseVPDLargeResourceFields
-libvirt.so.0:virPCIVPDParseVPDLargeResourceString
-libvirt.so.0:virPCIVPDReadVPDBytes
 libvirt.so.0:virPCIVPDResourceCustomCompareIndex
 libvirt.so.0:virPCIVPDResourceCustomFree
 libvirt.so.0:virPCIVPDResourceCustomUpsertValue
@@ -4043,6 +4051,7 @@ libvirt.so.0:virSkipSpacesBackwards
 libvirt.so.0:virSkipToDigit
 libvirt.so.0:virSocketAddrBroadcast
 libvirt.so.0:virSocketAddrBroadcastByPrefix
+libvirt.so.0:virSocketAddrBytes
 libvirt.so.0:virSocketAddrCheckNetmask
 libvirt.so.0:virSocketAddrEqual
 libvirt.so.0:virSocketAddrFormat
@@ -4074,6 +4083,7 @@ libvirt.so.0:virSocketAddrSetIPv6AddrNetOrder
 libvirt.so.0:virSocketAddrSetPort
 libvirt.so.0:virSocketRecvFD
 libvirt.so.0:virSocketSendFD
+libvirt.so.0:virSocketSendMsgWithFDs
 libvirt.so.0:virStateCleanup
 libvirt.so.0:virStateInitialize
 libvirt.so.0:virStateReload
@@ -4418,9 +4428,12 @@ libvirt.so.0:virSystemdHasLogind
 libvirt.so.0:virSystemdHasLogindResetCachedValue
 libvirt.so.0:virSystemdHasMachined
 libvirt.so.0:virSystemdHasMachinedResetCachedValue
+libvirt.so.0:virSystemdHasResolved
+libvirt.so.0:virSystemdHasResolvedResetCachedValue
 libvirt.so.0:virSystemdMakeScopeName
 libvirt.so.0:virSystemdMakeSliceName
 libvirt.so.0:virSystemdNotifyStartup
+libvirt.so.0:virSystemdResolvedRegisterNameServer
 libvirt.so.0:virSystemdTerminateMachine
 libvirt.so.0:virTPMCreateCancelPath
 libvirt.so.0:virTPMGetSwtpm
@@ -5776,6 +5789,8 @@ libvirt.so.0:xdr_remote_node_device_set_autostart_args
 libvirt.so.0:xdr_remote_node_device_set_autostart_args_clear
 libvirt.so.0:xdr_remote_node_device_undefine_args
 libvirt.so.0:xdr_remote_node_device_undefine_args_clear
+libvirt.so.0:xdr_remote_node_device_update_args
+libvirt.so.0:xdr_remote_node_device_update_args_clear
 libvirt.so.0:xdr_remote_node_get_cells_free_memory_args
 libvirt.so.0:xdr_remote_node_get_cells_free_memory_args_clear
 libvirt.so.0:xdr_remote_node_get_cells_free_memory_ret
