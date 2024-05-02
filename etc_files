@@ -1,16 +1,16 @@
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/libvirt/lxc/autostart:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/libvirt/lxc:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/libvirt/nwfilter:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/libvirt/qemu/autostart:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/libvirt/qemu/networks/autostart:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/libvirt/qemu/networks:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/libvirt/qemu:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/libvirt/secrets:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/libvirt/storage/autostart:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/libvirt/storage:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/libvirt:
-/builddir/build/BUILDROOT/libvirt-10.2.0-164.x86_64/etc/logrotate.d:
+/etc/:
+/etc/libvirt/lxc/autostart:
+/etc/libvirt/lxc:
+/etc/libvirt/nwfilter:
+/etc/libvirt/qemu/autostart:
+/etc/libvirt/qemu/networks/autostart:
+/etc/libvirt/qemu/networks:
+/etc/libvirt/qemu:
+/etc/libvirt/secrets:
+/etc/libvirt/storage/autostart:
+/etc/libvirt/storage:
+/etc/libvirt:
+/etc/logrotate.d:
 allow-arp.xml
 allow-dhcp-server.xml
 allow-dhcp.xml
@@ -30,7 +30,6 @@ libvirt
 libvirt-admin.conf
 libvirtd.libxl
 logrotate.d
-logrotate.d' ']'
 lxc
 networks
 no-arp-ip-spoofing.xml

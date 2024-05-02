@@ -9,7 +9,7 @@ libnss_libvirt_guest.so.2:_nss_libvirt_guest_gethostbyname_r
 libvirt-admin.so.0:LIBVIRT_ADMIN_2.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_3.0.0
 libvirt-admin.so.0:LIBVIRT_ADMIN_8.6.0
-libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_10.1.0
+libvirt-admin.so.0:LIBVIRT_ADMIN_PRIVATE_10.3.0
 libvirt-admin.so.0:virAdmClientClose
 libvirt-admin.so.0:virAdmClientFree
 libvirt-admin.so.0:virAdmClientGetID
@@ -162,6 +162,7 @@ libvirt.so.0:LIBVIRT_1.2.8
 libvirt.so.0:LIBVIRT_1.2.9
 libvirt.so.0:LIBVIRT_1.3.3
 libvirt.so.0:LIBVIRT_10.1.0
+libvirt.so.0:LIBVIRT_10.2.0
 libvirt.so.0:LIBVIRT_2.0.0
 libvirt.so.0:LIBVIRT_2.2.0
 libvirt.so.0:LIBVIRT_3.0.0
@@ -191,7 +192,7 @@ libvirt.so.0:LIBVIRT_8.4.0
 libvirt.so.0:LIBVIRT_8.5.0
 libvirt.so.0:LIBVIRT_9.0.0
 libvirt.so.0:LIBVIRT_9.7.0
-libvirt.so.0:LIBVIRT_PRIVATE_10.1.0
+libvirt.so.0:LIBVIRT_PRIVATE_10.3.0
 libvirt.so.0:cpuDecode
 libvirt.so.0:cpuEncode
 libvirt.so.0:dnsmasqAddDhcpHost
@@ -417,6 +418,7 @@ libvirt.so.0:virCPUDefFree
 libvirt.so.0:virCPUDefFreeFeatures
 libvirt.so.0:virCPUDefFreeModel
 libvirt.so.0:virCPUDefIsEqual
+libvirt.so.0:virCPUDefListExplicitFeatures
 libvirt.so.0:virCPUDefListFree
 libvirt.so.0:virCPUDefListParse
 libvirt.so.0:virCPUDefNew
@@ -444,6 +446,7 @@ libvirt.so.0:virCPUx86DataSetSignature
 libvirt.so.0:virCPUx86DataSetVendor
 libvirt.so.0:virCPUx86FeatureFilterDropMSR
 libvirt.so.0:virCPUx86FeatureFilterSelectMSR
+libvirt.so.0:virCPUx86GetAddedFeatures
 libvirt.so.0:virCacheKernelTypeFromString
 libvirt.so.0:virCacheKernelTypeToString
 libvirt.so.0:virCacheTypeFromString
@@ -1456,6 +1459,8 @@ libvirt.so.0:virDomainGraphicsGetRenderNode
 libvirt.so.0:virDomainGraphicsListenAppendAddress
 libvirt.so.0:virDomainGraphicsListenAppendSocket
 libvirt.so.0:virDomainGraphicsNeedsAutoRenderNode
+libvirt.so.0:virDomainGraphicsReload
+libvirt.so.0:virDomainGraphicsReloadEnsureACL
 libvirt.so.0:virDomainGraphicsSpiceChannelModeTypeFromString
 libvirt.so.0:virDomainGraphicsSpiceChannelModeTypeToString
 libvirt.so.0:virDomainGraphicsSpiceChannelNameTypeFromString
@@ -1516,6 +1521,7 @@ libvirt.so.0:virDomainInputSourceGrabTypeToString
 libvirt.so.0:virDomainInputTypeToString
 libvirt.so.0:virDomainInterfaceAddresses
 libvirt.so.0:virDomainInterfaceAddressesEnsureACL
+libvirt.so.0:virDomainInterfaceClearQoS
 libvirt.so.0:virDomainInterfaceDeleteDevice
 libvirt.so.0:virDomainInterfaceEthernetConnect
 libvirt.so.0:virDomainInterfaceFree
@@ -1526,6 +1532,7 @@ libvirt.so.0:virDomainInterfaceStats
 libvirt.so.0:virDomainInterfaceStatsEnsureACL
 libvirt.so.0:virDomainInterfaceStopDevice
 libvirt.so.0:virDomainInterfaceStopDevices
+libvirt.so.0:virDomainInterfaceVportRemove
 libvirt.so.0:virDomainIsActive
 libvirt.so.0:virDomainIsActiveEnsureACL
 libvirt.so.0:virDomainIsPersistent
@@ -3549,6 +3556,7 @@ libvirt.so.0:virNodeDeviceReset
 libvirt.so.0:virNodeDeviceResetEnsureACL
 libvirt.so.0:virNodeDeviceSetAutostart
 libvirt.so.0:virNodeDeviceSetAutostartEnsureACL
+libvirt.so.0:virNodeDeviceSyncMdevActiveConfig
 libvirt.so.0:virNodeDeviceUndefine
 libvirt.so.0:virNodeDeviceUndefineEnsureACL
 libvirt.so.0:virNodeDeviceUpdate
@@ -3666,7 +3674,6 @@ libvirt.so.0:virPCIDeviceGetUnbindFromStub
 libvirt.so.0:virPCIDeviceGetUsedBy
 libvirt.so.0:virPCIDeviceGetVPD
 libvirt.so.0:virPCIDeviceHasPCIExpressLink
-libvirt.so.0:virPCIDeviceHasVPD
 libvirt.so.0:virPCIDeviceIsAssignable
 libvirt.so.0:virPCIDeviceIsPCIExpress
 libvirt.so.0:virPCIDeviceListAdd
@@ -5255,6 +5262,8 @@ libvirt.so.0:xdr_remote_domain_get_xml_desc_args
 libvirt.so.0:xdr_remote_domain_get_xml_desc_args_clear
 libvirt.so.0:xdr_remote_domain_get_xml_desc_ret
 libvirt.so.0:xdr_remote_domain_get_xml_desc_ret_clear
+libvirt.so.0:xdr_remote_domain_graphics_reload_args
+libvirt.so.0:xdr_remote_domain_graphics_reload_args_clear
 libvirt.so.0:xdr_remote_domain_has_current_snapshot_args
 libvirt.so.0:xdr_remote_domain_has_current_snapshot_args_clear
 libvirt.so.0:xdr_remote_domain_has_current_snapshot_ret
