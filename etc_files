@@ -11,6 +11,9 @@
 /etc/libvirt/storage:
 /etc/libvirt:
 /etc/logrotate.d:
+/etc/ssh/ssh_config.d:
+/etc/ssh:
+30-libvirt-ssh-proxy.conf
 allow-arp.xml
 allow-dhcp-server.xml
 allow-dhcp.xml
@@ -30,7 +33,9 @@ libvirt
 libvirt-admin.conf
 libvirtd.libxl
 logrotate.d
+logrotate.d
 lxc
+network.conf
 networks
 no-arp-ip-spoofing.xml
 no-arp-mac-spoofing.xml
@@ -48,6 +53,9 @@ qemu
 qemu-announce-self-rarp.xml
 qemu-announce-self.xml
 secrets
+ssh
+ssh' ']'
+ssh_config.d
 storage
 virtchd.conf
 virtinterfaced.conf
