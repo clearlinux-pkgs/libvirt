@@ -12,14 +12,12 @@ libgio-2.0.so.0
 libglib-2.0.so.0
 libgnutls.so.30
 libgobject-2.0.so.0
-libiscsi.so.9
+libiscsi.so.10
 libm.so.6
 libnl-3.so.200
 libnuma.so.1
-libparted.so.2
 libpcap.so.1
 libpciaccess.so.0
-libreadline.so.8
 libssh.so.4
 libssh2.so.1
 libtirpc.so.3
