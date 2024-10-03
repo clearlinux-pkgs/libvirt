@@ -2,6 +2,7 @@ ld-linux-x86-64.so.2
 libacl.so.1
 libaudit.so.1
 libblkid.so.1
+libbsd.so.0
 libc.so.6
 libcap-ng.so.0
 libcurl.so.4
@@ -13,6 +14,7 @@ libglib-2.0.so.0
 libgnutls.so.30
 libgobject-2.0.so.0
 libiscsi.so.10
+libjson-c.so.5
 libm.so.6
 libnl-3.so.200
 libnuma.so.1
@@ -23,4 +25,3 @@ libssh2.so.1
 libtirpc.so.3
 libudev.so.1
 libxml2.so.2
-libyajl.so.2

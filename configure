@@ -32,4 +32,3 @@
 -Dselinux=disabled
 -Dtls_priority="SECURE128"
 -Dudev=enabled
--Dyajl=enabled
