@@ -8,11 +8,11 @@
 # Source0 file verified with key 0xCA68BE8010084C9C (jdenemar@redhat.com)
 #
 Name     : libvirt
-Version  : 10.8.0
-Release  : 171
-URL      : https://libvirt.org/sources/libvirt-10.8.0.tar.xz
-Source0  : https://libvirt.org/sources/libvirt-10.8.0.tar.xz
-Source1  : https://libvirt.org/sources/libvirt-10.8.0.tar.xz.asc
+Version  : 10.9.0
+Release  : 172
+URL      : https://libvirt.org/sources/libvirt-10.9.0.tar.xz
+Source0  : https://libvirt.org/sources/libvirt-10.9.0.tar.xz
+Source1  : https://libvirt.org/sources/libvirt-10.9.0.tar.xz.asc
 Source2  : CA68BE8010084C9C.pkey
 Summary  : Library providing a simple virtualization API
 Group    : Development/Tools
@@ -216,13 +216,13 @@ chmod 700 .gnupg
 gpg --homedir .gnupg --import %{SOURCE2}
 gpg --homedir .gnupg --status-fd 1 --verify %{SOURCE1} %{SOURCE0} > gpg.status
 grep -E '^\[GNUPG:\] (GOODSIG|EXPKEYSIG) CA68BE8010084C9C' gpg.status
-%setup -q -n libvirt-10.8.0
-cd %{_builddir}/libvirt-10.8.0
+%setup -q -n libvirt-10.9.0
+cd %{_builddir}/libvirt-10.9.0
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
 pushd ..
-cp -a libvirt-10.8.0 buildavx2
+cp -a libvirt-10.9.0 buildavx2
 popd
 
 %build
@@ -230,7 +230,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1727973917
+export SOURCE_DATE_EPOCH=1730471461
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -636,10 +636,10 @@ rmdir %{buildroot}/usr/sbin
 %defattr(-,root,root,-)
 /V3/usr/lib64/libnss_libvirt.so.2
 /V3/usr/lib64/libnss_libvirt_guest.so.2
-/V3/usr/lib64/libvirt-admin.so.0.10008.0
-/V3/usr/lib64/libvirt-lxc.so.0.10008.0
-/V3/usr/lib64/libvirt-qemu.so.0.10008.0
-/V3/usr/lib64/libvirt.so.0.10008.0
+/V3/usr/lib64/libvirt-admin.so.0.10009.0
+/V3/usr/lib64/libvirt-lxc.so.0.10009.0
+/V3/usr/lib64/libvirt-qemu.so.0.10009.0
+/V3/usr/lib64/libvirt.so.0.10009.0
 /V3/usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
 /V3/usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /V3/usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
@@ -663,13 +663,13 @@ rmdir %{buildroot}/usr/sbin
 /usr/lib64/libnss_libvirt.so.2
 /usr/lib64/libnss_libvirt_guest.so.2
 /usr/lib64/libvirt-admin.so.0
-/usr/lib64/libvirt-admin.so.0.10008.0
+/usr/lib64/libvirt-admin.so.0.10009.0
 /usr/lib64/libvirt-lxc.so.0
-/usr/lib64/libvirt-lxc.so.0.10008.0
+/usr/lib64/libvirt-lxc.so.0.10009.0
 /usr/lib64/libvirt-qemu.so.0
-/usr/lib64/libvirt-qemu.so.0.10008.0
+/usr/lib64/libvirt-qemu.so.0.10009.0
 /usr/lib64/libvirt.so.0
-/usr/lib64/libvirt.so.0.10008.0
+/usr/lib64/libvirt.so.0.10009.0
 /usr/lib64/libvirt/connection-driver/libvirt_driver_ch.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_interface.so
 /usr/lib64/libvirt/connection-driver/libvirt_driver_lxc.so
