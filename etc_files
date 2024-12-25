@@ -33,7 +33,6 @@ libvirt
 libvirt-admin.conf
 libvirtd.libxl
 logrotate.d
-logrotate.d
 lxc
 network.conf
 networks
@@ -54,7 +53,6 @@ qemu-announce-self-rarp.xml
 qemu-announce-self.xml
 secrets
 ssh
-ssh' ']'
 ssh_config.d
 storage
 virtchd.conf
