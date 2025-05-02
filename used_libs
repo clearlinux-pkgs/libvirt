@@ -24,4 +24,4 @@ libssh.so.4
 libssh2.so.1
 libtirpc.so.3
 libudev.so.1
-libxml2.so.2
+libxml2.so.16
