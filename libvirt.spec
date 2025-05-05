@@ -9,7 +9,7 @@
 #
 Name     : libvirt
 Version  : 11.3.0
-Release  : 178
+Release  : 179
 URL      : https://libvirt.org/sources/libvirt-11.3.0.tar.xz
 Source0  : https://libvirt.org/sources/libvirt-11.3.0.tar.xz
 Source1  : https://libvirt.org/sources/libvirt-11.3.0.tar.xz.asc
